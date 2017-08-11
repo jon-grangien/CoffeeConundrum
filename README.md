@@ -37,7 +37,7 @@ or (if your dev GOOGLE_WEB_FONTS is different from your dist);
 
 `npm run assets:dev`
 
-src/assets.ts will be generated which contains sections for all asset types (the generator is smart enough to distinguish what assets are what !) and classes for every asset, it will also generate an enum containing every frame and sprite in Atlases and AudioSprites respectively!
+src/assets.ts will be generated which contains sections for all asset types and classes for every asset, it will also generate an enum containing every frame and sprite in Atlases and AudioSprites respectively
 
 ## Change the game size and generate a template background:
 
@@ -45,7 +45,7 @@ src/assets.ts will be generated which contains sections for all asset types (the
 
 `npm run setupGameSize -- -h`
 
-`npm run setupGameSize -- --width [whatever width you want] --height [whatever height you want] --aspect-ratio [If you want a different default aspect ratio] --scale-mode [one of the Phaser Scale Modes] [--no-png]`
+`npm run setupGameSize -- --width [width] --height [height] --scale-mode [one of the Phaser Scale Modes]`
 
 ## Google Web Fonts:
 
@@ -58,5 +58,5 @@ Add your desired Custom/Local Web Fonts to your assets folder and they will then
 - One CSS file per font
 
 Good generators
-- [Font Squirrel Webfont Generator][fontsquirrel]
-- [Everything Fonts font-face generator][everythingfonts]
+- Font Squirrel Webfont Generator
+- Everything Fonts font-face generator

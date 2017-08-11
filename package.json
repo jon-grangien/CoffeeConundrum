@@ -1,0 +1,53 @@
+{
+  "name": "coffeeconundrum",
+  "version": "0.0.1",
+  "main": "electron-main.js",
+  "scripts": {
+    "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
+    "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
+    "build:dev": "echo-cli 'Building DEV ...' && npm run webpack:dev && echo-cli 'Build Complete ✔'",
+    "build:dist": "echo-cli 'Building DIST ...' && npm run webpack:dist && echo-cli 'Build Complete ✔'",
+    "server:dev": "webpack-dev-server --config webpack.dev.config.js --open",
+    "server:dist": "webpack-dev-server --config webpack.dist.config.js --open",
+    "setupGameSize": "node ./scripts/setupGameSize.js",
+    "assets:dev": "node ./scripts/generateAssetsClass.js --dev",
+    "assets": "node ./scripts/generateAssetsClass.js",
+    "postinstall": "npm run setupGameSize",
+    "electron:dev": "npm run build:dev && electron .",
+    "electron:dist": "npm run build:dist && electron .",
+    "electron:pack:dev": "npm run build:dev && node ./scripts/packageElectronApp.js",
+    "electron:pack:dist": "npm run build:dist && node ./scripts/packageElectronApp.js",
+    "checkDepsVersions": "npm-check --skip-unused -u"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Jonathan Grangien <jonathan.grangien@gmail.com>",
+  "devDependencies": {
+    "@types/node": "8.0.17",
+    "@types/webfontloader": "^1.6.28",
+    "clean-webpack-plugin": "0.1.16",
+    "commander": "2.11.0",
+    "copy-webpack-plugin": "4.0.1",
+    "echo-cli": "1.0.8",
+    "electron": "1.6.11",
+    "electron-packager": "8.7.2",
+    "expose-loader": "0.7.3",
+    "file-loader": "0.11.2",
+    "html-webpack-plugin": "2.29.0",
+    "npm-check": "5.4.5",
+    "phaser-ce": "2.8.3",
+    "pngjs-image": "0.11.7",
+    "shelljs": "0.7.8",
+    "ts-loader": "2.3.2",
+    "tslint": "5.5.0",
+    "tslint-loader": "3.5.3",
+    "typescript": "2.4.2",
+    "webfontloader": "1.6.28",
+    "webpack": "3.4.1",
+    "webpack-dev-server": "2.6.1",
+    "webpack-shell-plugin": "0.5.0",
+    "xml2js": "0.4.17"
+  }
+}

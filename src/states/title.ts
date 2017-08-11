@@ -33,6 +33,12 @@ export default class Title extends Phaser.State {
             this.sfxAudiosprite.play(Phaser.ArrayUtils.getRandomItem(this.sfxLaserSounds));
         });
 
+        this.game.add.button(this.game.world.centerX - 100, 400, 'button', this.goNext, this, 2, 1, 0);
         this.game.camera.flash(0x000000, 1000);
     }
+
+    private goNext(): void {
+        this.game.state.start('levelone');
+    }
+
 }

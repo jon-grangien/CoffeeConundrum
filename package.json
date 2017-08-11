@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "electron-main.js",
   "scripts": {
+    "start": "npm run server:dev",
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
     "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
     "build:dev": "echo-cli 'Building DEV ...' && npm run webpack:dev && echo-cli 'Build Complete ✔'",

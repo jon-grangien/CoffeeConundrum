@@ -4,12 +4,15 @@ HTML 5 arcade shooter game with a cute setting, developed with TypeScript and ph
 Project used [this starter boilerplate](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project)
 
 ## Setup
+
 `npm install`
 
 <b>Run the dev server</b>
+
 `npm run server:dev`
 
 <b>Development build</b>
+
 `npm run build:dev`
 
 This will build the game with a few caveats;
@@ -17,6 +20,7 @@ This will build the game with a few caveats;
 - The resulting game.js will not be minified
 
 <b>Production build</b>
+
 `npm run build:dist`
 
 This will build the game with a few caveats;

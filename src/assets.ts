@@ -6,10 +6,20 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/images/background_template.png'); }
     }
+    export class ImagesLakeside {
+        static getName(): string { return 'lakeside'; }
+
+        static getPNG(): string { return require('assets/images/lakeside.png'); }
+    }
     export class SpritesheetsMetalslugMummy374518 {
         static getName(): string { return 'metalslug_mummy.[37,45,18,0,0]'; }
 
         static getPNG(): string { return require('assets/spritesheets/metalslug_mummy.[37,45,18,0,0].png'); }
+    }
+    export class SpritesheetsTinyShip {
+        static getName(): string { return 'tiny_ship'; }
+
+        static getPNG(): string { return require('assets/spritesheets/tiny_ship.png'); }
     }
 }
 

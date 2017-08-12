@@ -1,10 +1,10 @@
-import * as Utils from '../utils/utils';
-import * as Assets from '../assets';
+import * as Utils from '../utils/utils'
+import * as Assets from '../assets'
 
 export default class Boot extends Phaser.State {
     public preload(): void {
         // Load any assets you need for your preloader state here.
-        this.game.load.atlasJSONArray(Assets.Atlases.AtlasesPreloadSpritesArray.getName(), Assets.Atlases.AtlasesPreloadSpritesArray.getPNG(), Assets.Atlases.AtlasesPreloadSpritesArray.getJSONArray());
+        this.game.load.atlasJSONArray(Assets.Atlases.AtlasesPreloadSpritesArray.getName(), Assets.Atlases.AtlasesPreloadSpritesArray.getPNG(), Assets.Atlases.AtlasesPreloadSpritesArray.getJSONArray())
         // this.game.load.atlasJSONHash(Assets.Atlases.AtlasesPreloadSpritesHash.getName(), Assets.Atlases.AtlasesPreloadSpritesHash.getPNG(), Assets.Atlases.AtlasesPreloadSpritesHash.getJSONHash());
         // this.game.load.atlasXML(Assets.Atlases.AtlasesPreloadSpritesXml.getName(), Assets.Atlases.AtlasesPreloadSpritesXml.getPNG(), Assets.Atlases.AtlasesPreloadSpritesXml.getXML());
     }
@@ -15,16 +15,16 @@ export default class Boot extends Phaser.State {
         // Uncomment the following to disable multitouch
         // this.input.maxPointers = 1;
 
-        this.game.scale.scaleMode = Phaser.ScaleManager[SCALE_MODE];
+        this.game.scale.scaleMode = Phaser.ScaleManager[SCALE_MODE]
 
         if (SCALE_MODE === 'USER_SCALE') {
-            let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.screenMetrics;
+            let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.screenMetrics
 
-            this.game.scale.setUserScale(screenMetrics.scaleX, screenMetrics.scaleY);
+            this.game.scale.setUserScale(screenMetrics.scaleX, screenMetrics.scaleY)
         }
 
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
+        this.game.scale.pageAlignHorizontally = true
+        this.game.scale.pageAlignVertically = true
 
         if (this.game.device.desktop) {
             // Any desktop specific stuff here
@@ -32,7 +32,7 @@ export default class Boot extends Phaser.State {
             // Any mobile specific stuff here
 
             // Comment the following and uncomment the line after that to force portrait mode instead of landscape
-            this.game.scale.forceOrientation(true, false);
+            this.game.scale.forceOrientation(true, false)
             // this.game.scale.forceOrientation(false, true);
         }
 
@@ -58,6 +58,6 @@ export default class Boot extends Phaser.State {
            \nSOUND_EXTENSIONS_PREFERENCE. ${SOUND_EXTENSIONS_PREFERENCE}`
         );
 
-        this.game.state.start('preloader');
+        this.game.state.start('preloader')
     }
 }

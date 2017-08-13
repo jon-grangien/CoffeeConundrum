@@ -11,14 +11,14 @@ export default class Player extends Phaser.Sprite {
 
   constructor(game: Phaser.Game) {
     super(game, 100, game.world.centerY, Images.SpritesheetsTinyShip.getName())
-    game.add.existing(this)
-
     this.moveUpKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
     this.moveDownKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
     this.moveLeftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
     this.moveRightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
     game.physics.enable(this, Phaser.Physics.ARCADE);
+    this.body.collideWorldBounds = true
+    game.add.existing(this)
   }
 
   update(): void {

@@ -4,10 +4,13 @@ import {Images} from '../assets';
 export default class Player extends Phaser.Sprite {
   private TOP_SPEED: number = 500
 
+  private canons: Phaser.Weapon
+
   private moveUpKey: Phaser.Key
   private moveDownKey: Phaser.Key
   private moveLeftKey: Phaser.Key
   private moveRightKey: Phaser.Key
+  private shootKey: Phaser.Key
 
   constructor(game: Phaser.Game) {
     super(game, 100, game.world.centerY, Images.SpritesheetsTinyShip.getName())
@@ -15,9 +18,19 @@ export default class Player extends Phaser.Sprite {
     this.moveDownKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
     this.moveLeftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
     this.moveRightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+    this.shootKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true
+    this.anchor.setTo(0.5, 0.5)
+
+    this.canons = game.add.weapon(-1, 'canonbullet')
+    this.canons.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
+    this.canons.bulletSpeed = 1200
+    this.canons.fireRate = 75
+    this.canons.fireAngle = 0
+    this.canons.trackSprite(this, 0, 0, false);
+
     game.add.existing(this)
   }
 
@@ -38,6 +51,9 @@ export default class Player extends Phaser.Sprite {
       this.body.velocity.x = this.deAccelerate(this.body.velocity.x)
     }
 
+    if (this.shootKey.isDown) {
+      this.canons.fire()
+    }
   }
 
   /**

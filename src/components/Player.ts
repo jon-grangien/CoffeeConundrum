@@ -10,7 +10,7 @@ export default class Player extends Phaser.Sprite {
   private moveDownKey: Phaser.Key
   private moveLeftKey: Phaser.Key
   private moveRightKey: Phaser.Key
-  private shootKey: Phaser.Key
+  private shootKeys: Phaser.Key[]
 
   constructor(game: Phaser.Game) {
     super(game, 100, game.world.centerY, Images.SpritesheetsTinyShip.getName())
@@ -18,7 +18,7 @@ export default class Player extends Phaser.Sprite {
     this.moveDownKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
     this.moveLeftKey = game.input.keyboard.addKey(Phaser.Keyboard.A)
     this.moveRightKey = game.input.keyboard.addKey(Phaser.Keyboard.D)
-    this.shootKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
+    this.shootKeys = [game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR), game.input.keyboard.addKey(Phaser.Keyboard.J)]
 
     game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.collideWorldBounds = true
@@ -35,24 +35,27 @@ export default class Player extends Phaser.Sprite {
   }
 
   update(): void {
-    if (this.moveUpKey.isDown) {
-      this.body.velocity.y = this.accelerate(this.body.velocity.y, false)
-    } else if (this.moveDownKey.isDown) {
-      this.body.velocity.y = this.accelerate(this.body.velocity.y, true)
+    let { velocity } = this.body
+    const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey, shootKeys, canons } = this
+
+    if (moveUpKey.isDown) {
+      this.body.velocity.y = this.accelerate(velocity.y, false)
+    } else if (moveDownKey.isDown) {
+      this.body.velocity.y = this.accelerate(velocity.y, true)
     } else {
-      this.body.velocity.y = this.deAccelerate(this.body.velocity.y)
+      this.body.velocity.y = this.deAccelerate(velocity.y)
     }
 
-    if (this.moveLeftKey.isDown) {
-      this.body.velocity.x = this.accelerate(this.body.velocity.x, false)
-    } else if (this.moveRightKey.isDown) {
-      this.body.velocity.x = this.accelerate(this.body.velocity.x, true)
+    if (moveLeftKey.isDown) {
+      this.body.velocity.x = this.accelerate(velocity.x, false)
+    } else if (moveRightKey.isDown) {
+      this.body.velocity.x = this.accelerate(velocity.x, true)
     } else {
-      this.body.velocity.x = this.deAccelerate(this.body.velocity.x)
+      this.body.velocity.x = this.deAccelerate(velocity.x)
     }
 
-    if (this.shootKey.isDown) {
-      this.canons.fire()
+    if (shootKeys[0].isDown || shootKeys[1].isDown) {
+      canons.fire()
     }
   }
 

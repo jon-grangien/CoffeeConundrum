@@ -8,18 +8,12 @@ export default class Enemy extends Phaser.Sprite {
 
   constructor(game: Phaser.Game) {
     super(game, game.world.centerX + 200, game.world.centerY, Images.SpritesheetsSmilingShip.getName())
+
     game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.collideWorldBounds = true
     this.anchor.setTo(0.5, 0.5)
 
     this.timer = game.time.create(false)
-
-    this.weaponWeak = game.add.weapon(-1, 'enemybulletweak')
-    this.weaponWeak.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
-    this.weaponWeak.bulletSpeed = 300
-    this.weaponWeak.fireRate = 500
-    this.weaponWeak.fireAngle = 180
-    this.weaponWeak.trackSprite(this, 0, 0, false);
 
     this.setupWeapon(this.weaponWeak, 'enemybulletweak')
     this.setupWeapon(this.weaponStrong, 'enemybulletstrong')

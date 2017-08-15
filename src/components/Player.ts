@@ -2,7 +2,7 @@ import 'phaser'
 import {Images} from '../assets'
 
 export default class Player extends Phaser.Sprite {
-  private TOP_SPEED: number = 500
+  private TOP_SPEED: number = 350
 
   private canons: Phaser.Weapon
 

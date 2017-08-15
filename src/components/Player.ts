@@ -24,7 +24,7 @@ export default class Player extends Phaser.Sprite {
     this.body.collideWorldBounds = true
     this.anchor.setTo(0.5, 0.5)
 
-    this.canons = game.add.weapon(-1, 'canonbullet')
+    this.canons = game.add.weapon(-1, Images.SpritesheetsCanonbullet.getName())
     this.canons.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     this.canons.bulletSpeed = 1200
     this.canons.fireRate = 75

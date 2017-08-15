@@ -11,7 +11,6 @@ export default class DumbEnemyStrategy implements IEnemyStrategy {
     weapon.bulletSpeed = 300
     weapon.fireRate = 1000
     weapon.fireAngle = 180
-    //weapon.trackSprite(this, 0, 0, false);
 
     return weapon
   }

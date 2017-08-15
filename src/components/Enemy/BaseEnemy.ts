@@ -9,7 +9,7 @@ export default class Enemy extends Phaser.Sprite {
   private strategy: IEnemyStrategy
 
   constructor(game: Phaser.Game, strategy: IEnemyStrategy) {
-    super(game, game.world.centerX + 200, game.world.centerY, Images.SpritesheetsSmilingShip.getName())
+    super(game, game.world.centerX + 200, game.world.centerY, Images.SpritesheetsSmilingship.getName())
     this.strategy = strategy
     game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.collideWorldBounds = true
@@ -17,8 +17,8 @@ export default class Enemy extends Phaser.Sprite {
 
     this.timer = game.time.create(false)
 
-    this.weaponWeak = this.strategy.setupWeapon(this.game, this.weaponWeak, 'enemybulletweak')
-    this.weaponStrong = this.strategy.setupWeapon(this.game, this.weaponStrong, 'enemybulletstrong')
+    this.weaponWeak = this.strategy.setupWeapon(this.game, this.weaponWeak, Images.SpritesheetsEnemybulletweak.getName())
+    this.weaponStrong = this.strategy.setupWeapon(this.game, this.weaponStrong, Images.SpritesheetsEnemybulletstrong.getName())
     this.weaponWeak.trackSprite(this, 0, 0, false);
     this.weaponStrong.trackSprite(this, 0, 0, false);
 

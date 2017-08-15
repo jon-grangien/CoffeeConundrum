@@ -3,23 +3,43 @@
 export namespace Images {
     export class ImagesBackgroundTemplate {
         static getName(): string { return 'background_template'; }
+
         static getPNG(): string { return require('assets/images/background_template.png'); }
     }
     export class ImagesLakeside {
         static getName(): string { return 'lakeside'; }
+
         static getPNG(): string { return require('assets/images/lakeside.png'); }
+    }
+    export class SpritesheetsCanonbullet {
+        static getName(): string { return 'canonbullet'; }
+
+        static getPNG(): string { return require('assets/spritesheets/canonbullet.png'); }
+    }
+    export class SpritesheetsEnemybulletstrong {
+        static getName(): string { return 'enemybulletstrong'; }
+
+        static getPNG(): string { return require('assets/spritesheets/enemybulletstrong.png'); }
+    }
+    export class SpritesheetsEnemybulletweak {
+        static getName(): string { return 'enemybulletweak'; }
+
+        static getPNG(): string { return require('assets/spritesheets/enemybulletweak.png'); }
     }
     export class SpritesheetsMetalslugMummy374518 {
         static getName(): string { return 'metalslug_mummy.[37,45,18,0,0]'; }
+
         static getPNG(): string { return require('assets/spritesheets/metalslug_mummy.[37,45,18,0,0].png'); }
+    }
+    export class SpritesheetsSmilingship {
+        static getName(): string { return 'smilingship'; }
+
+        static getPNG(): string { return require('assets/spritesheets/smilingship.png'); }
     }
     export class SpritesheetsTinyShip {
         static getName(): string { return 'tiny_ship'; }
+
         static getPNG(): string { return require('assets/spritesheets/tiny_ship.png'); }
-    }
-    export class SpritesheetsSmilingShip {
-      static getName(): string { return 'smilingship'; }
-      static getPNG(): string { return require('assets/spritesheets/smilingship.png'); }
     }
 }
 

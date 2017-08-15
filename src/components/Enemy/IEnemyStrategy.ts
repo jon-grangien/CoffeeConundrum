@@ -1,6 +1,14 @@
 import 'phaser'
 
 interface IEnemyStrategy {
+
+  /**
+   * Set the health of the enemy
+   * @param {number} amount
+   * @returns {number}
+   */
+  setHealth(): number
+
   /**
    * Set up weapon properties
    * @param {Phaser.Game} game - The game instance

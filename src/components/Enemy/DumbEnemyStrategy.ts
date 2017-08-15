@@ -5,6 +5,10 @@ import IEnemyStrategy from './IEnemyStrategy'
  * A dumb, standard enemy
  */
 export default class DumbEnemyStrategy implements IEnemyStrategy {
+  public setHealth() {
+    return 5
+  }
+
   public setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
     weapon = game.add.weapon(-1, resource)
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS

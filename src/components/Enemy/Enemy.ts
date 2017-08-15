@@ -1,8 +1,11 @@
 import 'phaser'
 import {Images} from '../../assets'
 import IEnemyStrategy from './IEnemyStrategy'
+import GameManager from '../../GameManager'
 
 export default class Enemy extends Phaser.Sprite {
+  public health: number
+
   private weaponWeak: Phaser.Weapon
   private weaponStrong: Phaser.Weapon
   private timer: Phaser.Timer
@@ -15,6 +18,7 @@ export default class Enemy extends Phaser.Sprite {
     this.body.collideWorldBounds = true
     this.anchor.setTo(0.5, 0.5)
 
+    this.health = this.strategy.setHealth()
     this.timer = game.time.create(false)
 
     this.weaponWeak = this.strategy.setupWeapon(this.game, this.weaponWeak, Images.SpritesheetsEnemybulletweak.getName())
@@ -22,7 +26,9 @@ export default class Enemy extends Phaser.Sprite {
     this.weaponWeak.trackSprite(this, 0, 0, false);
     this.weaponStrong.trackSprite(this, 0, 0, false);
 
-    game.add.existing(this)
+    this.events.onKilled.add(() => {
+      GameManager.Instance.buryInGraveyard(this)
+    })
   }
 
   public create(): void {
@@ -32,6 +38,14 @@ export default class Enemy extends Phaser.Sprite {
   public update(): void {
     this.strategy.attack(this.weaponWeak, this.weaponStrong, this.timer)
     this.body.velocity = this.strategy.move(this.game.time.totalElapsedSeconds(), this.body.velocity)
+  }
+
+  /**
+   * Spawn object into game
+   * Not needed to call if object added to a group
+   */
+  public spawn(): void {
+    this.game.add.existing(this)
   }
 }
 

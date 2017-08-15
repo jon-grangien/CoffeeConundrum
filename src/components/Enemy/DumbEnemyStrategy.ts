@@ -17,7 +17,7 @@ export default class DumbEnemyStrategy implements IEnemyStrategy {
   }
 
   move(elapsedSeconds: number, velocity: Phaser.Point): Phaser.Point {
-    velocity.y += 10 * Math.sin(elapsedSeconds * 1000)
+    velocity.y += 100 * Math.random() * Math.sin(elapsedSeconds * 1000)
     return velocity
   }
 

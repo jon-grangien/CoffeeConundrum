@@ -1,6 +1,7 @@
 import * as Assets from '../../assets'
 import Player from '../../components/Player'
-import Enemy from '../../components/Enemy'
+import Enemy from '../../components/Enemy/BaseEnemy'
+import DumbEnemyStrategy from '../../components/Enemy/DumbEnemyStrategy'
 
 export default class LevelOne extends Phaser.State {
   private backgroundTemplateSprite: Phaser.Sprite = null
@@ -14,6 +15,6 @@ export default class LevelOne extends Phaser.State {
 
   public create(): void {
     this.player = new Player(this.game)
-    this.enemy = new Enemy(this.game)
+    this.enemy = new Enemy(this.game, new DumbEnemyStrategy())
   }
 }

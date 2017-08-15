@@ -1,6 +1,6 @@
 import * as Assets from '../../assets'
 import Player from '../../components/Player'
-import Enemy from '../../components/Enemy/BaseEnemy'
+import Enemy from '../../components/Enemy/Enemy'
 import DumbEnemyStrategy from '../../components/Enemy/DumbEnemyStrategy'
 
 export default class LevelOne extends Phaser.State {

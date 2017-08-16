@@ -10,9 +10,12 @@ import { DUMB_ENEMY_HEALTH } from '../../globals/constants'
 export default class DumbSprayingEnemyStrategy extends DumbEnemyStrategy {
   private sprayTimerStrong: boolean
   private moveDirectionUp?: boolean
+  private pauseShooting: boolean
 
   constructor(moveDirectionUp?: boolean) {
     super()
+
+    this.pauseShooting = false
 
     this.moveDirectionUp = (
       moveDirectionUp !== undefined || moveDirectionUp !== null
@@ -29,6 +32,14 @@ export default class DumbSprayingEnemyStrategy extends DumbEnemyStrategy {
 
     enemy.getTimer().loop(4000, () => {
       this.sprayTimerStrong = !this.sprayTimerStrong
+    })
+
+    enemy.getTimer().loop(4000, () => {
+      this.pauseShooting = true
+
+      enemy.getTimer().add(1000, () => {
+        this.pauseShooting = false
+      })
     })
   }
 
@@ -74,6 +85,10 @@ export default class DumbSprayingEnemyStrategy extends DumbEnemyStrategy {
    * @param {Phaser.Timer} timer
    */
   public attack(weaponWeak: Phaser.Weapon, weaponStrong: Phaser.Weapon, timer: Phaser.Timer) {
+    if (this.pauseShooting) {
+      return
+    }
+
     const playerInstance = GameManager.Instance.getPlayerInstance()
     const x = playerInstance.body ? playerInstance.body.position.x : undefined
     const y = playerInstance.body ? playerInstance.body.position.y : undefined

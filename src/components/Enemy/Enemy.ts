@@ -10,7 +10,9 @@ export default class Enemy extends Phaser.Sprite {
   private weaponStrong: Phaser.Weapon
   private timer: Phaser.Timer
   private strategy: IEnemyStrategy
+
   private initialPositionJustified: boolean = false
+  private buryAfterDeadBullets: boolean = false
 
   constructor(game: Phaser.Game, strategy: IEnemyStrategy) {
     super(game, game.world.centerX + 200, game.world.centerY, Images.SpritesheetsSmilingship.getName())
@@ -27,7 +29,7 @@ export default class Enemy extends Phaser.Sprite {
     this.weaponStrong.trackSprite(this, 0, 0, false);
 
     this.events.onKilled.add(() => {
-      GameManager.Instance.buryInGraveyard(this)
+      this.buryAfterDeadBullets = true
     })
 
     this.strategy.customSetup(this)
@@ -41,8 +43,16 @@ export default class Enemy extends Phaser.Sprite {
       this.initialPositionJustified = true
     }
 
-    this.strategy.attack(this.weaponWeak, this.weaponStrong, this.timer)
-    this.body.velocity = this.strategy.move(this.game.time.totalElapsedSeconds(), this.body.velocity)
+    if (this.buryAfterDeadBullets) {
+      if (this.weaponWeak.bullets.countLiving() === 0 && this.weaponStrong.bullets.countLiving() === 0) {
+        GameManager.Instance.buryInGraveyard(this)
+      }
+    }
+
+    if (this.alive) {
+      this.strategy.attack(this.weaponWeak, this.weaponStrong, this.timer)
+      this.body.velocity = this.strategy.move(this.game.time.totalElapsedSeconds(), this.body.velocity)
+    }
   }
 
   /**

@@ -19,14 +19,23 @@ export default class GameAdapter {
     })
 
     enemies.forEach(enemy => {
+
+      // Enemy weak bullets hits player
       game.physics.arcade.overlap(player, enemy.getWeakBullets(), (player, bullet) => {
         bullet.kill()
         player.damage(1)
       })
 
+      // Enemy strong bullets hits player
       game.physics.arcade.overlap(player, enemy.getStrongBullets(), (player, bullet) => {
         bullet.kill()
         player.damage(1)
+      })
+
+      // Player bullets and enemy weak bullets hit each other
+      game.physics.arcade.overlap(player.getBullets(), enemy.getWeakBullets(), (playerBullet, enemyBullet) => {
+        playerBullet.kill()
+        enemyBullet.kill()
       })
     }, this)
   }

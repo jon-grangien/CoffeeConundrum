@@ -10,6 +10,7 @@ export default class Enemy extends Phaser.Sprite {
   private weaponStrong: Phaser.Weapon
   private timer: Phaser.Timer
   private strategy: IEnemyStrategy
+  private initialPositionJustified: boolean = false
 
   constructor(game: Phaser.Game, strategy: IEnemyStrategy) {
     super(game, game.world.centerX + 200, game.world.centerY, Images.SpritesheetsSmilingship.getName())
@@ -29,14 +30,16 @@ export default class Enemy extends Phaser.Sprite {
     this.events.onKilled.add(() => {
       GameManager.Instance.buryInGraveyard(this)
     })
-  }
 
-  public create(): void {
     this.timer.start(0)
-    console.log(this.game.world.getLocalBounds())
   }
 
   public update(): void {
+    if (!this.initialPositionJustified) {
+      this.body.position.y = this.strategy.setStartPosY(this.game)
+      this.initialPositionJustified = true
+    }
+
     this.strategy.attack(this.weaponWeak, this.weaponStrong, this.timer)
     this.body.velocity = this.strategy.move(this.game.time.totalElapsedSeconds(), this.body.velocity)
   }

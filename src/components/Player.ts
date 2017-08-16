@@ -37,7 +37,6 @@ export default class Player extends Phaser.Sprite {
     this.events.onKilled.add(() => {
       GameManager.Instance.buryInGraveyard(this)
     })
-    
     game.add.existing(this)
   }
 

@@ -5,8 +5,13 @@ import IEnemyStrategy from './IEnemyStrategy'
  * A dumb, standard enemy
  */
 export default class DumbEnemyStrategy implements IEnemyStrategy {
-  public setHealth() {
+  public setHealth(): number {
     return 5
+  }
+
+  public setStartPosY(game: Phaser.Game): number {
+    // Return random height between max height - 5 and lowest height (0) + 5
+    return Math.floor(Math.random() * game.height - 5) + 5
   }
 
   public setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
@@ -24,7 +29,13 @@ export default class DumbEnemyStrategy implements IEnemyStrategy {
     return velocity
   }
 
-  attack(weapon1: Phaser.Weapon, weapon2: Phaser.Weapon, timer: Phaser.Timer) {
-    weapon1.fire()
+  attack(weaponWeak: Phaser.Weapon, weaponStrong: Phaser.Weapon, timer: Phaser.Timer) {
+    const poll = Math.random()
+
+    if (poll < 0.08) {
+      weaponStrong.fire()
+    } else {
+      weaponWeak.fire()
+    }
   }
 }

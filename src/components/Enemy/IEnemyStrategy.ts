@@ -9,6 +9,12 @@ interface IEnemyStrategy {
   setHealth(): number
 
   /**
+   * Set an initial position for spawned enemy
+   * @returns {number}
+   */
+  setStartPosY(game: Phaser.Game): number
+
+  /**
    * Set up weapon properties
    * @param {Phaser.Game} game - The game instance
    * @param {Phaser.Weapon} weapon - The weapon to set up
@@ -26,11 +32,11 @@ interface IEnemyStrategy {
 
   /**
    * Fire the weapons in a certain pattern
-   * @param {Phaser.Weapon} weapon1 - The first weapon
-   * @param {Phaser.Weapon} weapon2 - The second weapon
+   * @param {Phaser.Weapon} weaponWeak - The first weapon
+   * @param {Phaser.Weapon} weaponStrong - The second weapon
    * @param {Phaser.Timer} timer - Timer to execute events on
    */
-  attack(weapon1: Phaser.Weapon, weapon2: Phaser.Weapon, timer: Phaser.Timer)
+  attack(weaponWeak: Phaser.Weapon, weaponStrong: Phaser.Weapon, timer: Phaser.Timer)
 }
 
 export default IEnemyStrategy

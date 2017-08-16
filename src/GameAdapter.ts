@@ -1,6 +1,5 @@
 import 'phaser'
 import Player from './components/Player'
-import GameManager from './GameManager'
 
 export default class GameAdapter {
 
@@ -38,5 +37,9 @@ export default class GameAdapter {
         enemyBullet.kill()
       })
     }, this)
+  }
+
+  public enemyGroupDead(enemies: Phaser.Group): boolean {
+    return enemies.countLiving() === 0;
   }
 }

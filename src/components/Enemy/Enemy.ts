@@ -33,6 +33,7 @@ export default class Enemy extends Phaser.Sprite {
 
   public create(): void {
     this.timer.start(0)
+    console.log(this.game.world.getLocalBounds())
   }
 
   public update(): void {
@@ -47,5 +48,20 @@ export default class Enemy extends Phaser.Sprite {
   public spawn(): void {
     this.game.add.existing(this)
   }
-}
 
+  /**
+   * Expose weak bullets group
+   * @returns {Phaser.Group}
+   */
+  public getWeakBullets(): Phaser.Group {
+    return this.weaponWeak.bullets
+  }
+
+  /**
+   * Expose strong bullets group
+   * @returns {Phaser.Group}
+   */
+  public getStrongBullets(): Phaser.Group {
+    return this.weaponStrong.bullets
+  }
+}

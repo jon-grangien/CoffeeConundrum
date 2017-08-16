@@ -4,7 +4,6 @@ interface IEnemyStrategy {
 
   /**
    * Set the health of the enemy
-   * @param {number} amount
    * @returns {number}
    */
   setHealth(): number

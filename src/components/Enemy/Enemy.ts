@@ -45,7 +45,7 @@ export default class Enemy extends Phaser.Sprite {
 
     if (this.buryAfterDeadBullets) {
       if (this.weaponWeak.bullets.countLiving() === 0 && this.weaponStrong.bullets.countLiving() === 0) {
-        GameManager.Instance.buryInGraveyard(this)
+        GameManager.Instance.buryInGraveyard(this) // mark for destroy
       }
     }
 

@@ -1,7 +1,8 @@
 import 'phaser'
 import DumbEnemyStrategy from './DumbEnemyStrategy'
-import GameManager from '../../GameManager'
+import GameManager from '../../globals/GameManager'
 import Enemy from './Enemy'
+import { DUMB_ENEMY_HEALTH } from '../../globals/constants'
 
 /**
  * A dumb, standard enemy that shoots towards the player
@@ -23,7 +24,7 @@ export default class DumbSprayingEnemyStrategy extends DumbEnemyStrategy {
    * @param {Enemy} enemy
    */
   public customSetup(enemy: Enemy): void {
-    enemy.health = 3
+    enemy.health = DUMB_ENEMY_HEALTH
     this.sprayTimerStrong = true
 
     enemy.getTimer().loop(4000, () => {

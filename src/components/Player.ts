@@ -1,6 +1,6 @@
 import 'phaser'
 import {Images} from '../assets'
-import GameManager from '../GameManager'
+import GameManager from '../globals/GameManager'
 
 export default class Player extends Phaser.Sprite {
   private TOP_SPEED: number = 350

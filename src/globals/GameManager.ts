@@ -1,6 +1,6 @@
 import 'phaser'
-import Enemy from './components/Enemy/Enemy'
-import Player from './components/Player'
+import Enemy from '../components/Enemy/Enemy'
+import Player from '../components/Player'
 
 export default class GameManager {
   private static instance: GameManager

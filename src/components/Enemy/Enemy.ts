@@ -1,7 +1,7 @@
 import 'phaser'
 import {Images} from '../../assets'
 import IEnemyStrategy from './IEnemyStrategy'
-import GameManager from '../../GameManager'
+import GameManager from '../../globals/GameManager'
 
 export default class Enemy extends Phaser.Sprite {
   public health: number

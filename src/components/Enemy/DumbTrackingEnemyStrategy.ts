@@ -1,6 +1,6 @@
 import 'phaser'
 import DumbEnemyStrategy from './DumbEnemyStrategy'
-import GameManager from '../../GameManager'
+import GameManager from '../../globals/GameManager'
 
 /**
  * A dumb, standard enemy that shoots towards the player

@@ -4,8 +4,8 @@ import Enemy from '../../components/Enemy/Enemy'
 import DumbEnemyStrategy from '../../components/Enemy/DumbEnemyStrategy'
 import DumbTrackingEnemyStrategy from '../../components/Enemy/DumbTrackingEnemyStrategy'
 import DumbSprayingEnemyStrategy from '../../components/Enemy/DumbSprayingEnemyStrategy'
-import GameAdapter from '../../GameAdapter'
-import GameManager from '../../GameManager'
+import GameAdapter from '../../globals/GameAdapter'
+import GameManager from '../../globals/GameManager'
 
 export default class LevelOne extends Phaser.State {
   private backgroundTemplateSprite: Phaser.Sprite = null
@@ -84,6 +84,18 @@ export default class LevelOne extends Phaser.State {
       new Enemy(this.game, new DumbTrackingEnemyStrategy()),
       new Enemy(this.game, new DumbTrackingEnemyStrategy()),
       new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(false))
+    ]
+    this.waves[6] = [
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(false)),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(false)),
       new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
       new Enemy(this.game, new DumbSprayingEnemyStrategy(false))
     ]

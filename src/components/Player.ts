@@ -1,5 +1,6 @@
 import 'phaser'
 import {Images} from '../assets'
+import GameManager from '../GameManager'
 
 export default class Player extends Phaser.Sprite {
   private TOP_SPEED: number = 350
@@ -33,6 +34,10 @@ export default class Player extends Phaser.Sprite {
     this.canons.fireAngle = 0
     this.canons.trackSprite(this, 0, 0, false)
 
+    this.events.onKilled.add(() => {
+      GameManager.Instance.buryInGraveyard(this)
+    })
+    
     game.add.existing(this)
   }
 

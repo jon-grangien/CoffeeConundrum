@@ -1,12 +1,13 @@
 import 'phaser'
 import IEnemyStrategy from './IEnemyStrategy'
+import Enemy from './Enemy'
 
 /**
  * A dumb, standard enemy
  */
 export default class DumbEnemyStrategy implements IEnemyStrategy {
-  public setHealth(): number {
-    return 5
+  public customSetup(enemy: Enemy): void {
+    enemy.health = 3
   }
 
   public setStartPosY(game: Phaser.Game): number {

@@ -1,8 +1,14 @@
 import 'phaser'
+import Enemy from './components/Enemy/Enemy'
+import Player from './components/Player'
 
 export default class GameManager {
   private static instance: GameManager
+
   private graveyard: Phaser.Sprite[]
+  private weakEnemyBullets: Phaser.Group
+  private strongEnemyBullets: Phaser.Group
+  private playerInstance: Player
 
   constructor() {
     this.graveyard = []
@@ -37,5 +43,17 @@ export default class GameManager {
     }
 
     this.graveyard = []
+  }
+
+  public addEnemyBullets(enemy: Enemy): void {
+
+  }
+
+  public setPlayerInstance(player: Player): void {
+    this.playerInstance = player
+  }
+
+  public getPlayerInstance(): Player {
+    return this.playerInstance
   }
 }

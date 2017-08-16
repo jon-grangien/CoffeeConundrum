@@ -21,7 +21,7 @@ export default class Player extends Phaser.Sprite {
     this.moveRightKey = game.input.keyboard.addKey(Phaser.Keyboard.D)
     this.shootKeys = [game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR), game.input.keyboard.addKey(Phaser.Keyboard.J)]
 
-    this.health = 3
+    this.health = 5
 
     game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.collideWorldBounds = true

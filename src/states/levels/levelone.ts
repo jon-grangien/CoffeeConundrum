@@ -2,6 +2,8 @@ import * as Assets from '../../assets'
 import Player from '../../components/Player'
 import Enemy from '../../components/Enemy/Enemy'
 import DumbEnemyStrategy from '../../components/Enemy/DumbEnemyStrategy'
+import DumbTrackingEnemyStrategy from '../../components/Enemy/DumbTrackingEnemyStrategy'
+import DumbSprayingEnemyStrategy from '../../components/Enemy/DumbSprayingEnemyStrategy'
 import GameAdapter from '../../GameAdapter'
 import GameManager from '../../GameManager'
 
@@ -18,6 +20,7 @@ export default class LevelOne extends Phaser.State {
     4: [],
     5: [],
     6: [],
+    7: [],
   }
 
   private currentWaveNumber: number
@@ -34,46 +37,55 @@ export default class LevelOne extends Phaser.State {
 
   public create(): void {
 
+    // Spawn player
+    this.player = new Player(this.game)
+    GameManager.Instance.setPlayerInstance(this.player)
+
     this.waves[1] = [
       new Enemy(this.game, new DumbEnemyStrategy()),
       new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy())
+      new Enemy(this.game, new DumbTrackingEnemyStrategy())
     ]
     this.waves[2] = [
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy())
+      new Enemy(this.game, new DumbSprayingEnemyStrategy())
     ]
     this.waves[3] = [
       new Enemy(this.game, new DumbEnemyStrategy()),
       new Enemy(this.game, new DumbEnemyStrategy()),
       new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy())
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
     ]
     this.waves[4] = [
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy())
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(false))
     ]
     this.waves[5] = [
       new Enemy(this.game, new DumbEnemyStrategy()),
       new Enemy(this.game, new DumbEnemyStrategy()),
       new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy())
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
     ]
     this.waves[6] = [
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy())
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+    ]
+    this.waves[6] = [
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
+      new Enemy(this.game, new DumbSprayingEnemyStrategy(false))
     ]
 
     this.enemiesGroup = this.game.add.group()
@@ -81,9 +93,6 @@ export default class LevelOne extends Phaser.State {
     // Spawn first wave
     this.enemiesGroup.addMultiple(this.waves['1'])
     this.currentWaveNumber = 1
-
-    // Spawn player
-    this.player = new Player(this.game)
   }
 
   public update(): void {

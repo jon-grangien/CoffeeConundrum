@@ -19,7 +19,6 @@ export default class Enemy extends Phaser.Sprite {
     this.body.collideWorldBounds = true
     this.anchor.setTo(0.5, 0.5)
 
-    this.health = this.strategy.setHealth()
     this.timer = game.time.create(false)
 
     this.weaponWeak = this.strategy.setupWeapon(this.game, this.weaponWeak, Images.SpritesheetsEnemybulletweak.getName())
@@ -30,6 +29,8 @@ export default class Enemy extends Phaser.Sprite {
     this.events.onKilled.add(() => {
       GameManager.Instance.buryInGraveyard(this)
     })
+
+    this.strategy.customSetup(this)
 
     this.timer.start(0)
   }
@@ -66,5 +67,9 @@ export default class Enemy extends Phaser.Sprite {
    */
   public getStrongBullets(): Phaser.Group {
     return this.weaponStrong.bullets
+  }
+
+  public getTimer(): Phaser.Timer {
+    return this.timer
   }
 }

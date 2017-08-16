@@ -1,12 +1,12 @@
 import 'phaser'
+import Enemy from './Enemy'
 
 interface IEnemyStrategy {
 
   /**
-   * Set the health of the enemy
-   * @returns {number}
+   * Custom setup settings for the strategy
    */
-  setHealth(): number
+  customSetup(enemy: Enemy): void
 
   /**
    * Set an initial position for spawned enemy

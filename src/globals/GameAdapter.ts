@@ -36,6 +36,15 @@ export default class GameAdapter {
         playerBullet.kill()
         enemyBullet.kill()
       })
+
+      // Player and enemy collision
+      game.physics.arcade.overlap(player, enemy, (player, enemy) => {
+        if (!player.getInvulnerability()) {
+          player.damage(1)
+          enemy.damage(3)
+        }
+      })
+
     }, this)
   }
 

@@ -47,6 +47,22 @@ export default class Player extends Phaser.Sprite {
     game.add.existing(this)
   }
 
+  /**
+   * Return the weapon bullets group
+   * @returns {Phaser.Group}
+   */
+  public getBullets(): Phaser.Group {
+    return this.canons.bullets
+  }
+
+  /**
+   * Get invulnerable cooldown state
+   * @returns {boolean}
+   */
+  public getInvulnerability(): boolean {
+    return this.invulnerable
+  }
+
   public update(): void {
     let { velocity } = this.body
     const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey, shootKeys, canons } = this
@@ -70,14 +86,6 @@ export default class Player extends Phaser.Sprite {
     if (shootKeys[0].isDown || shootKeys[1].isDown) {
       canons.fire()
     }
-  }
-
-  /**
-   * Return the weapon bullets group
-   * @returns {Phaser.Group}
-   */
-  public getBullets(): Phaser.Group {
-    return this.canons.bullets
   }
 
   /**

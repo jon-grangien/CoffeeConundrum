@@ -39,11 +39,6 @@ export default class LevelOne extends Phaser.State {
     this.gameAdapter = new GameAdapter()
   }
 
-  public preload(): void {
-    //this.backgroundTemplateSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesLakeside.getName())
-    //this.backgroundTemplateSprite.anchor.setTo(0.5)
-  }
-
   public create(): void {
 
     this.game.stage.backgroundColor = '#071924'
@@ -154,9 +149,9 @@ export default class LevelOne extends Phaser.State {
     this.updateWaveIfPassed()
     this.gameAdapter.checkCollisions(this.game, this.player, this.enemiesGroup)
 
-    this.bgBack.tilePosition.x -= 0.05;
-    this.bgMid.tilePosition.x -= 0.3;
-    this.bgFront.tilePosition.x -= 0.75;
+    this.bgBack.tilePosition.x -= 0.2;
+    this.bgMid.tilePosition.x -= 0.8;
+    this.bgFront.tilePosition.x -= 2;
   }
 
   public goNext(): void {

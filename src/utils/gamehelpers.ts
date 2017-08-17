@@ -8,3 +8,13 @@ export const skipBuiltinTypeChecks = (): void => {
     Phaser['Component'].Core.skipTypeChecks = true
 }
 
+/**
+ * Get random value between the max and min limits
+ * @param {number} max
+ * @param {number} min
+ * @returns {number}
+ */
+export function randomInRange(min: number, max: number): number {
+  return Math.floor(Math.random() * max) + min
+}
+

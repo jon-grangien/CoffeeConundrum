@@ -1,5 +1,6 @@
 import 'phaser'
 import IMoveStrategy from './IMoveStrategy'
+import Enemy from '../Enemy'
 
 export default class SlowMoveStrategy implements IMoveStrategy {
   private moveDirectionUp?: boolean
@@ -12,6 +13,25 @@ export default class SlowMoveStrategy implements IMoveStrategy {
 
   public setStartPosY(game: Phaser.Game): number {
     return game.world.centerY
+  }
+
+  setMovement(enemy: Enemy, game: Phaser.Game): void {
+    let props = {y: 0}
+    if (this.moveDirectionUp !== undefined)  {
+      if (this.moveDirectionUp) {
+        props = {y: enemy.body.position.y - 300}
+      } else {
+        props = {y: enemy.body.position.y + 300}
+      }
+    } else {
+      props = {y: enemy.body.position.y - 300}
+    }
+
+    // Truncate to fit world
+    props.y = props.y > game.height - 5 ? game.height - 5 : props.y
+    props.y = props.y < 5 ? 5 : props.y
+
+    game.add.tween(enemy).to(props, 15000, Phaser.Easing.Linear.None, true, 0, -1, true)
   }
 
   public move(elapsedSeconds: number, velocity: Phaser.Point): Phaser.Point {

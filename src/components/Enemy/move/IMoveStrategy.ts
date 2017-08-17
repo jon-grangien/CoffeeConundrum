@@ -1,4 +1,5 @@
 import 'phaser'
+import Enemy from '../Enemy'
 
 interface IMoveStrategy {
 
@@ -7,6 +8,13 @@ interface IMoveStrategy {
    * @returns {number}
    */
   setStartPosY(game: Phaser.Game): number
+
+  /**
+   *
+   * @param {Enemy} enemy
+   * @param {Phaser.Game} game
+   */
+  setMovement(enemy: Enemy, game: Phaser.Game): void
 
   /**
    * Move the enemy with particular movement each frame

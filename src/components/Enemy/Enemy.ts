@@ -38,14 +38,16 @@ export default class Enemy extends Phaser.Sprite {
       this.buryAfterDeadBullets = true
     })
 
+    this.body.position.y = this.moveStrategy.setStartPosY(this.game)
     this.attackStrategy.setupProperties(this)
+    this.moveStrategy.setMovement(this, this.game)
 
     this.timer.start(0)
   }
 
   public update(): void {
     if (!this.initialPositionJustified) {
-      this.body.position.y = this.moveStrategy.setStartPosY(this.game)
+      // this.body.position.y = this.moveStrategy.setStartPosY(this.game)
       this.initialPositionJustified = true
     }
 
@@ -57,7 +59,7 @@ export default class Enemy extends Phaser.Sprite {
 
     if (this.alive) {
       this.attackStrategy.attack(this.weaponWeak, this.weaponStrong, this.timer)
-      this.body.velocity = this.moveStrategy.move(this.game.time.totalElapsedSeconds(), this.body.velocity)
+      // this.body.velocity = this.moveStrategy.move(this.game.time.totalElapsedSeconds(), this.body.velocity)
     }
   }
 

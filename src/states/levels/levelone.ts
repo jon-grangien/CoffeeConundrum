@@ -9,6 +9,7 @@ import TrackingAttackStrategy from '../../components/Enemy/attack/TrackingAttack
 import SprayingAttackStrategy from '../../components/Enemy/attack/SprayingAttackStrategy'
 import SlowMoveStrategy from '../../components/Enemy/move/SlowMoveStrategy'
 import { randomYPos } from '../../utils/gamehelpers'
+import FastShootAttackStrategy from '../../components/Enemy/attack/FastShootAttackStrategy'
 
 export default class LevelOne extends Phaser.State {
   private backgroundTemplateSprite: Phaser.Sprite = null
@@ -25,6 +26,7 @@ export default class LevelOne extends Phaser.State {
     6: [],
     7: [],
     8: [],
+    9: [],
   }
 
   private currentWaveNumber: number
@@ -60,28 +62,33 @@ export default class LevelOne extends Phaser.State {
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
-    this.waves[4] = [
+    this.waves[3] = [
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
+    ]
+    this.waves[5] = [
       new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
       new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
-    this.waves[5] = [
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-    ]
     this.waves[6] = [
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
     ]
     this.waves[7] = [
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
+    ]
+    this.waves[8] = [
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
@@ -92,7 +99,7 @@ export default class LevelOne extends Phaser.State {
       new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
-    this.waves[8] = [
+    this.waves[9] = [
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),

@@ -1,26 +1,18 @@
 import 'phaser'
 import IAttackStrategy from './IAttackStrategy'
-import Enemy from '../Enemy'
 import GameManager from '../../../globals/GameManager'
+import { randomInRange } from '../../../utils/gamehelpers'
+import Enemy from '../Enemy'
 
-export default class SprayingAttackStrategy implements IAttackStrategy {
-  private sprayTimerStrong: boolean
-  private pauseShooting: boolean = false
+export default class FastShootAttackStrategy implements IAttackStrategy {
+  private allowedToShoot: boolean = false
 
   setupProperties(enemy: Enemy): void {
     enemy.events.onAddedToGroup.add(() => {
-      this.sprayTimerStrong = true
 
-      enemy.getTimer().loop(4000, () => {
-        this.sprayTimerStrong = !this.sprayTimerStrong
-      })
-
-      enemy.getTimer().loop(4000, () => {
-        this.pauseShooting = true
-
-        enemy.getTimer().add(1000, () => {
-          this.pauseShooting = false
-        })
+      // Delay first shot
+      enemy.getTimer().add(randomInRange(100, 700), () => {
+        this.allowedToShoot = true
       })
     })
   }
@@ -28,28 +20,35 @@ export default class SprayingAttackStrategy implements IAttackStrategy {
   setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
     weapon = game.add.weapon(-1, resource)
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
-    weapon.bulletSpeed = 300
-    weapon.fireRate = 130
+    weapon.bulletSpeed = 800
+    weapon.fireRate = randomInRange(1700, 2300)
     weapon.fireAngle = 180
 
     return weapon
   }
 
   attack(weaponWeak: Phaser.Weapon, weaponStrong: Phaser.Weapon, timer: Phaser.Timer): void {
-    if (this.pauseShooting) {
+    if (this.allowedToShoot === false) {
       return
     }
 
+    const poll = Math.random()
     const playerInstance = GameManager.Instance.getPlayerInstance()
     const x = playerInstance.body ? playerInstance.body.position.x : undefined
     const y = playerInstance.body ? playerInstance.body.position.y : undefined
 
-    const weapon: Phaser.Weapon = this.sprayTimerStrong ? weaponStrong : weaponWeak
-
     if (x !== undefined && y !== undefined) {
-      weapon.fireAtXY(x, y)
+      if (poll < 0.3) {
+        weaponStrong.fireAtXY(x, y)
+      } else {
+        weaponWeak.fireAtXY(x, y)
+      }
     } else {
-      weapon.fire()
+      if (poll < 0.3) {
+        weaponStrong.fire()
+      } else {
+        weaponWeak.fire()
+      }
     }
   }
 }

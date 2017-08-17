@@ -66,4 +66,14 @@ export default class GameAdapter {
       GameManager.Instance.pushHeart(heart)
     }
   }
+
+  public gameOver(game: Phaser.Game): void {
+    const text = new Phaser.Text(game, game.world.centerX, game.world.centerY, 'Game Over', { font: '65px Arial', fill: '#ff0044', align: 'center' })
+    text.anchor.set(0.5)
+    game.add.existing(text)
+
+    game.add.button(game.world.centerX - 100, game.world.centerY + 50, Assets.Images.SpritesheetsTryagain1.getName(), () => {
+      game.state.start('levelone')
+    })
+  }
 }

@@ -1,6 +1,7 @@
 import 'phaser'
 import {Images} from '../assets'
 import GameManager from '../globals/GameManager'
+import GameAdapter from '../globals/GameAdapter'
 import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../globals/constants'
 
 export default class Player extends Phaser.Sprite {
@@ -16,6 +17,7 @@ export default class Player extends Phaser.Sprite {
   private moveLeftKey: Phaser.Key
   private moveRightKey: Phaser.Key
   private shootKeys: Phaser.Key[]
+  private gameAdapter: GameAdapter = new GameAdapter()
 
   constructor(game: Phaser.Game) {
     super(game, 100, game.world.centerY, Images.SpritesheetsTinyShip.getName())
@@ -40,6 +42,7 @@ export default class Player extends Phaser.Sprite {
     this.canons.trackSprite(this, 0, 0, false)
 
     this.events.onKilled.add(() => {
+      this.gameAdapter.gameOver(this.game)
       GameManager.Instance.buryInGraveyard(this)
     })
 

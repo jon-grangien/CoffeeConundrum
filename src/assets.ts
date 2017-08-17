@@ -81,6 +81,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/spritesheets/tiny_ship.png'); }
     }
+    export class SpritesheetsTryagain1 {
+        static getName(): string { return 'tryagain1'; }
+
+        static getPNG(): string { return require('assets/spritesheets/tryagain1.png'); }
+    }
 }
 
 export namespace Spritesheets {

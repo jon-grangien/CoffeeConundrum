@@ -1,30 +1,40 @@
 /* AUTO GENERATED FILE. DO NOT MODIFY. YOU WILL LOSE YOUR CHANGES ON BUILD. */
 
 export namespace Images {
-    export class ImagesBackBuildings {
-        static getName(): string { return 'back-buildings'; }
-
-        static getPNG(): string { return require('assets/images/back-buildings.png'); }
-    }
     export class ImagesBackgroundTemplate {
         static getName(): string { return 'background_template'; }
 
         static getPNG(): string { return require('assets/images/background_template.png'); }
     }
-    export class ImagesCyberpunkStreet {
-        static getName(): string { return 'cyberpunk-street'; }
+    export class ImagesCyberpunkFarEdit {
+        static getName(): string { return 'cyberpunk-far-edit'; }
 
-        static getPNG(): string { return require('assets/images/cyberpunk-street.png'); }
+        static getPNG(): string { return require('assets/images/cyberpunk-far-edit.png'); }
     }
-    export class ImagesFarBuildings {
-        static getName(): string { return 'far-buildings'; }
+    export class ImagesCyberpunkFarEdit2 {
+        static getName(): string { return 'cyberpunk-far-edit2'; }
 
-        static getPNG(): string { return require('assets/images/far-buildings.png'); }
+        static getPNG(): string { return require('assets/images/cyberpunk-far-edit2.png'); }
     }
-    export class ImagesForeground {
-        static getName(): string { return 'foreground'; }
+    export class ImagesCyberpunkFarEdit3 {
+        static getName(): string { return 'cyberpunk-far-edit3'; }
 
-        static getPNG(): string { return require('assets/images/foreground.png'); }
+        static getPNG(): string { return require('assets/images/cyberpunk-far-edit3.png'); }
+    }
+    export class ImagesCyberpunkFar {
+        static getName(): string { return 'cyberpunk-far'; }
+
+        static getPNG(): string { return require('assets/images/cyberpunk-far.png'); }
+    }
+    export class ImagesCyberpunkForeground {
+        static getName(): string { return 'cyberpunk-foreground'; }
+
+        static getPNG(): string { return require('assets/images/cyberpunk-foreground.png'); }
+    }
+    export class ImagesCyberpunkMid {
+        static getName(): string { return 'cyberpunk-mid'; }
+
+        static getPNG(): string { return require('assets/images/cyberpunk-mid.png'); }
     }
     export class ImagesLakeside {
         static getName(): string { return 'lakeside'; }

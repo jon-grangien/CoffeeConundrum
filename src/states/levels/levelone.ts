@@ -16,6 +16,9 @@ export default class LevelOne extends Phaser.State {
   private player: Player
   private enemiesGroup: Phaser.Group
   private gameAdapter: GameAdapter
+  private bgBack: any
+  private bgMid: any
+  private bgFront: any
 
   private waves = {
     1: [],
@@ -37,11 +40,38 @@ export default class LevelOne extends Phaser.State {
   }
 
   public preload(): void {
-    this.backgroundTemplateSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesLakeside.getName())
-    this.backgroundTemplateSprite.anchor.setTo(0.5)
+    //this.backgroundTemplateSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesLakeside.getName())
+    //this.backgroundTemplateSprite.anchor.setTo(0.5)
   }
 
   public create(): void {
+
+    this.game.stage.backgroundColor = '#052c46'
+
+    const backImg = Assets.Images.ImagesCyberpunkFarEdit3.getName()
+    const midImg = Assets.Images.ImagesCyberpunkMid.getName()
+    const frontImg = Assets.Images.ImagesCyberpunkForeground.getName()
+
+    this.bgBack = this.game.add.tileSprite(0,
+      this.game.height - this.game.cache.getImage(backImg).height,
+      this.game.width,
+      this.game.cache.getImage(backImg).height,
+      backImg
+    );
+
+    this.bgMid = this.game.add.tileSprite(0,
+      this.game.height - this.game.cache.getImage(midImg).height,
+      this.game.width,
+      this.game.cache.getImage(midImg).height,
+      midImg
+    );
+
+    this.bgFront = this.game.add.tileSprite(0,
+      this.game.height - this.game.cache.getImage(frontImg).height,
+      this.game.width,
+      this.game.cache.getImage(frontImg).height,
+      frontImg
+    );
 
     // Spawn player
     this.player = new Player(this.game)
@@ -123,6 +153,10 @@ export default class LevelOne extends Phaser.State {
     GameManager.Instance.clearGraveyard()
     this.updateWaveIfPassed()
     this.gameAdapter.checkCollisions(this.game, this.player, this.enemiesGroup)
+
+    this.bgBack.tilePosition.x -= 0.05;
+    this.bgMid.tilePosition.x -= 0.3;
+    this.bgFront.tilePosition.x -= 0.75;
   }
 
   public goNext(): void {

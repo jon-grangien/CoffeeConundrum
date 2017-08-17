@@ -8,6 +8,7 @@ import DumbAttackStrategy from '../../components/Enemy/attack/DumbAttackStrategy
 import TrackingAttackStrategy from '../../components/Enemy/attack/TrackingAttackStrategy'
 import SprayingAttackStrategy from '../../components/Enemy/attack/SprayingAttackStrategy'
 import SlowMoveStrategy from '../../components/Enemy/move/SlowMoveStrategy'
+import { randomYPos } from '../../utils/gamehelpers'
 
 export default class LevelOne extends Phaser.State {
   private backgroundTemplateSprite: Phaser.Sprite = null
@@ -45,63 +46,63 @@ export default class LevelOne extends Phaser.State {
     GameManager.Instance.setPlayerInstance(this.player)
 
     this.waves[1] = [
-      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[2] = [
-      new Enemy(this.game, new SlowMoveStrategy(), new SprayingAttackStrategy()),
+      new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(), new SprayingAttackStrategy()),
     ]
     this.waves[3] = [
-      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[4] = [
-      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
     this.waves[5] = [
-      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[6] = [
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[7] = [
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
     this.waves[8] = [
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
 
     this.enemiesGroup = this.game.add.group()

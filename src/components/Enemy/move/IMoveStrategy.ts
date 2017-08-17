@@ -4,17 +4,10 @@ import Enemy from '../Enemy'
 interface IMoveStrategy {
 
   /**
-   * Set an initial position for spawned enemy
-   * @returns {number}
-   */
-  setStartPosY(game: Phaser.Game): number
-
-  /**
    *
    * @param {Enemy} enemy
-   * @param {Phaser.Game} game
    */
-  setMovement(enemy: Enemy, game: Phaser.Game): void
+  setMovement(enemy: Enemy): void
 
   /**
    * Move the enemy with particular movement each frame

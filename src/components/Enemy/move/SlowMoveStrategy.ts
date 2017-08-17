@@ -11,11 +11,8 @@ export default class SlowMoveStrategy implements IMoveStrategy {
     ) ? moveDirectionUp : undefined
   }
 
-  public setStartPosY(game: Phaser.Game): number {
-    return game.world.centerY
-  }
-
-  setMovement(enemy: Enemy, game: Phaser.Game): void {
+  setMovement(enemy: Enemy): void {
+    const game = enemy.game
     let props = {y: 0}
     if (this.moveDirectionUp !== undefined)  {
       if (this.moveDirectionUp) {

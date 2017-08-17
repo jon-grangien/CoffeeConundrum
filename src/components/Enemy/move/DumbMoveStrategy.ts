@@ -8,12 +8,8 @@ export default class DumbMoveStrategy implements IMoveStrategy {
   private tween2: Phaser.Tween
   private tween3: Phaser.Tween
 
-  public setStartPosY(game: Phaser.Game): number {
-    // Return random height between max height - 5 and lowest height (0) + 5
-    return Math.floor(Math.random() * game.height - 5) + 5
-  }
-
-  setMovement(enemy: Enemy, game: Phaser.Game): void {
+  setMovement(enemy: Enemy): void {
+    const game = enemy.game
     const originalPosY = enemy.body.position.y
     const originalPosX = enemy.body.position.x
 
@@ -25,14 +21,18 @@ export default class DumbMoveStrategy implements IMoveStrategy {
     const secondDelay = randomInRange(10, 600)
     const thirdDelay = randomInRange(10, 600)
 
-    const firstX = enemy.body.position.x + randomInRange(0, 100)
+    let firstX = enemy.body.position.x + randomInRange(0, 100)
     let firstY = randomInRange(5, game.height - 5)
-    const secondX = enemy.body.position.x + randomInRange(0, 100)
+    let secondX = enemy.body.position.x + randomInRange(0, 100)
     let secondY = randomInRange(5, game.height - 5)
 
     // Truncate to fit world
     firstY = firstY > game.height - 5 ? game.height - 5 : firstY
+    secondY = secondY > game.height - 5 ? game.height - 5 : secondY
+    firstY = firstY < 5 ? 5 : firstY
     secondY = secondY < 5 ? 5 : secondY
+    firstX = firstX > game.width - 10 ? game.width - 10 : firstX
+    secondX = firstX > game.width - 10 ? game.width - 10 : firstX
 
     this.tween1 = game.add.tween(enemy).to({
       x: firstX,

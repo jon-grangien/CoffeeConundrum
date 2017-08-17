@@ -14,11 +14,10 @@ export default class Enemy extends Phaser.Sprite {
   private moveStrategy: IMoveStrategy
   private attackStrategy: IAttackStrategy
 
-  private initialPositionJustified: boolean = false
   private buryAfterDeadBullets: boolean = false
 
-  constructor(game: Phaser.Game, moveStrategy: IMoveStrategy, attackStrategy: IAttackStrategy) {
-    super(game, game.world.centerX + 200, game.world.centerY, Images.SpritesheetsSmilingship.getName())
+  constructor(game: Phaser.Game, yPos: number, moveStrategy: IMoveStrategy, attackStrategy: IAttackStrategy) {
+    super(game, game.width - 150, yPos, Images.SpritesheetsSmilingship.getName())
     this.moveStrategy = moveStrategy
     this.attackStrategy = attackStrategy
 
@@ -38,19 +37,13 @@ export default class Enemy extends Phaser.Sprite {
       this.buryAfterDeadBullets = true
     })
 
-    this.body.position.y = this.moveStrategy.setStartPosY(this.game)
+    this.moveStrategy.setMovement(this)
     this.attackStrategy.setupProperties(this)
-    this.moveStrategy.setMovement(this, this.game)
 
     this.timer.start(0)
   }
 
   public update(): void {
-    if (!this.initialPositionJustified) {
-      // this.body.position.y = this.moveStrategy.setStartPosY(this.game)
-      this.initialPositionJustified = true
-    }
-
     if (this.buryAfterDeadBullets) {
       if (this.weaponWeak.bullets.countLiving() === 0 && this.weaponStrong.bullets.countLiving() === 0) {
         GameManager.Instance.buryInGraveyard(this) // mark for destroy
@@ -59,7 +52,6 @@ export default class Enemy extends Phaser.Sprite {
 
     if (this.alive) {
       this.attackStrategy.attack(this.weaponWeak, this.weaponStrong, this.timer)
-      // this.body.velocity = this.moveStrategy.move(this.game.time.totalElapsedSeconds(), this.body.velocity)
     }
   }
 

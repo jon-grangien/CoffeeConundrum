@@ -1,18 +1,9 @@
 import 'phaser'
-import Enemy from './Enemy'
+import Enemy from '../Enemy'
 
-interface IEnemyStrategy {
+interface IAttackStrategy {
 
-  /**
-   * Custom setup settings for the strategy
-   */
-  customSetup(enemy: Enemy): void
-
-  /**
-   * Set an initial position for spawned enemy
-   * @returns {number}
-   */
-  setStartPosY(game: Phaser.Game): number
+  setupProperties(enemy: Enemy): void
 
   /**
    * Set up weapon properties
@@ -23,14 +14,6 @@ interface IEnemyStrategy {
   setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon
 
   /**
-   * Move the enemy with particular movement each frame
-   * @param {number} elapsedSeconds - Timer in seconds that has passed
-   * @param {number} velocity - The velocity and its direction components
-   * @returns {number} The changed velocity
-   */
-  move(elapsedSeconds: number, velocity: Phaser.Point): Phaser.Point
-
-  /**
    * Fire the weapons in a certain pattern
    * @param {Phaser.Weapon} weaponWeak - The first weapon
    * @param {Phaser.Weapon} weaponStrong - The second weapon
@@ -39,4 +22,4 @@ interface IEnemyStrategy {
   attack(weaponWeak: Phaser.Weapon, weaponStrong: Phaser.Weapon, timer: Phaser.Timer)
 }
 
-export default IEnemyStrategy
+export default IAttackStrategy

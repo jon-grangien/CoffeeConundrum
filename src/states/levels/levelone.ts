@@ -1,11 +1,13 @@
 import * as Assets from '../../assets'
 import Player from '../../components/Player'
 import Enemy from '../../components/Enemy/Enemy'
-import DumbEnemyStrategy from '../../components/Enemy/DumbEnemyStrategy'
-import DumbTrackingEnemyStrategy from '../../components/Enemy/DumbTrackingEnemyStrategy'
-import DumbSprayingEnemyStrategy from '../../components/Enemy/DumbSprayingEnemyStrategy'
 import GameAdapter from '../../globals/GameAdapter'
 import GameManager from '../../globals/GameManager'
+import DumbMoveStrategy from '../../components/Enemy/move/DumbMoveStrategy'
+import DumbAttackStrategy from '../../components/Enemy/attack/DumbAttackStrategy'
+import TrackingAttackStrategy from '../../components/Enemy/attack/TrackingAttackStrategy'
+import SprayingAttackStrategy from '../../components/Enemy/attack/SprayingAttackStrategy'
+import SlowMoveStrategy from '../../components/Enemy/move/SlowMoveStrategy'
 
 export default class LevelOne extends Phaser.State {
   private backgroundTemplateSprite: Phaser.Sprite = null
@@ -42,62 +44,62 @@ export default class LevelOne extends Phaser.State {
     GameManager.Instance.setPlayerInstance(this.player)
 
     this.waves[1] = [
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy())
+      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[2] = [
-      new Enemy(this.game, new DumbSprayingEnemyStrategy())
+      new Enemy(this.game, new SlowMoveStrategy(), new SprayingAttackStrategy()),
     ]
     this.waves[3] = [
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[4] = [
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(false))
+      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
     this.waves[5] = [
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[6] = [
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[6] = [
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(false))
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
     this.waves[6] = [
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbTrackingEnemyStrategy()),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(false)),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(false)),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(true)),
-      new Enemy(this.game, new DumbSprayingEnemyStrategy(false))
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
+      new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
 
     this.enemiesGroup = this.game.add.group()

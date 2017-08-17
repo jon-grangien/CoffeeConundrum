@@ -44,7 +44,7 @@ export default class SprayingAttackStrategy implements IAttackStrategy {
 
     const weapon: Phaser.Weapon = this.sprayTimerStrong ? weaponStrong : weaponWeak
 
-    if (x && y) {
+    if (x !== undefined && y !== undefined) {
       weapon.fireAtXY(x, y)
     } else {
       weapon.fire()

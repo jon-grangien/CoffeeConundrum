@@ -22,7 +22,7 @@ export default class TrackingAttackStrategy implements IAttackStrategy {
     const y = playerInstance.body ? playerInstance.body.position.y : undefined
 
     if (poll < 0.08) {
-      if (x && y) {
+      if (x !== undefined && y !== undefined) {
         weaponStrong.fireAtXY(x, y)
       } else {
         weaponStrong.fire()
@@ -30,7 +30,7 @@ export default class TrackingAttackStrategy implements IAttackStrategy {
     }
 
     else {
-      if (x && y) {
+      if (x !== undefined && y !== undefined) {
         weaponWeak.fireAtXY(x, y)
       } else {
         weaponWeak.fire()

@@ -145,7 +145,7 @@ export default class Player extends Phaser.Sprite {
     // Set invulnerable for some short time
     this.invulnerable = true
     this.invulnerableTween = this.game.add.tween(this).to(
-      {alpha: 0}, 100, Phaser.Easing.Linear.None, true, 0, 1000, true
+      {alpha: 0}, 75, Phaser.Easing.Linear.None, true, 0, 1000, true
     )
 
     this.timer.add(PLAYER_INVULNERABILITY_COOLDOWN, () => {

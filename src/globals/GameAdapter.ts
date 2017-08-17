@@ -21,14 +21,18 @@ export default class GameAdapter {
 
       // Enemy weak bullets hits player
       game.physics.arcade.overlap(player, enemy.getWeakBullets(), (player, bullet) => {
-        bullet.kill()
-        player.damage(1)
+        if (!player.getInvulnerability()) {
+          bullet.kill()
+          player.damage(1)
+        }
       })
 
       // Enemy strong bullets hits player
       game.physics.arcade.overlap(player, enemy.getStrongBullets(), (player, bullet) => {
-        bullet.kill()
-        player.damage(1)
+        if (!player.getInvulnerability()) {
+          bullet.kill()
+          player.damage(1)
+        }
       })
 
       // Player bullets and enemy weak bullets hit each other

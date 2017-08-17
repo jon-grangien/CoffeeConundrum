@@ -1,7 +1,7 @@
 import * as Assets from '../assets';
 
 export default class Title extends Phaser.State {
-  private backgroundTemplateSprite: Phaser.Sprite = null
+  private backgroundTemplateSprite: Phaser.TileSprite = null
   private sfxAudiosprite: Phaser.AudioSprite = null
   private startKey: Phaser.Key
 
@@ -10,8 +10,14 @@ export default class Title extends Phaser.State {
   private sfxLaserSounds: any[] = null
 
   public create(): void {
-    this.backgroundTemplateSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesBackgroundTemplate.getName())
-    this.backgroundTemplateSprite.anchor.setTo(0.5)
+    this.game.stage.backgroundColor = '#071924'
+    const bgImg = Assets.Images.ImagesCyberpunkFarEdit3.getName()
+    this.backgroundTemplateSprite = this.game.add.tileSprite(0,
+      this.game.height - this.game.cache.getImage(bgImg).height,
+      this.game.width,
+      this.game.cache.getImage(bgImg).height,
+      bgImg
+    )
 
     this.startKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.sfxAudiosprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesSfx.getName())
@@ -35,7 +41,7 @@ export default class Title extends Phaser.State {
       this.sfxAudiosprite.play(Phaser.ArrayUtils.getRandomItem(this.sfxLaserSounds))
     });
 
-    this.game.add.button(this.game.world.centerX - 100, 400, 'button', this.goNext, this, 2, 1, 0)
+    this.game.add.button(this.game.world.centerX - 100, 400, Assets.Images.SpritesheetsStartgame1.getName(), this.goNext, this, 2, 1, 0)
     this.game.camera.flash(0x000000, 1000)
   }
 

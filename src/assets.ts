@@ -71,6 +71,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/spritesheets/smilingship.png'); }
     }
+    export class SpritesheetsStartgame1 {
+        static getName(): string { return 'startgame1'; }
+
+        static getPNG(): string { return require('assets/spritesheets/startgame1.png'); }
+    }
     export class SpritesheetsTinyShip {
         static getName(): string { return 'tiny_ship'; }
 

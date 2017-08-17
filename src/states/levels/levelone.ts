@@ -46,7 +46,7 @@ export default class LevelOne extends Phaser.State {
 
   public create(): void {
 
-    this.game.stage.backgroundColor = '#052c46'
+    this.game.stage.backgroundColor = '#071924'
 
     const backImg = Assets.Images.ImagesCyberpunkFarEdit3.getName()
     const midImg = Assets.Images.ImagesCyberpunkMid.getName()

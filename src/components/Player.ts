@@ -156,7 +156,6 @@ export default class Player extends Phaser.Sprite {
       this.alpha = 1
     }, this)
 
-    console.log(`health: ${this.health - 1}`)
     GameManager.Instance.removeHeart()
     return super.damage(amount)
   }

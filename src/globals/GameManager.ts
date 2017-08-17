@@ -59,6 +59,9 @@ export default class GameManager {
 
   public removeHeart(): void {
     const heart: Phaser.Sprite = this.hearts.pop()
-    heart.visible = false
+    const tween = heart.game.add.tween(heart).to({
+      alpha: 0
+    }, 100, Phaser.Easing.Linear.None, true, 0, 2, true)
+    tween.onComplete.add(() => heart.alpha = 0)
   }
 }

@@ -61,7 +61,7 @@ export default class GameAdapter {
 
   public initHealthBar(game: Phaser.Game): void {
     for (let i = 0; i < PLAYER_HEALTH; ++i) {
-      const heart = new Phaser.Sprite(game, 10 + i * 36, 10, Assets.Images.SpritesheetsHeart.getName())
+      const heart = new Phaser.Sprite(game, 10 + i * 22, 10, Assets.Images.SpritesheetsHeart.getName())
       game.add.existing(heart)
       GameManager.Instance.pushHeart(heart)
     }

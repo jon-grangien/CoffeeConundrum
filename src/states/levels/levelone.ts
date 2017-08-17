@@ -23,6 +23,7 @@ export default class LevelOne extends Phaser.State {
     5: [],
     6: [],
     7: [],
+    8: [],
   }
 
   private currentWaveNumber: number
@@ -79,7 +80,7 @@ export default class LevelOne extends Phaser.State {
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
-    this.waves[6] = [
+    this.waves[7] = [
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
@@ -90,7 +91,7 @@ export default class LevelOne extends Phaser.State {
       new Enemy(this.game, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
       new Enemy(this.game, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
     ]
-    this.waves[6] = [
+    this.waves[8] = [
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
@@ -106,7 +107,7 @@ export default class LevelOne extends Phaser.State {
     this.enemiesGroup = this.game.add.group()
 
     // Spawn first wave
-    this.enemiesGroup.addMultiple(this.waves['1'])
+    this.enemiesGroup.addMultiple(this.waves[1])
     this.currentWaveNumber = 1
   }
 

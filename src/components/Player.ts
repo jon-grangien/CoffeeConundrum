@@ -1,11 +1,15 @@
 import 'phaser'
 import {Images} from '../assets'
 import GameManager from '../globals/GameManager'
+import { PLAYER_INVULNERABILITY_COOLDOWN } from '../globals/constants'
 
 export default class Player extends Phaser.Sprite {
   private TOP_SPEED: number = 350
 
   private canons: Phaser.Weapon
+  private timer: Phaser.Timer
+  private invulnerable: boolean = false
+  private invulnerableTween: Phaser.Tween
 
   private moveUpKey: Phaser.Key
   private moveDownKey: Phaser.Key
@@ -22,6 +26,7 @@ export default class Player extends Phaser.Sprite {
     this.shootKeys = [game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR), game.input.keyboard.addKey(Phaser.Keyboard.J)]
 
     this.health = 5
+    this.timer = game.time.create(false)
 
     game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.collideWorldBounds = true
@@ -37,6 +42,8 @@ export default class Player extends Phaser.Sprite {
     this.events.onKilled.add(() => {
       GameManager.Instance.buryInGraveyard(this)
     })
+
+    this.timer.start(0)
     game.add.existing(this)
   }
 
@@ -114,5 +121,34 @@ export default class Player extends Phaser.Sprite {
     }
 
     return velocity
+  }
+
+  /**
+   * @override
+   * Don't apply damage functionality if invulnerable set
+   * @param {number} amount
+   * @returns {Phaser.Sprite}
+   */
+  public damage(amount: number): Phaser.Sprite {
+    if (this.invulnerable === true) {
+      return null
+    }
+
+    // Set invulnerable for some short time
+    this.invulnerable = true
+    this.invulnerableTween = this.game.add.tween(this).to(
+      {alpha: 0}, 100, Phaser.Easing.Linear.None, true, 0, 1000, true
+    )
+
+    this.timer.add(PLAYER_INVULNERABILITY_COOLDOWN, () => {
+      this.invulnerable = false
+      if (this.game && this.game.tweens) {
+        this.game.tweens.remove(this.invulnerableTween)
+      }
+      this.alpha = 1
+    }, this)
+
+    console.log(`health: ${this.health - 1}`)
+    return super.damage(amount)
   }
 }

@@ -1,5 +1,8 @@
 import 'phaser'
 import Player from '../components/Player'
+import * as Assets from '../assets'
+import { PLAYER_HEALTH } from './constants'
+import GameManager from './GameManager'
 
 export default class GameAdapter {
 
@@ -54,5 +57,13 @@ export default class GameAdapter {
 
   public enemyGroupDead(enemies: Phaser.Group): boolean {
     return enemies.countLiving() === 0;
+  }
+
+  public initHealthBar(game: Phaser.Game): void {
+    for (let i = 0; i < PLAYER_HEALTH; ++i) {
+      const heart = new Phaser.Sprite(game, 10 + i * 36, 10, Assets.Images.SpritesheetsHeart.getName())
+      game.add.existing(heart)
+      GameManager.Instance.pushHeart(heart)
+    }
   }
 }

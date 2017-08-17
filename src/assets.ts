@@ -56,6 +56,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/spritesheets/enemybulletweak.png'); }
     }
+    export class SpritesheetsHeart {
+        static getName(): string { return 'Heart'; }
+
+        static getPNG(): string { return require('assets/spritesheets/Heart.png'); }
+    }
     export class SpritesheetsMetalslugMummy374518 {
         static getName(): string { return 'metalslug_mummy.[37,45,18,0,0]'; }
 

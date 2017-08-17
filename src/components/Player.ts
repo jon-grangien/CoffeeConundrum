@@ -1,7 +1,7 @@
 import 'phaser'
 import {Images} from '../assets'
 import GameManager from '../globals/GameManager'
-import { PLAYER_INVULNERABILITY_COOLDOWN } from '../globals/constants'
+import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../globals/constants'
 
 export default class Player extends Phaser.Sprite {
   private TOP_SPEED: number = 350
@@ -25,7 +25,7 @@ export default class Player extends Phaser.Sprite {
     this.moveRightKey = game.input.keyboard.addKey(Phaser.Keyboard.D)
     this.shootKeys = [game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR), game.input.keyboard.addKey(Phaser.Keyboard.J)]
 
-    this.health = 5
+    this.health = PLAYER_HEALTH
     this.timer = game.time.create(false)
 
     game.physics.enable(this, Phaser.Physics.ARCADE)
@@ -157,6 +157,7 @@ export default class Player extends Phaser.Sprite {
     }, this)
 
     console.log(`health: ${this.health - 1}`)
+    GameManager.Instance.removeHeart()
     return super.damage(amount)
   }
 }

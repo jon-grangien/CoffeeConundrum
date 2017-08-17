@@ -6,12 +6,12 @@ export default class GameManager {
   private static instance: GameManager
 
   private graveyard: Phaser.Sprite[]
-  private weakEnemyBullets: Phaser.Group
-  private strongEnemyBullets: Phaser.Group
   private playerInstance: Player
+  private hearts: Phaser.Sprite[]
 
   constructor() {
     this.graveyard = []
+    this.hearts = []
   }
 
   static get Instance(): GameManager {
@@ -45,15 +45,20 @@ export default class GameManager {
     this.graveyard = []
   }
 
-  public addEnemyBullets(enemy: Enemy): void {
-
-  }
-
   public setPlayerInstance(player: Player): void {
     this.playerInstance = player
   }
 
   public getPlayerInstance(): Player {
     return this.playerInstance
+  }
+
+  public pushHeart(heart: Phaser.Sprite): void {
+    this.hearts.push(heart)
+  }
+
+  public removeHeart(): void {
+    const heart: Phaser.Sprite = this.hearts.pop()
+    heart.visible = false
   }
 }

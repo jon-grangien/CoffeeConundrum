@@ -54,7 +54,7 @@ export default class LevelOne extends Phaser.State {
     this.waves[3] = [
       new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
@@ -65,12 +65,13 @@ export default class LevelOne extends Phaser.State {
     this.waves[5] = [
       new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, new DumbMoveStrategy(), new DumbAttackStrategy()),
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
     ]
     this.waves[6] = [
+      new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),
       new Enemy(this.game, new DumbMoveStrategy(), new TrackingAttackStrategy()),

@@ -1,10 +1,30 @@
 /* AUTO GENERATED FILE. DO NOT MODIFY. YOU WILL LOSE YOUR CHANGES ON BUILD. */
 
 export namespace Images {
+    export class ImagesBackBuildings {
+        static getName(): string { return 'back-buildings'; }
+
+        static getPNG(): string { return require('assets/images/back-buildings.png'); }
+    }
     export class ImagesBackgroundTemplate {
         static getName(): string { return 'background_template'; }
 
         static getPNG(): string { return require('assets/images/background_template.png'); }
+    }
+    export class ImagesCyberpunkStreet {
+        static getName(): string { return 'cyberpunk-street'; }
+
+        static getPNG(): string { return require('assets/images/cyberpunk-street.png'); }
+    }
+    export class ImagesFarBuildings {
+        static getName(): string { return 'far-buildings'; }
+
+        static getPNG(): string { return require('assets/images/far-buildings.png'); }
+    }
+    export class ImagesForeground {
+        static getName(): string { return 'foreground'; }
+
+        static getPNG(): string { return require('assets/images/foreground.png'); }
     }
     export class ImagesLakeside {
         static getName(): string { return 'lakeside'; }

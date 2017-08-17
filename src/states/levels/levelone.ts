@@ -12,13 +12,15 @@ import { randomYPos } from '../../utils/gamehelpers'
 import FastShootAttackStrategy from '../../components/Enemy/attack/FastShootAttackStrategy'
 
 export default class LevelOne extends Phaser.State {
-  private backgroundTemplateSprite: Phaser.Sprite = null
   private player: Player
   private enemiesGroup: Phaser.Group
   private gameAdapter: GameAdapter
   private bgBack: any
   private bgMid: any
   private bgFront: any
+  private farTilesSpeed: number = 0.1
+  private midTilesSpeed: number = 1
+  private frontTilesSpeed: number = 3
 
   private waves = {
     1: [],
@@ -52,21 +54,21 @@ export default class LevelOne extends Phaser.State {
       this.game.width,
       this.game.cache.getImage(backImg).height,
       backImg
-    );
+    )
 
     this.bgMid = this.game.add.tileSprite(0,
       this.game.height - this.game.cache.getImage(midImg).height,
       this.game.width,
       this.game.cache.getImage(midImg).height,
       midImg
-    );
+    )
 
     this.bgFront = this.game.add.tileSprite(0,
       this.game.height - this.game.cache.getImage(frontImg).height,
       this.game.width,
       this.game.cache.getImage(frontImg).height,
       frontImg
-    );
+    )
 
     this.gameAdapter.initHealthBar(this.game)
 
@@ -151,9 +153,9 @@ export default class LevelOne extends Phaser.State {
     this.updateWaveIfPassed()
     this.gameAdapter.checkCollisions(this.game, this.player, this.enemiesGroup)
 
-    this.bgBack.tilePosition.x -= 0.2;
-    this.bgMid.tilePosition.x -= 0.8;
-    this.bgFront.tilePosition.x -= 2;
+    this.bgBack.tilePosition.x -= this.farTilesSpeed
+    this.bgMid.tilePosition.x -= this.midTilesSpeed
+    this.bgFront.tilePosition.x -= this.frontTilesSpeed
   }
 
   public goNext(): void {
@@ -167,6 +169,11 @@ export default class LevelOne extends Phaser.State {
   private updateWaveIfPassed(): void {
     if (this.gameAdapter.enemyGroupDead(this.enemiesGroup)) {
       this.currentWaveNumber = this.currentWaveNumber + 1
+
+      // Make parallax bg move slightly faster
+      this.farTilesSpeed += 0.03
+      this.midTilesSpeed += 0.1
+      this.frontTilesSpeed += 0.3
 
       if (this.waves[this.currentWaveNumber] !== undefined) {
         this.enemiesGroup.addMultiple(this.waves[this.currentWaveNumber])

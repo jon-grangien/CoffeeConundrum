@@ -10,6 +10,7 @@ import SprayingAttackStrategy from '../../components/Enemy/attack/SprayingAttack
 import SlowMoveStrategy from '../../components/Enemy/move/SlowMoveStrategy'
 import { randomYPos } from '../../utils/gamehelpers'
 import FastShootAttackStrategy from '../../components/Enemy/attack/FastShootAttackStrategy'
+import EnemyFactory from '../../components/Enemy/EnemyFactory'
 
 export default class LevelOne extends Phaser.State {
   private player: Player
@@ -44,7 +45,6 @@ export default class LevelOne extends Phaser.State {
   }
 
   public create(): void {
-
     this.game.stage.backgroundColor = '#071924'
 
     const backImg = Assets.Images.ImagesCyberpunkFarEdit3.getName()
@@ -73,132 +73,133 @@ export default class LevelOne extends Phaser.State {
     )
 
     this.gameAdapter.initHealthBar(this.game)
+    const enemyFactory = new EnemyFactory(this.game)
 
     // Spawn player
     this.player = new Player(this.game)
     GameManager.Instance.setPlayerInstance(this.player)
 
     this.waves[1] = [
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      enemyFactory.makeDumb(),
+      enemyFactory.makeDumb(),
+      enemyFactory.makeDumbMovingTracking()
     ]
     this.waves[2] = [
-      new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(), new SprayingAttackStrategy()),
+      enemyFactory.makeSlowMovingSpraying()
     ]
     this.waves[3] = [
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
+      enemyFactory.makeDumb(),
+      enemyFactory.makeDumb(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking()
     ]
     this.waves[3] = [
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
+      enemyFactory.makeDumbMovingFastShooting(),
+      enemyFactory.makeDumbMovingFastShooting(),
+      enemyFactory.makeDumbMovingFastShooting(),
     ]
     this.waves[5] = [
-      new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false)
     ]
     this.waves[6] = [
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new DumbAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
+      enemyFactory.makeDumb(),
+      enemyFactory.makeDumb(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingFastShooting()
     ]
     this.waves[7] = [
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new FastShootAttackStrategy()),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingFastShooting()
     ]
     this.waves[8] = [
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false)
     ]
     this.waves[9] = [
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new TrackingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeDumbMovingTracking(),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false)
     ]
     this.waves[10] = [
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new SprayingAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new SprayingAttackStrategy()),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false),
+      enemyFactory.makeSlowMovingSpraying(true),
+      enemyFactory.makeSlowMovingSpraying(false)
     ]
     this.waves[11] = [
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(true), new FastShootAttackStrategy()),
-      new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(false), new FastShootAttackStrategy()),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false),
+      enemyFactory.makeSlowMovingFastShooting(true),
+      enemyFactory.makeSlowMovingFastShooting(false)
     ]
     this.enemiesGroup = this.game.add.group()
 

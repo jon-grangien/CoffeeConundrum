@@ -4,6 +4,8 @@ import IMoveStrategy from './move/IMoveStrategy'
 import IAttackStrategy from './attack/IAttackStrategy'
 import GameManager from '../../globals/GameManager'
 import { DUMB_ENEMY_HEALTH } from '../../globals/constants'
+import EnemyWeakBullet from './bullets/EnemyWeakBullet'
+import EnemyStrongBullet from './bullets/EnemyStrongBullet'
 
 const glsl = require('glslify')
 const weakWeapFrag = require('raw-loader!glslify!./glsl/weaponweak.frag')
@@ -35,12 +37,8 @@ export default class Enemy extends Phaser.Sprite {
     this.weaponStrong = this.attackStrategy.setupWeapon(this.game, this.weaponStrong, Images.SpritesheetsEnemybulletstrong.getName())
     this.weaponWeak.trackSprite(this, 0, 0, false);
     this.weaponStrong.trackSprite(this, 0, 0, false);
-
-    //const weakWeapShader = new Phaser.Filter(this.game, null, weakWeapFrag)
-    //weakWeapShader.setResolution(18, 18)
-
-    //this.weaponWeak.bullets.filters = [ weakWeapShader ]
-    //this.weaponWeak.bullets.setAllChildren('filters', [ weakWeapShader ])
+    this.weaponWeak.bulletClass = EnemyWeakBullet
+    this.weaponStrong.bulletClass = EnemyStrongBullet
 
     this.events.onKilled.add(() => {
       this.buryAfterDeadBullets = true

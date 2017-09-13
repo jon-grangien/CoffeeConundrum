@@ -5,7 +5,7 @@ export default class DumbAttackStrategy implements IAttackStrategy {
   setupProperties(): void {}
 
   setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
-    weapon = game.add.weapon(-1, resource)
+    weapon = game.add.weapon(-1)
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     weapon.bulletSpeed = 300
     weapon.fireRate = 1000
@@ -17,7 +17,7 @@ export default class DumbAttackStrategy implements IAttackStrategy {
   attack(weaponWeak: Phaser.Weapon, weaponStrong: Phaser.Weapon, timer: Phaser.Timer): void {
     const poll = Math.random()
 
-    if (poll < 0.08) {
+    if (poll < 0.008) {
       weaponStrong.fire()
     } else {
       weaponWeak.fire()

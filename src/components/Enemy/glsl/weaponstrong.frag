@@ -14,7 +14,7 @@ void main() {
     float centerDistance = distance(uv, vec2(0.5, 0.5));
 
     if (centerDistance < 0.5) {
-        gl_FragColor = vec4(0.8, 0.5, 0.3, 1.0);
+        gl_FragColor = vec4(0.7, 0.5, 0.8, 1.0);
         return;
     }
 

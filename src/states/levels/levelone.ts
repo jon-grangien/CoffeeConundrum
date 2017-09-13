@@ -81,8 +81,8 @@ export default class LevelOne extends Phaser.State {
 
     this.waves[1] = [
       enemyFactory.makeDumb(),
-      enemyFactory.makeDumb(),
-      enemyFactory.makeDumbMovingTracking()
+      //enemyFactory.makeDumb(),
+      //enemyFactory.makeDumbMovingTracking()
     ]
     this.waves[2] = [
       enemyFactory.makeSlowMovingSpraying()

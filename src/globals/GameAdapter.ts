@@ -25,6 +25,11 @@ export default class GameAdapter {
       // Enemy weak bullets hits player
       game.physics.arcade.overlap(player, enemy.getWeakBullets(), (player, bullet) => {
         if (!player.getInvulnerability()) {
+
+          // Hotfix for invisible bullets bug
+          if (!bullet.filters) {
+            return
+          }
           bullet.kill()
           player.damage(1)
         }
@@ -33,6 +38,12 @@ export default class GameAdapter {
       // Enemy strong bullets hits player
       game.physics.arcade.overlap(player, enemy.getStrongBullets(), (player, bullet) => {
         if (!player.getInvulnerability()) {
+
+          // Hotfix for invisible bullets bug
+          if (!bullet.filters) {
+            return
+          }
+
           bullet.kill()
           player.damage(1)
         }

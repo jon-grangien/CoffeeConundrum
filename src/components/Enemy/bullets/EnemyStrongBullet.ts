@@ -10,6 +10,7 @@ export default class EnemyStrongBullet extends Phaser.Bullet {
     super(game, x, y, key, frame)
     this.width = ENEMY_BULLET_WIDTH
     this.height = ENEMY_BULLET_HEIGHT
+    this.outOfBoundsKill = true
 
     const uniforms = {
       u_resolution: { type: '2f', value: {x: ENEMY_BULLET_WIDTH, y: ENEMY_BULLET_HEIGHT} },

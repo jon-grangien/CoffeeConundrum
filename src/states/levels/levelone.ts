@@ -3,13 +3,6 @@ import Player from '../../components/Player'
 import Enemy from '../../components/Enemy/Enemy'
 import GameAdapter from '../../globals/GameAdapter'
 import GameManager from '../../globals/GameManager'
-import DumbMoveStrategy from '../../components/Enemy/move/DumbMoveStrategy'
-import DumbAttackStrategy from '../../components/Enemy/attack/DumbAttackStrategy'
-import TrackingAttackStrategy from '../../components/Enemy/attack/TrackingAttackStrategy'
-import SprayingAttackStrategy from '../../components/Enemy/attack/SprayingAttackStrategy'
-import SlowMoveStrategy from '../../components/Enemy/move/SlowMoveStrategy'
-import { randomYPos } from '../../utils/gamehelpers'
-import FastShootAttackStrategy from '../../components/Enemy/attack/FastShootAttackStrategy'
 import EnemyFactory from '../../components/Enemy/EnemyFactory'
 
 export default class LevelOne extends Phaser.State {
@@ -22,20 +15,6 @@ export default class LevelOne extends Phaser.State {
   private farTilesSpeed: number = 0.1
   private midTilesSpeed: number = 1
   private frontTilesSpeed: number = 3
-
-  private waves = {
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
-    7: [],
-    8: [],
-    9: [],
-    10: [],
-    11: [],
-  }
 
   private currentWaveNumber: number
 
@@ -73,138 +52,15 @@ export default class LevelOne extends Phaser.State {
     )
 
     this.gameAdapter.initHealthBar(this.game)
-    const enemyFactory = new EnemyFactory(this.game)
 
     // Spawn player
     this.player = new Player(this.game)
     GameManager.Instance.setPlayerInstance(this.player)
 
-    this.waves[1] = [
-      enemyFactory.makeDumb(),
-      //enemyFactory.makeDumb(),
-      //enemyFactory.makeDumbMovingTracking()
-    ]
-    this.waves[2] = [
-      enemyFactory.makeSlowMovingSpraying()
-    ]
-    this.waves[3] = [
-      enemyFactory.makeDumb(),
-      enemyFactory.makeDumb(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking()
-    ]
-    this.waves[3] = [
-      enemyFactory.makeDumbMovingFastShooting(),
-      enemyFactory.makeDumbMovingFastShooting(),
-      enemyFactory.makeDumbMovingFastShooting(),
-    ]
-    this.waves[5] = [
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false)
-    ]
-    this.waves[6] = [
-      enemyFactory.makeDumb(),
-      enemyFactory.makeDumb(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingFastShooting()
-    ]
-    this.waves[7] = [
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingFastShooting()
-    ]
-    this.waves[8] = [
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false)
-    ]
-    this.waves[9] = [
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeDumbMovingTracking(),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false)
-    ]
-    this.waves[10] = [
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false),
-      enemyFactory.makeSlowMovingSpraying(true),
-      enemyFactory.makeSlowMovingSpraying(false)
-    ]
-    this.waves[11] = [
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false),
-      enemyFactory.makeSlowMovingFastShooting(true),
-      enemyFactory.makeSlowMovingFastShooting(false)
-    ]
     this.enemiesGroup = this.game.add.group()
 
     // Spawn first wave
-    this.enemiesGroup.addMultiple(this.waves[1])
+    this.enemiesGroup.addMultiple(this.getWaveOfEnemies(1))
     this.currentWaveNumber = 1
   }
 
@@ -230,16 +86,143 @@ export default class LevelOne extends Phaser.State {
     if (this.gameAdapter.enemyGroupDead(this.enemiesGroup)) {
       this.currentWaveNumber = this.currentWaveNumber + 1
 
-      // Make parallax bg move slightly faster
+      // Make parallax bg move slightly faster for each wave
       this.farTilesSpeed += 0.03
       this.midTilesSpeed += 0.1
       this.frontTilesSpeed += 0.3
 
-      if (this.waves[this.currentWaveNumber] !== undefined) {
-        this.enemiesGroup.addMultiple(this.waves[this.currentWaveNumber])
+      const wave = this.getWaveOfEnemies(this.currentWaveNumber)
+
+      if (wave.length > 0) {
+        this.enemiesGroup.addMultiple(wave)
       } else {
         this.goNext()
       }
     }
+  }
+
+  private getWaveOfEnemies(waveNumber: number): Enemy[] {
+    const enemyFactory = new EnemyFactory(this.game)
+    let enemies
+
+    switch (waveNumber) {
+      case 1:
+        enemies = [
+          enemyFactory.makeDumb(),
+          enemyFactory.makeDumb(),
+          enemyFactory.makeDumbMovingTracking()
+        ]
+        break
+      case 2:
+        enemies = [
+          enemyFactory.makeDumb(),
+          enemyFactory.makeDumb(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking()
+        ]
+        break
+      case 3:
+        enemies = [
+          enemyFactory.makeDumbMovingFastShooting(),
+          enemyFactory.makeDumbMovingFastShooting(),
+          enemyFactory.makeDumbMovingFastShooting(),
+        ]
+        break
+      case 4:
+        enemies = [
+          enemyFactory.makeDumb(),
+          enemyFactory.makeDumb(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingFastShooting()
+        ]
+        break
+      case 5:
+        enemies = [
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingFastShooting()
+        ]
+        break
+      case 6:
+        enemies = [
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false)
+        ]
+        break
+      case 7:
+        enemies = [
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeDumbMovingTracking(),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false)
+        ]
+        break
+      case 8:
+        enemies = [
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+          enemyFactory.makeSlowMovingSpraying(true),
+          enemyFactory.makeSlowMovingSpraying(false),
+
+        ]
+        break
+      case 9:
+        enemies = [
+          enemyFactory.makeSlowMovingFastShooting(true),
+          enemyFactory.makeSlowMovingFastShooting(false),
+          enemyFactory.makeSlowMovingFastShooting(true),
+          enemyFactory.makeSlowMovingFastShooting(false),
+          enemyFactory.makeSlowMovingFastShooting(true),
+          enemyFactory.makeSlowMovingFastShooting(false),
+          enemyFactory.makeSlowMovingFastShooting(true),
+          enemyFactory.makeSlowMovingFastShooting(false),
+          enemyFactory.makeSlowMovingFastShooting(true),
+          enemyFactory.makeSlowMovingFastShooting(false),
+          enemyFactory.makeSlowMovingFastShooting(true),
+          enemyFactory.makeSlowMovingFastShooting(false),
+          enemyFactory.makeSlowMovingFastShooting(true),
+          enemyFactory.makeSlowMovingFastShooting(false)
+        ]
+        break
+      default:
+        enemies = []
+        break
+    }
+
+    return enemies
   }
 }

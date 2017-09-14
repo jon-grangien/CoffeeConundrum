@@ -20,18 +20,14 @@ export default class FastShootAttackStrategy implements IAttackStrategy {
   setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
     weapon = game.add.weapon(-1)
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
-    weapon.bulletSpeed = 800
-    weapon.fireRate = randomInRange(1700, 2300)
+    weapon.bulletSpeed = 1000
+    weapon.fireRate = randomInRange(800, 1000)
     weapon.fireAngle = 180
 
     return weapon
   }
 
   attack(weaponWeak: Phaser.Weapon, weaponStrong: Phaser.Weapon, timer: Phaser.Timer): void {
-    if (this.allowedToShoot === false) {
-      return
-    }
-
     const poll = Math.random()
     const playerInstance = GameManager.Instance.getPlayerInstance()
     const x = playerInstance.body ? playerInstance.body.position.x : undefined

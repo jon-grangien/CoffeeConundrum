@@ -228,15 +228,10 @@ export namespace Scripts {
     }
 }
 export namespace Shaders {
-    export class ShadersBulletsWeaponstrong {
-        static getName(): string { return 'weaponstrong'; }
+    export class ShadersEnemyBullet {
+        static getName(): string { return 'bullet'; }
 
-        static getFRAG(): string { return require('assets/shaders/bullets/weaponstrong.frag'); }
-    }
-    export class ShadersBulletsWeaponweak {
-        static getName(): string { return 'weaponweak'; }
-
-        static getFRAG(): string { return require('assets/shaders/bullets/weaponweak.frag'); }
+        static getFRAG(): string { return require('assets/shaders/enemy/bullet.frag'); }
     }
     export class ShadersPixelate {
         static getName(): string { return 'pixelate'; }

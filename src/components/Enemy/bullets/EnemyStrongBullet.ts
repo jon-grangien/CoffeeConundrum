@@ -14,13 +14,14 @@ export default class EnemyStrongBullet extends Phaser.Bullet {
     this.outOfBoundsKill = true
 
     this._uniforms = {
+      u_color: { type: '3f', value: {x: 0.7, y: 0.5, z: 0.8} },
       u_resolution: { type: '2f', value: {x: ENEMY_BULLET_WIDTH, y: ENEMY_BULLET_HEIGHT} },
       u_screenSize: { type: '2f', value: { x: this.game.width , y: this.game.height }},
       u_radius: { type: '1f', value: ENEMY_BULLET_RADIUS},
       u_time: { type: '1f', value: game.time.totalElapsedSeconds() * 1000 }
     }
 
-    this._shader = new Phaser.Filter(game, this._uniforms, game.cache.getShader(Shaders.ShadersBulletsWeaponstrong.getName()))
+    this._shader = new Phaser.Filter(game, this._uniforms, game.cache.getShader(Shaders.ShadersEnemyBullet.getName()))
     this._shader.setResolution(ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT)
     this.filters = [ this._shader ]
   }

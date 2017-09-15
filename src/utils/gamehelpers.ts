@@ -22,3 +22,15 @@ export function randomYPos(height: number): number {
   return randomInRange(5, height - 5)
 }
 
+/**
+ * Check if sprite hits bounds
+ * @param {any} body
+ * @param {Phaser.Game} game
+ * @returns {boolean}
+ */
+export const checkOnOrOutOfBounds = (body: any, game: Phaser.Game): boolean => {
+  const { position } = body
+  const { width, height } = game
+  const pad = 3
+  return position.x <= pad || position.x >= width - pad || position.y <= pad || position.y >= height - pad
+}

@@ -1,6 +1,7 @@
 import 'phaser'
 import {ENEMY_BULLET_HEIGHT, ENEMY_BULLET_RADIUS, ENEMY_BULLET_WIDTH} from '../../../globals/constants'
 import {Shaders} from '../../../assets'
+import {checkOnOrOutOfBounds} from '../../../utils/gamehelpers'
 
 export default class EnemyWeakBullet extends Phaser.Bullet {
   private _shader
@@ -10,7 +11,8 @@ export default class EnemyWeakBullet extends Phaser.Bullet {
     super(game, x, y, key, frame)
     this.width = ENEMY_BULLET_WIDTH
     this.height = ENEMY_BULLET_HEIGHT
-    this.outOfBoundsKill = true
+    this.checkWorldBounds = false
+    this.outOfBoundsKill = false
 
     this._uniforms = {
       u_resolution: { type: '2f', value: {x: ENEMY_BULLET_WIDTH, y: ENEMY_BULLET_HEIGHT} },
@@ -26,6 +28,10 @@ export default class EnemyWeakBullet extends Phaser.Bullet {
 
   public update(): void {
     this._uniforms.u_time.value = this.game.time.totalElapsedSeconds() * 1000
-  }
 
+    // Manual bullet destroy on bounds hit
+    if (checkOnOrOutOfBounds(this.body, this.game)) {
+      this.destroy()
+    }
+  }
 }

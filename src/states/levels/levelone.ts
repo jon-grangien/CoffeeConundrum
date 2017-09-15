@@ -69,6 +69,12 @@ export default class LevelOne extends Phaser.State {
     this.updateWaveIfPassed()
     this.gameAdapter.checkCollisions(this.game, this.player, this.enemiesGroup)
 
+    //let bullets = 0
+    //this.enemiesGroup.forEach((enemy) => {
+    //  bullets += enemy.getWeakBullets().length + enemy.getStrongBullets().length
+    //}, this)
+    //console.log(bullets)
+
     this.bgBack.tilePosition.x -= this.farTilesSpeed
     this.bgMid.tilePosition.x -= this.midTilesSpeed
     this.bgFront.tilePosition.x -= this.frontTilesSpeed
@@ -173,20 +179,10 @@ export default class LevelOne extends Phaser.State {
           enemyFactory.makeSlowMovingSpraying(false),
           enemyFactory.makeSlowMovingSpraying(true),
           enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false)
         ]
         break
       case 8:
         enemies = [
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
           enemyFactory.makeSlowMovingSpraying(true),
           enemyFactory.makeSlowMovingSpraying(false),
           enemyFactory.makeSlowMovingSpraying(true),
@@ -214,8 +210,6 @@ export default class LevelOne extends Phaser.State {
           enemyFactory.makeSlowMovingFastShooting(false),
           enemyFactory.makeSlowMovingFastShooting(true),
           enemyFactory.makeSlowMovingFastShooting(false),
-          enemyFactory.makeSlowMovingFastShooting(true),
-          enemyFactory.makeSlowMovingFastShooting(false)
         ]
         break
       default:

@@ -27,7 +27,7 @@ export default class EnemyFactory {
   }
 
   public makeSlowMovingSpraying(moveUpwards?: boolean): Enemy {
-    return new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(moveUpwards), new SprayingAttackStrategy())
+    return new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(moveUpwards), new SprayingAttackStrategy())
   }
 
   public makeSlowMovingFastShooting(moveUpwards?: boolean): Enemy {

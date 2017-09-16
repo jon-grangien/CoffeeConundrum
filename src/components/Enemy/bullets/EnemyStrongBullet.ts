@@ -2,6 +2,9 @@ import 'phaser'
 import {ENEMY_BULLET_HEIGHT, ENEMY_BULLET_WIDTH, ENEMY_BULLET_RADIUS} from '../../../globals/constants'
 import {Shaders} from '../../../assets'
 import {checkOnOrOutOfBounds} from '../../../utils/gamehelpers'
+import PixiShader = PIXI.PixiShader
+const glslify = require('glslify')
+import glContexts = PIXI.glContexts
 
 export default class EnemyStrongBullet extends Phaser.Bullet {
   private _shader
@@ -23,7 +26,10 @@ export default class EnemyStrongBullet extends Phaser.Bullet {
 
     this._shader = new Phaser.Filter(game, this._uniforms, game.cache.getShader(Shaders.ShadersEnemyBullet.getName()))
     this._shader.setResolution(ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT)
-    this.filters = [ this._shader ]
+    const gl = game.canvas.getContext('webgl')
+
+    this.shader = new PixiShader(gl)
+    this.shader.fragmentSrc = glslify('assets/shaders/enemy/bullet.frag')
   }
 
   public update(): void {

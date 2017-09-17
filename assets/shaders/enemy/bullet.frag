@@ -68,12 +68,12 @@ vec2 cellular(vec2 P) {
 	return sqrt(d1.xy);
 }
 
+uniform float u_time;
 varying vec2 vTextureCoord;
 uniform vec3 u_color;
 uniform vec2 u_resolution;
 uniform vec2 u_screenSize;
 uniform float u_radius;
-uniform float u_time;
 
 vec2 resolution = vec2(1.0, 1.0);
 

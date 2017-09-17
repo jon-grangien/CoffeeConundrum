@@ -5,6 +5,7 @@ import {checkOnOrOutOfBounds} from '../../../utils/gamehelpers'
 import PixiShader = PIXI.PixiShader
 const glslify = require('glslify')
 import glContexts = PIXI.glContexts
+import GameManager from '../../../globals/GameManager'
 
 export default class EnemyStrongBullet extends Phaser.Bullet {
   private _shader
@@ -28,8 +29,12 @@ export default class EnemyStrongBullet extends Phaser.Bullet {
     this._shader.setResolution(ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT)
     const gl = game.canvas.getContext('webgl')
 
-    this.shader = new PixiShader(gl)
-    this.shader.fragmentSrc = glslify('assets/shaders/enemy/bullet.frag')
+    // this.shader = new PixiShader(gl)
+    // this.shader.fragmentSrc = glslify('assets/shaders/enemy/bullet.frag')
+
+    //this.key = GameManager.Instance.EnemyBulletTexture
+
+    this.filters = [ GameManager.Instance.getBulletFilter('strong')]
   }
 
   public update(): void {

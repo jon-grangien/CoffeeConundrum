@@ -2,6 +2,7 @@ import 'phaser'
 import {ENEMY_BULLET_HEIGHT, ENEMY_BULLET_RADIUS, ENEMY_BULLET_WIDTH} from '../../../globals/constants'
 import {Shaders} from '../../../assets'
 import {checkOnOrOutOfBounds} from '../../../utils/gamehelpers'
+import GameManager from '../../../globals/GameManager'
 
 export default class EnemyWeakBullet extends Phaser.Bullet {
   private _shader
@@ -24,7 +25,8 @@ export default class EnemyWeakBullet extends Phaser.Bullet {
 
     this._shader = new Phaser.Filter(game, this._uniforms, game.cache.getShader(Shaders.ShadersEnemyBullet.getName()))
     this._shader.setResolution(ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT)
-    this.shader = this._shader
+    //this.shader = this._shader
+    this.filters = [ GameManager.Instance.getBulletFilter('weak')]
   }
 
   public update(): void {

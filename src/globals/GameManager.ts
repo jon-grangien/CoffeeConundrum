@@ -1,13 +1,16 @@
 import 'phaser'
 import Enemy from '../components/Enemy/Enemy'
 import Player from '../components/Player'
+import EnemyBulletFilter from './filters/EnemyBulletFilter'
+import {ENEMY_STRONG_BULLET_COLOR, ENEMY_WEAK_BULLET_COLOR} from "./constants"
 
 export default class GameManager {
   private static instance: GameManager
-
   private graveyard: Phaser.Sprite[]
   private playerInstance: Player
   private hearts: Phaser.Sprite[]
+  private enemyStrongBulletFilter: EnemyBulletFilter
+  private enemyWeakBulletFilter: EnemyBulletFilter
 
   constructor() {
     this.graveyard = []
@@ -63,5 +66,23 @@ export default class GameManager {
       alpha: 0
     }, 100, Phaser.Easing.Linear.None, true, 0, 2, true)
     tween.onComplete.add(() => heart.alpha = 0)
+  }
+
+  public initBulletFilters(game: Phaser.Game) {
+    this.enemyWeakBulletFilter = new EnemyBulletFilter(game, ENEMY_WEAK_BULLET_COLOR)
+    this.enemyStrongBulletFilter = new EnemyBulletFilter(game, ENEMY_STRONG_BULLET_COLOR)
+  }
+
+  public getBulletFilter(type: string): Phaser.Filter {
+    if (type === 'weak') {
+      return this.enemyWeakBulletFilter.getFilter()
+    } else {
+      return this.enemyStrongBulletFilter.getFilter()
+    }
+  }
+
+  public updateFiltersTime(time: number) {
+    this.enemyStrongBulletFilter.updateTime(time)
+    this.enemyWeakBulletFilter.updateTime(time)
   }
 }

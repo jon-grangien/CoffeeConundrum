@@ -1,4 +1,5 @@
 import * as Assets from '../assets';
+import GameManager from '../globals/GameManager'
 
 export default class Title extends Phaser.State {
   private backgroundTemplateSprite: Phaser.TileSprite = null
@@ -18,6 +19,9 @@ export default class Title extends Phaser.State {
       this.game.cache.getImage(bgImg).height,
       bgImg
     )
+
+    // Init Game Manager
+    GameManager.Instance.initBulletFilters(this.game)
 
     this.startKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.sfxAudiosprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesSfx.getName())

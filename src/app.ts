@@ -10,6 +10,8 @@ import Title from './states/title'
 import LevelOne from './states/levels/levelone'
 import * as Utils from './utils/utils'
 import * as Assets from './assets'
+//import EnemyBulletTexture from './utils/texrender/enemybullet'
+//import GameManager from './globals/GameManager'
 
 class App extends Phaser.Game {
     constructor(config: Phaser.IGameConfig) {
@@ -50,6 +52,7 @@ function startApp(): void {
 window.onload = () => {
     let webFontLoaderOptions: any = null
     let webFontsToLoad: string[] = GOOGLE_WEB_FONTS
+    //GameManager.Instance.EnemyBulletTexture = EnemyBulletTexture
 
     if (webFontsToLoad.length > 0) {
         webFontLoaderOptions = (webFontLoaderOptions || {})

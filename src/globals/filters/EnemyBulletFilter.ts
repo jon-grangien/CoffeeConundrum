@@ -22,6 +22,7 @@ export default class EnemyBulletFilter {
     }
 
     this._filter = new Phaser.Filter(game, this._uniforms, game.cache.getShader(Shaders.ShadersEnemyBullet.getName()))
+    this._filter.setResolution(ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT)
   }
 
   public getFilter(): Phaser.Filter {

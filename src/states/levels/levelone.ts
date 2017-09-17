@@ -72,6 +72,7 @@ export default class LevelOne extends Phaser.State {
     //let bullets = 0
     //this.enemiesGroup.forEach((enemy) => {
     //  bullets += enemy.getWeakBullets().length + enemy.getStrongBullets().length
+    //  console.log(enemy.getWeakBullets())
     //}, this)
     //console.log(bullets)
 

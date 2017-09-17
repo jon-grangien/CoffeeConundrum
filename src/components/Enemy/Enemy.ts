@@ -31,12 +31,12 @@ export default class Enemy extends Phaser.Sprite {
     this.timer = game.time.create(false)
 
     this.weaponWeak = this.attackStrategy.setupWeapon(this.game, this.weaponWeak, Images.SpritesheetsEnemybulletweak.getName())
-    this.weaponWeak.trackSprite(this, 0, 0, false)
     this.weaponWeak.bulletClass = EnemyWeakBullet
+    this.weaponWeak.trackSprite(this, null, null, false)
 
     this.weaponStrong = this.attackStrategy.setupWeapon(this.game, this.weaponStrong, Images.SpritesheetsEnemybulletstrong.getName())
-    this.weaponStrong.trackSprite(this, 0, 0, false)
     this.weaponStrong.bulletClass = EnemyStrongBullet
+    this.weaponStrong.trackSprite(this, null, null, false)
 
     this.events.onKilled.add(() => {
       this.buryAfterDeadBullets = true

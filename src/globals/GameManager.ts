@@ -1,8 +1,7 @@
 import 'phaser'
-import Enemy from '../components/Enemy/Enemy'
 import Player from '../components/Player'
 import EnemyBulletFilter from './filters/EnemyBulletFilter'
-import {ENEMY_STRONG_BULLET_COLOR, ENEMY_WEAK_BULLET_COLOR} from "./constants"
+import {ENEMY_STRONG_BULLET_COLOR, ENEMY_WEAK_BULLET_COLOR} from './constants'
 
 export default class GameManager {
   private static instance: GameManager

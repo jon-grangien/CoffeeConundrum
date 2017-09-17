@@ -87,7 +87,7 @@ void main() {
     float noise = 0.5 * (f1f2.y - f1f2.x);
 
     if (centerDistance - variance < 0.5 ) {
-        gl_FragColor = vec4(u_color, 1.0) + noise;
+        gl_FragColor = vec4(u_color, 1.0) - noise;
         return;
     }
 

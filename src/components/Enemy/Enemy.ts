@@ -7,9 +7,6 @@ import { DUMB_ENEMY_HEALTH } from '../../globals/constants'
 import EnemyWeakBullet from './bullets/EnemyWeakBullet'
 import EnemyStrongBullet from './bullets/EnemyStrongBullet'
 
-const glsl = require('glslify')
-const weakWeapFrag = require('raw-loader!glslify!./glsl/weaponweak.frag')
-
 export default class Enemy extends Phaser.Sprite {
   public health: number
 

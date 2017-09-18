@@ -1,8 +1,8 @@
 import * as Assets from '../../assets'
 import Player from '../../components/Player'
-import Enemy from '../../components/Enemy/Enemy'
 import GameAdapter from '../../globals/GameAdapter'
 import GameManager from '../../globals/GameManager'
+import getLevelOneEnemyWave from '../enemyWaves/levelOneWaves'
 import EnemyFactory from '../../components/Enemy/EnemyFactory'
 
 export default class LevelOne extends Phaser.State {
@@ -15,6 +15,7 @@ export default class LevelOne extends Phaser.State {
   private farTilesSpeed: number = 0.1
   private midTilesSpeed: number = 1
   private frontTilesSpeed: number = 3
+  private enemyFactory: EnemyFactory
 
   private currentWaveNumber: number
 
@@ -24,6 +25,7 @@ export default class LevelOne extends Phaser.State {
   }
 
   public create(): void {
+    this.enemyFactory = new EnemyFactory(this.game)
     this.game.stage.backgroundColor = '#071924'
 
     const backImg = Assets.Images.ImagesCyberpunkFarEdit3.getName()
@@ -60,7 +62,7 @@ export default class LevelOne extends Phaser.State {
     this.enemiesGroup = this.game.add.group()
 
     // Spawn first wave
-    this.enemiesGroup.addMultiple(this.getWaveOfEnemies(1))
+    this.enemiesGroup.addMultiple(getLevelOneEnemyWave(1, this.enemyFactory))
     this.currentWaveNumber = 1
   }
 
@@ -99,7 +101,7 @@ export default class LevelOne extends Phaser.State {
       this.midTilesSpeed += 0.1
       this.frontTilesSpeed += 0.3
 
-      const wave = this.getWaveOfEnemies(this.currentWaveNumber)
+      const wave = getLevelOneEnemyWave(this.currentWaveNumber, this.enemyFactory)
 
       if (wave.length > 0) {
         this.enemiesGroup.addMultiple(wave)
@@ -109,116 +111,4 @@ export default class LevelOne extends Phaser.State {
     }
   }
 
-  private getWaveOfEnemies(waveNumber: number): Enemy[] {
-    const enemyFactory = new EnemyFactory(this.game)
-    let enemies
-
-    switch (waveNumber) {
-      case 1:
-        enemies = [
-          enemyFactory.makeDumb(),
-          enemyFactory.makeDumb(),
-          enemyFactory.makeDumbMovingTracking()
-        ]
-        break
-      case 2:
-        enemies = [
-          enemyFactory.makeDumb(),
-          enemyFactory.makeDumb(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking()
-        ]
-        break
-      case 3:
-        enemies = [
-          enemyFactory.makeDumbMovingFastShooting(),
-          enemyFactory.makeDumbMovingFastShooting(),
-          enemyFactory.makeDumbMovingFastShooting(),
-        ]
-        break
-      case 4:
-        enemies = [
-          enemyFactory.makeDumb(),
-          enemyFactory.makeDumb(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingFastShooting()
-        ]
-        break
-      case 5:
-        enemies = [
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingFastShooting()
-        ]
-        break
-      case 6:
-        enemies = [
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false)
-        ]
-        break
-      case 7:
-        enemies = [
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeDumbMovingTracking(),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-        ]
-        break
-      case 8:
-        enemies = [
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-          enemyFactory.makeSlowMovingSpraying(true),
-          enemyFactory.makeSlowMovingSpraying(false),
-
-        ]
-        break
-      case 9:
-        enemies = [
-          enemyFactory.makeSlowMovingFastShooting(true),
-          enemyFactory.makeSlowMovingFastShooting(false),
-          enemyFactory.makeSlowMovingFastShooting(true),
-          enemyFactory.makeSlowMovingFastShooting(false),
-          enemyFactory.makeSlowMovingFastShooting(true),
-          enemyFactory.makeSlowMovingFastShooting(false),
-          enemyFactory.makeSlowMovingFastShooting(true),
-          enemyFactory.makeSlowMovingFastShooting(false),
-          enemyFactory.makeSlowMovingFastShooting(true),
-          enemyFactory.makeSlowMovingFastShooting(false),
-          enemyFactory.makeSlowMovingFastShooting(true),
-          enemyFactory.makeSlowMovingFastShooting(false),
-        ]
-        break
-      default:
-        enemies = []
-        break
-    }
-
-    return enemies
-  }
 }

@@ -6,6 +6,8 @@ import TrackingAttackStrategy from './attack/TrackingAttackStrategy'
 import SlowMoveStrategy from './move/SlowMoveStrategy'
 import SprayingAttackStrategy from './attack/SprayingAttackStrategy'
 import FastShootAttackStrategy from './attack/FastShootAttackStrategy'
+import ScatterShootAttackStrategy from './attack/ScatterShootAttackStrategy'
+import ScatterStrongShootAttackStrategy from './attack/ScatterStrongShootAttackStrategy'
 
 export default class EnemyFactory {
   private game: Phaser.Game
@@ -32,5 +34,17 @@ export default class EnemyFactory {
 
   public makeSlowMovingFastShooting(moveUpwards?: boolean): Enemy {
     return new Enemy(this.game, randomYPos(this.game.height), new SlowMoveStrategy(moveUpwards), new FastShootAttackStrategy())
+  }
+
+  public makeSlowCenteredScatterer(moveUpwards?: boolean): Enemy {
+    return new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(moveUpwards), new ScatterShootAttackStrategy())
+  }
+
+  public makeDumbMovingScatterer(): Enemy {
+    return new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new ScatterShootAttackStrategy())
+  }
+
+  public makeSlowCenteredStrongScatterer(moveUpwards?: boolean): Enemy {
+    return new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(moveUpwards), new ScatterStrongShootAttackStrategy())
   }
 }

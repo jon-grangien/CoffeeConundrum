@@ -4,6 +4,8 @@ import GameManager from '../globals/GameManager'
 import GameAdapter from '../globals/GameAdapter'
 import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../globals/constants'
 
+enum Direction { Up, Down, Left, Right, None }
+
 export default class Player extends Phaser.Sprite {
   private TOP_SPEED: number = 350
 
@@ -17,15 +19,26 @@ export default class Player extends Phaser.Sprite {
   private moveLeftKey: Phaser.Key
   private moveRightKey: Phaser.Key
   private shootKeys: Phaser.Key[]
+  private dodgeKeys: Phaser.Key[]
+  private currentMovingDirection: Direction
+
   private gameAdapter: GameAdapter = new GameAdapter()
+
+  public dodgeDistance: number = 125
+  public dodgeCooldownTimer: Phaser.TimerEvent
+  public dodgeCooldownMS: number = 5000
+  public dodgeReady: boolean = true
 
   constructor(game: Phaser.Game) {
     super(game, 100, game.world.centerY, Images.SpritesheetsTinyShip.getName())
-    this.moveUpKey = game.input.keyboard.addKey(Phaser.Keyboard.W)
-    this.moveDownKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
-    this.moveLeftKey = game.input.keyboard.addKey(Phaser.Keyboard.A)
-    this.moveRightKey = game.input.keyboard.addKey(Phaser.Keyboard.D)
-    this.shootKeys = [game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR), game.input.keyboard.addKey(Phaser.Keyboard.J)]
+
+    const { keyboard } = game.input
+    this.moveUpKey = keyboard.addKey(Phaser.Keyboard.W)
+    this.moveDownKey = keyboard.addKey(Phaser.Keyboard.S)
+    this.moveLeftKey = keyboard.addKey(Phaser.Keyboard.A)
+    this.moveRightKey = keyboard.addKey(Phaser.Keyboard.D)
+    this.shootKeys = [keyboard.addKey(Phaser.Keyboard.SPACEBAR), keyboard.addKey(Phaser.Keyboard.J)]
+    this.dodgeKeys = [keyboard.addKey(Phaser.Keyboard.ALT), keyboard.addKey(Phaser.Keyboard.K)]
 
     this.health = PLAYER_HEALTH
     this.timer = game.time.create(false)
@@ -71,24 +84,34 @@ export default class Player extends Phaser.Sprite {
     const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey, shootKeys, canons } = this
 
     if (moveUpKey.isDown) {
+      this.currentMovingDirection = Direction.Up
       this.body.velocity.y = this.accelerate(velocity.y, false)
     } else if (moveDownKey.isDown) {
+      this.currentMovingDirection = Direction.Down
       this.body.velocity.y = this.accelerate(velocity.y, true)
     } else {
       this.body.velocity.y = this.deAccelerate(velocity.y)
     }
 
     if (moveLeftKey.isDown) {
+      this.currentMovingDirection = Direction.Left
       this.body.velocity.x = this.accelerate(velocity.x, false)
     } else if (moveRightKey.isDown) {
+      this.currentMovingDirection = Direction.Right
       this.body.velocity.x = this.accelerate(velocity.x, true)
     } else {
       this.body.velocity.x = this.deAccelerate(velocity.x)
     }
 
+    if (this.dodgeKeys[0].isDown || this.dodgeKeys[1].isDown) {
+      this.tryDodge()
+    }
+
     if (shootKeys[0].isDown || shootKeys[1].isDown) {
       canons.fire()
     }
+
+    this.currentMovingDirection = Direction.None
   }
 
   /**
@@ -132,6 +155,47 @@ export default class Player extends Phaser.Sprite {
     }
 
     return velocity
+  }
+
+  private tryDodge(): void {
+    if (!this.dodgeReady) {
+      console.log('dodge not ready')
+      return
+    }
+
+    switch (this.currentMovingDirection) {
+      case Direction.Up:
+        this.body.position.y -= this.dodgeDistance
+        break
+      case Direction.Down:
+        this.body.position.y += this.dodgeDistance
+        break
+      case Direction.Left:
+        this.body.position.x -= this.dodgeDistance
+        break
+      case Direction.Right:
+        this.body.position.x += this.dodgeDistance
+        break
+      case Direction.None:
+      default:
+        this.body.position.x += this.dodgeDistance
+        break
+    }
+
+    this.resetDodgeCooldown()
+  }
+
+  private resetDodgeCooldown(): void {
+    this.dodgeReady = false
+    console.log('set dodge cooldown')
+    this.dodgeCooldownTimer = this.timer.add(this.dodgeCooldownMS, () => {
+      console.log('dodge ready!')
+      this.dodgeReady = true
+    })
+  }
+
+  public getDodgeCooldownTime(): number {
+    return this.dodgeCooldownTimer.timer.ms
   }
 
   /**

@@ -7,6 +7,8 @@ uniform vec2 u_screenSize;
 uniform float u_radius;
 
 vec2 resolution = vec2(1.0, 1.0);
+vec3 full_green = vec3(0.2, 0.8, 0.2);
+vec3 filling_green = vec3(0.5, 0.8, 0.2);
 float pi = 3.1415926;
 
 void main() {
@@ -26,6 +28,12 @@ void main() {
     // Frag is in circle
     if (centerDistance < 0.5 ) {
 
+        // Circle full
+        if (u_angle >= 359.5) {
+            gl_FragColor = vec4(full_green, 1.0);
+            return;
+        }
+
         //
         //
         //     c   ---|
@@ -33,7 +41,6 @@ void main() {
         //  _==_______|
         //      b
         //
-
         float a = abs(uv.y - 0.5);
         float b = abs(uv.x - 0.5);
         float c = sqrt((a * a) + (b * b));
@@ -51,7 +58,7 @@ void main() {
         // Frag contained in angle
         //if (c_angle <= u_angle) {
         if (c_angle <= u_angle) {
-            gl_FragColor = vec4(0.2, 0.8, 0.2, 1.0);
+            gl_FragColor = vec4(filling_green, 1.0);
         }
 
         return;

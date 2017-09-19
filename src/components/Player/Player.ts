@@ -1,8 +1,9 @@
 import 'phaser'
-import {Images} from '../assets'
-import GameManager from '../globals/GameManager'
-import GameAdapter from '../globals/GameAdapter'
-import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../globals/constants'
+import {Images} from '../../assets'
+import GameManager from '../../globals/GameManager'
+import GameAdapter from '../../globals/GameAdapter'
+import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../../globals/constants'
+import CooldownCircle from './CooldownCircle'
 
 enum Direction { Up, Down, Left, Right, None }
 
@@ -23,6 +24,7 @@ export default class Player extends Phaser.Sprite {
   private currentMovingDirection: Direction
 
   private gameAdapter: GameAdapter = new GameAdapter()
+  private cooldownCircle: CooldownCircle
 
   private currentCooldownStartTimeStamp: number
   public dodgeDistance: number = 125
@@ -59,6 +61,9 @@ export default class Player extends Phaser.Sprite {
       GameManager.Instance.buryInGraveyard(this)
     })
 
+    this.cooldownCircle = new CooldownCircle(game, this, 25)
+    //this.cooldownCircle.body.trackSprite(this, null, null, false)
+
     this.timer.start(0)
     game.add.existing(this)
   }
@@ -80,6 +85,8 @@ export default class Player extends Phaser.Sprite {
   }
 
   public update(): void {
+    this.cooldownCircle.updatePos(this.body.position)
+
     let { velocity } = this.body
     const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey, shootKeys, canons } = this
 

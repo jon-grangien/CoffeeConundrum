@@ -1,5 +1,5 @@
 import 'phaser'
-import Player from '../components/Player'
+import Player from '../components/Player/Player'
 import * as Assets from '../assets'
 import { PLAYER_HEALTH } from './constants'
 import GameManager from './GameManager'

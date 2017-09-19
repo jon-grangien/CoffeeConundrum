@@ -1,5 +1,5 @@
 import * as Assets from '../../assets'
-import Player from '../../components/Player'
+import Player from '../../components/Player/Player'
 import GameAdapter from '../../globals/GameAdapter'
 import GameManager from '../../globals/GameManager'
 import getLevelOneEnemyWave from '../enemyWaves/levelOneWaves'

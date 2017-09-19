@@ -228,6 +228,11 @@ export namespace Scripts {
     }
 }
 export namespace Shaders {
+    export class ShadersCooldowncircle {
+        static getName(): string { return 'cooldowncircle'; }
+
+        static getFRAG(): string { return require('assets/shaders/cooldowncircle.frag'); }
+    }
     export class ShadersEnemyBullet {
         static getName(): string { return 'bullet'; }
 

@@ -1,5 +1,5 @@
 import 'phaser'
-import Player from '../components/Player'
+import Player from '../components/Player/Player'
 import EnemyBulletFilter from './filters/EnemyBulletFilter'
 import {ENEMY_STRONG_BULLET_COLOR, ENEMY_WEAK_BULLET_COLOR} from './constants'
 

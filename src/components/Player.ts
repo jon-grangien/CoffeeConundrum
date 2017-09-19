@@ -24,8 +24,8 @@ export default class Player extends Phaser.Sprite {
 
   private gameAdapter: GameAdapter = new GameAdapter()
 
+  private currentCooldownStartTimeStamp: number
   public dodgeDistance: number = 125
-  public dodgeCooldownTimer: Phaser.TimerEvent
   public dodgeCooldownMS: number = 5000
   public dodgeReady: boolean = true
 
@@ -159,7 +159,6 @@ export default class Player extends Phaser.Sprite {
 
   private tryDodge(): void {
     if (!this.dodgeReady) {
-      console.log('dodge not ready')
       return
     }
 
@@ -188,15 +187,24 @@ export default class Player extends Phaser.Sprite {
 
   private resetDodgeCooldown(): void {
     this.dodgeReady = false
-    console.log('set dodge cooldown')
-    this.dodgeCooldownTimer = this.timer.add(this.dodgeCooldownMS, () => {
-      console.log('dodge ready!')
+
+    this.currentCooldownStartTimeStamp = this.timer.ms
+    this.timer.add(this.dodgeCooldownMS, () => {
       this.dodgeReady = true
     })
   }
 
-  public getDodgeCooldownTime(): number {
-    return this.dodgeCooldownTimer.timer.ms
+  /**
+   * Get percent of dodge cooldown, 100% being ready
+   * @returns {number}
+   */
+  public getDodgeCooldownTimePercent(): number {
+    if (this.dodgeReady) {
+      return 100
+    }
+
+    const cooldownTimeAsc = this.timer.ms - this.currentCooldownStartTimeStamp
+    return Math.round(cooldownTimeAsc / this.dodgeCooldownMS * 100)
   }
 
   /**

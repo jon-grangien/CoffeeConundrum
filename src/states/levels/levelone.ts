@@ -78,6 +78,10 @@ export default class LevelOne extends Phaser.State {
     //}, this)
     //console.log(bullets)
 
+    //if (!this.player.dodgeReady) {
+    //  console.log(this.player.getDodgeCooldownTimePercent())
+    //}
+
     GameManager.Instance.updateFiltersTime(this.game.time.totalElapsedSeconds() * 1000)
     this.bgBack.tilePosition.x -= this.farTilesSpeed
     this.bgMid.tilePosition.x -= this.midTilesSpeed

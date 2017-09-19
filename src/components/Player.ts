@@ -183,6 +183,7 @@ export default class Player extends Phaser.Sprite {
     }
 
     this.resetDodgeCooldown()
+    this.makeInvulnerable(300)
   }
 
   private resetDodgeCooldown(): void {
@@ -209,21 +210,28 @@ export default class Player extends Phaser.Sprite {
       return null
     }
 
-    // Set invulnerable for some short time
+    GameManager.Instance.removeHeart()
+    return super.damage(amount)
+  }
+
+  /**
+   * Set invulnerable for some short time
+   */
+  public makeInvulnerable(cooldown?: number): void {
     this.invulnerable = true
+
+    // Flicker feedback
     this.invulnerableTween = this.game.add.tween(this).to(
       {alpha: 0}, 75, Phaser.Easing.Linear.None, true, 0, 1000, true
     )
 
-    this.timer.add(PLAYER_INVULNERABILITY_COOLDOWN, () => {
+    // Remove invulnerability after custom time or standard time
+    this.timer.add(cooldown ? cooldown : PLAYER_INVULNERABILITY_COOLDOWN, () => {
       this.invulnerable = false
       if (this.game && this.game.tweens) {
         this.game.tweens.remove(this.invulnerableTween)
       }
       this.alpha = 1
     }, this)
-
-    GameManager.Instance.removeHeart()
-    return super.damage(amount)
   }
 }

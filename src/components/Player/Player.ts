@@ -86,6 +86,7 @@ export default class Player extends Phaser.Sprite {
 
   public update(): void {
     this.cooldownCircle.updatePos(this.body.position)
+    this.cooldownCircle.setPercentage(this.getDodgeCooldownTimePercent())
 
     let { velocity } = this.body
     const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey, shootKeys, canons } = this

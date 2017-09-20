@@ -226,6 +226,7 @@ export default class Player extends Phaser.Sprite {
       return null
     }
 
+    this.makeInvulnerable()
     GameManager.Instance.removeHeart()
     return super.damage(amount)
   }

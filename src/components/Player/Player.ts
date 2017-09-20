@@ -28,7 +28,7 @@ export default class Player extends Phaser.Sprite {
 
   private currentCooldownStartTimeStamp: number
   public dodgeDistance: number = 125
-  public diagonalDodgeDistance: number = 0.8 * 125
+  public diagonalDodgeDistance: number 
   public dodgeCooldownMS: number = 3500
   public dodgeReady: boolean = true
 
@@ -43,6 +43,7 @@ export default class Player extends Phaser.Sprite {
     this.shootKeys = [keyboard.addKey(Phaser.Keyboard.SPACEBAR), keyboard.addKey(Phaser.Keyboard.J)]
     this.dodgeKeys = [keyboard.addKey(Phaser.Keyboard.ALT), keyboard.addKey(Phaser.Keyboard.K)]
 
+    this.diagonalDodgeDistance = this.dodgeDistance * Math.sin(Math.PI / 4)
     this.health = PLAYER_HEALTH
     this.timer = game.time.create(false)
 

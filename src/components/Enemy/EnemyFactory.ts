@@ -7,6 +7,7 @@ import SlowMoveStrategy from './move/SlowMoveStrategy'
 import SprayingAttackStrategy from './attack/SprayingAttackStrategy'
 import FastShootAttackStrategy from './attack/FastShootAttackStrategy'
 import ScatterShootAttackStrategy from './attack/ScatterShootAttackStrategy'
+import ScatterCrazyAttackStrategy from './attack/ScatterCrazyAttackStrategy'
 import ScatterStrongShootAttackStrategy from './attack/ScatterStrongShootAttackStrategy'
 
 export default class EnemyFactory {
@@ -46,5 +47,13 @@ export default class EnemyFactory {
 
   public makeSlowCenteredStrongScatterer(moveUpwards?: boolean): Enemy {
     return new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(moveUpwards), new ScatterStrongShootAttackStrategy())
+  }
+
+  public makeSlowCenteredCrazyScatterer(moveUpwards?: boolean): Enemy {
+    return new Enemy(this.game, this.game.world.centerY, new SlowMoveStrategy(moveUpwards), new ScatterCrazyAttackStrategy())
+  }
+
+  public makeDumbMovingCrazyScatterer(): Enemy {
+    return new Enemy(this.game, this.game.world.centerY, new DumbMoveStrategy(), new ScatterCrazyAttackStrategy())
   }
 }

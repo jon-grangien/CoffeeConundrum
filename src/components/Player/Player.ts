@@ -5,7 +5,7 @@ import GameAdapter from '../../globals/GameAdapter'
 import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../../globals/constants'
 import CooldownCircle from './CooldownCircle'
 
-enum Direction { Up, Down, Left, Right, None }
+enum Direction { Up, Down, Left, Right, UpRight, UpLeft, DownLeft, DownRight, None }
 
 export default class Player extends Phaser.Sprite {
   private TOP_SPEED: number = 350
@@ -28,7 +28,8 @@ export default class Player extends Phaser.Sprite {
 
   private currentCooldownStartTimeStamp: number
   public dodgeDistance: number = 125
-  public dodgeCooldownMS: number = 5000
+  public diagonalDodgeDistance: number = 0.8 * 125
+  public dodgeCooldownMS: number = 3500
   public dodgeReady: boolean = true
 
   constructor(game: Phaser.Game) {
@@ -87,25 +88,22 @@ export default class Player extends Phaser.Sprite {
   public update(): void {
     this.cooldownCircle.updatePos(this.body.position)
     this.cooldownCircle.setPercentage(this.getDodgeCooldownTimePercent())
+    this.setDodgeDirection()
 
     let { velocity } = this.body
     const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey, shootKeys, canons } = this
 
     if (moveUpKey.isDown) {
-      this.currentMovingDirection = Direction.Up
       this.body.velocity.y = this.accelerate(velocity.y, false)
     } else if (moveDownKey.isDown) {
-      this.currentMovingDirection = Direction.Down
       this.body.velocity.y = this.accelerate(velocity.y, true)
     } else {
       this.body.velocity.y = this.deAccelerate(velocity.y)
     }
 
     if (moveLeftKey.isDown) {
-      this.currentMovingDirection = Direction.Left
       this.body.velocity.x = this.accelerate(velocity.x, false)
     } else if (moveRightKey.isDown) {
-      this.currentMovingDirection = Direction.Right
       this.body.velocity.x = this.accelerate(velocity.x, true)
     } else {
       this.body.velocity.x = this.deAccelerate(velocity.x)
@@ -165,6 +163,46 @@ export default class Player extends Phaser.Sprite {
     return velocity
   }
 
+  private setDodgeDirection(): void {
+    const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey } = this
+
+    if (moveUpKey.isDown) {
+      if (moveLeftKey.isDown)
+        this.currentMovingDirection = Direction.UpLeft
+      else if (moveRightKey.isDown)
+        this.currentMovingDirection = Direction.UpRight
+      else
+        this.currentMovingDirection = Direction.Up
+    }
+
+    if (moveDownKey.isDown) {
+      if (moveLeftKey.isDown)
+        this.currentMovingDirection = Direction.DownLeft
+      else if (moveRightKey.isDown)
+        this.currentMovingDirection = Direction.DownRight
+      else
+        this.currentMovingDirection = Direction.Down
+    }
+
+    if (moveLeftKey.isDown) {
+      if (moveUpKey.isDown)
+        this.currentMovingDirection = Direction.UpLeft
+      else if (moveDownKey.isDown)
+        this.currentMovingDirection = Direction.DownLeft
+      else
+        this.currentMovingDirection = Direction.Left
+    }
+
+    if (moveRightKey.isDown) {
+      if (moveUpKey.isDown)
+        this.currentMovingDirection = Direction.UpRight
+      else if (moveDownKey.isDown)
+        this.currentMovingDirection = Direction.DownRight
+      else
+        this.currentMovingDirection = Direction.Right
+    }
+  }
+
   private tryDodge(): void {
     if (!this.dodgeReady) {
       return
@@ -182,6 +220,22 @@ export default class Player extends Phaser.Sprite {
         break
       case Direction.Right:
         this.body.position.x += this.dodgeDistance
+        break
+      case Direction.UpLeft:
+        this.body.position.x -= this.diagonalDodgeDistance
+        this.body.position.y -= this.diagonalDodgeDistance
+        break
+      case Direction.UpRight:
+        this.body.position.x += this.diagonalDodgeDistance
+        this.body.position.y -= this.diagonalDodgeDistance
+        break
+      case Direction.DownLeft:
+        this.body.position.x -= this.diagonalDodgeDistance
+        this.body.position.y += this.diagonalDodgeDistance
+        break
+      case Direction.DownRight:
+        this.body.position.x += this.diagonalDodgeDistance
+        this.body.position.y += this.diagonalDodgeDistance
         break
       case Direction.None:
       default:
@@ -252,3 +306,4 @@ export default class Player extends Phaser.Sprite {
     }, this)
   }
 }
+

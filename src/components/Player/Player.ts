@@ -245,7 +245,10 @@ export default class Player extends Phaser.Sprite {
     }
 
     this.resetDodgeCooldown()
-    this.makeInvulnerable(300)
+
+    if (!this.invulnerable) {
+      this.makeInvulnerable(200)
+    }
   }
 
   private resetDodgeCooldown(): void {

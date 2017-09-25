@@ -9,6 +9,7 @@ import FastShootAttackStrategy from './attack/FastShootAttackStrategy'
 import ScatterShootAttackStrategy from './attack/ScatterShootAttackStrategy'
 import ScatterCrazyAttackStrategy from './attack/ScatterCrazyAttackStrategy'
 import ScatterStrongShootAttackStrategy from './attack/ScatterStrongShootAttackStrategy'
+import HoseAttackStrategy from './attack/HoseAttackStrategy'
 
 export default class EnemyFactory {
   private game: Phaser.Game
@@ -43,6 +44,10 @@ export default class EnemyFactory {
 
   public makeDumbMovingScatterer(): Enemy {
     return new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new ScatterShootAttackStrategy())
+  }
+
+  public makeDumbMovingHoseShooter(): Enemy {
+    return new Enemy(this.game, randomYPos(this.game.height), new DumbMoveStrategy(), new HoseAttackStrategy())
   }
 
   public makeSlowCenteredStrongScatterer(moveUpwards?: boolean): Enemy {

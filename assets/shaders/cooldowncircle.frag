@@ -8,7 +8,7 @@ uniform float u_radius;
 
 vec2 resolution = vec2(1.0, 1.0);
 vec3 full_green = vec3(0.2, 0.8, 0.2);
-vec3 filling_green = vec3(0.5, 0.8, 0.2);
+vec3 filling_color = vec3(0.8, 0.4, 0.1);
 float pi = 3.1415926;
 float to_degrees = 57.2958; // 180 / pi
 
@@ -31,7 +31,12 @@ void main() {
 
         // Circle full
         if (u_angle >= 359.5) {
-            gl_FragColor = vec4(full_green, 1.0);
+            if (centerDistance > 0.43 ) {
+                gl_FragColor = vec4(1.0);
+            } else {
+                gl_FragColor = vec4(full_green, 1.0);
+            }
+
             return;
         }
 
@@ -62,7 +67,8 @@ void main() {
             gl_FragColor = vec4(0.0, 0.0, 0.0, 0.2);
         }
         else {
-            gl_FragColor = vec4(filling_green, 1.0);
+            float color_factor = u_angle / 360.0;
+            gl_FragColor = vec4(mix(filling_color, full_green, color_factor), 1.0);
         }
 
         return;

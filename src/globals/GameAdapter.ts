@@ -90,7 +90,7 @@ export default class GameAdapter {
   }
 
   public gameOver(game: Phaser.Game): void {
-    const text = new Phaser.Text(game, game.world.centerX, game.world.centerY, 'Game Over', { font: '65px Arial', fill: '#ff0044', align: 'center' })
+    const text = new Phaser.Text(game, game.world.centerX, game.world.centerY, 'Game Over', { font: '65px Anonymous Pro', fill: '#ff0044', align: 'center' })
     text.anchor.set(0.5)
     game.add.existing(text)
 

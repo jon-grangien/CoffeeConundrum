@@ -63,7 +63,7 @@ export default class Intro extends Phaser.State {
     this.game.add.button(this.game.world.width - 150, this.game.world.height - 85, Images.SpritesheetsSkip.getName(), this.goNext, this, 2, 1, 0)
     this.skipKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
 
-    this.textObject = this.game.add.text(110, 32, '', { font: '13px Arial', fill: '#19de65' })
+    this.textObject = this.game.add.text(110, 32, '', { font: '13px Anonymous Pro', fill: '#19de65' })
     this.characterHead = this.game.add.sprite(32, 64, Images.ImagesAva1Normal.getName())
     this.nextLine()
   }
@@ -104,7 +104,7 @@ export default class Intro extends Phaser.State {
   }
 
   private countdownToStart(): void {
-    this.startLevelCounter = this.game.add.text(this.game.world.centerX, this.game.world.centerY, this.countdownNumber.toString(), { font: '62px Arial', fill: '#fff' })
+    this.startLevelCounter = this.game.add.text(this.game.world.centerX, this.game.world.centerY, this.countdownNumber.toString(), { font: '82px Anonymous Pro', fill: '#fff' })
 
     const tween = this.game.add.tween(this.startLevelCounter).to(
       {alpha: 0}, 1000, Phaser.Easing.Linear.None, true, 0, 0, false

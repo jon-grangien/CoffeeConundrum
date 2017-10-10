@@ -9,6 +9,7 @@ export default class Intro extends Phaser.State {
   private gameAdapter: GameAdapter
   private countdownNumber: number = 3
   private startLevelCounter: any
+  private skipKey: Phaser.Key
 
   private line: string[] = [];
   private wordIndex: number = 0;
@@ -48,11 +49,17 @@ export default class Intro extends Phaser.State {
     )
 
     this.game.add.button(this.game.world.width - 150, this.game.world.height - 85, Images.SpritesheetsSkip.getName(), this.goNext, this, 2, 1, 0)
+    this.skipKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
 
     this.textObject = this.game.add.text(150, 32, '', { font: '13px Arial', fill: '#19de65' })
     this.nextLine()
   }
 
+  public update(): void {
+    if (this.skipKey.isDown) {
+      this.goNext()
+    }
+  }
   private goNext(): void {
     this.game.state.start('levelone')
   }

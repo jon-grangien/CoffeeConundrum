@@ -1,4 +1,4 @@
-import * as Assets from '../../assets'
+import {Images} from '../../assets'
 import Player from '../../components/Player/Player'
 import GameAdapter from '../../globals/GameAdapter'
 import GameManager from '../../globals/GameManager'
@@ -28,9 +28,9 @@ export default class LevelOne extends Phaser.State {
     this.enemyFactory = new EnemyFactory(this.game)
     this.game.stage.backgroundColor = '#071924'
 
-    const backImg = Assets.Images.ImagesCyberpunkFarEdit3.getName()
-    const midImg = Assets.Images.ImagesCyberpunkMid.getName()
-    const frontImg = Assets.Images.ImagesCyberpunkForeground.getName()
+    const backImg = Images.ImagesCyberpunkFarEdit3.getName()
+    const midImg = Images.ImagesCyberpunkMid.getName()
+    const frontImg = Images.ImagesCyberpunkForeground.getName()
 
     this.bgBack = this.game.add.tileSprite(0,
       this.game.height - this.game.cache.getImage(backImg).height,

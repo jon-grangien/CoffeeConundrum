@@ -56,6 +56,6 @@ export default class Title extends Phaser.State {
   }
 
   private goNext(): void {
-    this.game.state.start('levelone')
+    this.game.state.start('intro')
   }
 }

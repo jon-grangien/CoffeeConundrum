@@ -61,6 +61,7 @@ export default class Player extends Phaser.Sprite {
     this.events.onKilled.add(() => {
       this.gameAdapter.gameOver(this.game)
       GameManager.Instance.buryInGraveyard(this)
+      GameManager.Instance.buryInGraveyard(this.cooldownCircle)
       this.timer.add(GameManager.Instance.RESTART_KEY_DELAY, () => {
         GameManager.Instance.setRestartReady(true)
       })

@@ -5,6 +5,8 @@ export default class Intro extends Phaser.State {
   private bgBack: any
   private bgMid: any
   private textContent: string[]
+  private textEmotions: any
+  private characterHead: Phaser.Sprite
   private textObject: any
   private gameAdapter: GameAdapter
   private countdownNumber: number = 3
@@ -26,8 +28,18 @@ export default class Intro extends Phaser.State {
       'If they get here they will burn all our organic coffee powder from the Old World!',
       'We can\'t let them have a monopoly on warm drinks in this city!',
       'Take the X-51 Caffeine and shoot those soggy teabags into powders.',
-      'Shoot with J and use the java-dodge mechanic with K! Now GO!'
+      'Shoot with J and use the java-dodge mechanic with K! Now GO!',
+      '',
     ]
+
+    this.textEmotions = {
+      0: Images.ImagesAva1Normal.getName(),
+      1: Images.ImagesAva1Sad.getName(),
+      2: Images.ImagesAva1Sad.getName(),
+      3: Images.ImagesAva1Normal.getName(),
+      4: Images.ImagesAva1Happy.getName(),
+      5: Images.ImagesAva1Glasses.getName()
+    }
   }
 
   public create(): void {
@@ -51,7 +63,8 @@ export default class Intro extends Phaser.State {
     this.game.add.button(this.game.world.width - 150, this.game.world.height - 85, Images.SpritesheetsSkip.getName(), this.goNext, this, 2, 1, 0)
     this.skipKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
 
-    this.textObject = this.game.add.text(150, 32, '', { font: '13px Arial', fill: '#19de65' })
+    this.textObject = this.game.add.text(110, 32, '', { font: '13px Arial', fill: '#19de65' })
+    this.characterHead = this.game.add.sprite(32, 64, Images.ImagesAva1Normal.getName())
     this.nextLine()
   }
 
@@ -71,6 +84,7 @@ export default class Intro extends Phaser.State {
 
     this.line = this.textContent[this.lineIndex].split(' ')
     this.wordIndex = 0
+    this.setDisplayCharacter(this.lineIndex)
     this.game.time.events.repeat(this.WORD_DELAY, this.line.length, this.nextWord, this)
     this.lineIndex++
   }
@@ -83,6 +97,10 @@ export default class Intro extends Phaser.State {
       this.textObject.text = this.textObject.text.concat('\n')
       this.game.time.events.add(this.LINE_DELAY, this.nextLine, this)
     }
+  }
+
+  private setDisplayCharacter(lineIdx: number): void {
+    this.characterHead.loadTexture(this.textEmotions[lineIdx])
   }
 
   private countdownToNext(): void {

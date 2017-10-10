@@ -1,6 +1,26 @@
 /* AUTO GENERATED FILE. DO NOT MODIFY. YOU WILL LOSE YOUR CHANGES ON BUILD. */
 
 export namespace Images {
+    export class ImagesAva1Glasses {
+        static getName(): string { return 'glasses'; }
+
+        static getPNG(): string { return require('assets/images/ava1/glasses.png'); }
+    }
+    export class ImagesAva1Happy {
+        static getName(): string { return 'happy'; }
+
+        static getPNG(): string { return require('assets/images/ava1/happy.png'); }
+    }
+    export class ImagesAva1Normal {
+        static getName(): string { return 'normal'; }
+
+        static getPNG(): string { return require('assets/images/ava1/normal.png'); }
+    }
+    export class ImagesAva1Sad {
+        static getName(): string { return 'sad'; }
+
+        static getPNG(): string { return require('assets/images/ava1/sad.png'); }
+    }
     export class ImagesBackgroundTemplate {
         static getName(): string { return 'background_template'; }
 

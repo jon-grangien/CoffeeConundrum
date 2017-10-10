@@ -16,6 +16,7 @@ export default class LevelOne extends Phaser.State {
   private midTilesSpeed: number = 1
   private frontTilesSpeed: number = 3
   private enemyFactory: EnemyFactory
+  private restartKey: Phaser.Key
 
   private currentWaveNumber: number
 
@@ -25,6 +26,8 @@ export default class LevelOne extends Phaser.State {
   }
 
   public create(): void {
+    GameManager.Instance.levelStartLogic()
+    this.restartKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.enemyFactory = new EnemyFactory(this.game)
     this.game.stage.backgroundColor = '#071924'
 
@@ -87,6 +90,12 @@ export default class LevelOne extends Phaser.State {
     this.bgBack.tilePosition.x -= this.farTilesSpeed
     this.bgMid.tilePosition.x -= this.midTilesSpeed
     this.bgFront.tilePosition.x -= this.frontTilesSpeed
+
+    if (!this.player.alive) {
+      if (GameManager.Instance.getRestartKeyReady() && this.restartKey.isDown) {
+        this.game.state.start('levelone')
+      }
+    }
   }
 
   public goNext(): void {

@@ -8,8 +8,11 @@ export default class GameManager {
   private graveyard: Phaser.Sprite[]
   private playerInstance: Player
   private hearts: Phaser.Sprite[]
+  private restartReady: boolean = false
   private enemyStrongBulletFilter: EnemyBulletFilter
   private enemyWeakBulletFilter: EnemyBulletFilter
+
+  readonly RESTART_KEY_DELAY: number = 1000
 
   constructor() {
     this.graveyard = []
@@ -21,6 +24,13 @@ export default class GameManager {
       this.instance = new GameManager()
     }
     return this.instance
+  }
+
+  /**
+   * What manager needs to do when player starts level
+   */
+  public levelStartLogic(): void {
+    this.restartReady = false
   }
 
   /**
@@ -83,5 +93,13 @@ export default class GameManager {
   public updateFiltersTime(time: number) {
     this.enemyStrongBulletFilter.updateTime(time)
     this.enemyWeakBulletFilter.updateTime(time)
+  }
+
+  public setRestartReady(readiness: boolean): void {
+    this.restartReady = readiness
+  }
+
+  public getRestartKeyReady(): boolean {
+    return this.restartReady
   }
 }

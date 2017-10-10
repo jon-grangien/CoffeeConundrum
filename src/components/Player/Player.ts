@@ -8,7 +8,7 @@ import CooldownCircle from './CooldownCircle'
 enum Direction { Up, Down, Left, Right, UpRight, UpLeft, DownLeft, DownRight, None }
 
 export default class Player extends Phaser.Sprite {
-  private TOP_SPEED: number = 350
+  readonly TOP_SPEED: number = 350
 
   private canons: Phaser.Weapon
   private timer: Phaser.Timer
@@ -61,6 +61,9 @@ export default class Player extends Phaser.Sprite {
     this.events.onKilled.add(() => {
       this.gameAdapter.gameOver(this.game)
       GameManager.Instance.buryInGraveyard(this)
+      this.timer.add(GameManager.Instance.RESTART_KEY_DELAY, () => {
+        GameManager.Instance.setRestartReady(true)
+      })
     })
 
     this.cooldownCircle = new CooldownCircle(game, this, 25)

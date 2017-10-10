@@ -25,7 +25,7 @@ export default class Intro extends Phaser.State {
 
     this.textContent = [
       'Drop the coffee mugs! It looks like the Tea Tyrant Triad is attacking again!',
-      'If they get here they will burn all our organic coffee powder from the Old World!',
+      'If they get here they will burn our shop\'s organic coffee powder from the Old World!',
       'We can\'t let them have a monopoly on warm drinks in this city!',
       'Take the X-51 Caffeine and shoot those soggy teabags into powders.',
       'Shoot with J and use the java-dodge mechanic with K! Now GO!',

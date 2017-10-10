@@ -76,7 +76,7 @@ export default class GameAdapter {
     controls.anchor.setTo(0.5, 0.5)
     game.add.existing(controls)
     const tween = game.add.tween(controls).to(
-      {alpha: 0}, 5000, Phaser.Easing.Linear.None, true, 0, 0, false
+      {alpha: 0}, 6500, Phaser.Easing.Linear.None, true, 0, 0, false
     )
     tween.onComplete.add(() => controls.destroy())
   }

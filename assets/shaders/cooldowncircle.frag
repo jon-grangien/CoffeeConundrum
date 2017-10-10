@@ -31,12 +31,7 @@ void main() {
 
         // Circle full
         if (u_angle >= 359.5) {
-            if (centerDistance > 0.43 ) {
-                gl_FragColor = vec4(1.0);
-            } else {
-                gl_FragColor = vec4(full_green, 1.0);
-            }
-
+            gl_FragColor = centerDistance > 0.43 ? vec4(1.0) : vec4(full_green, 1.0); // white border 
             return;
         }
 

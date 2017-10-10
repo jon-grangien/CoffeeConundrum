@@ -63,7 +63,7 @@ void main() {
         }
         else {
             float color_factor = u_angle / 360.0;
-            gl_FragColor = vec4(mix(filling_color, full_green, color_factor), 1.0);
+            gl_FragColor = vec4(mix(filling_color, full_green, smoothstep(0.0, 1.0, color_factor)), 1.0);
         }
 
         return;

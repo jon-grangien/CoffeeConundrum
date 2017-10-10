@@ -10,6 +10,7 @@ vec2 resolution = vec2(1.0, 1.0);
 vec3 full_green = vec3(0.2, 0.8, 0.2);
 vec3 filling_green = vec3(0.5, 0.8, 0.2);
 float pi = 3.1415926;
+float to_degrees = 57.2958; // 180 / pi
 
 void main() {
     vec2 uv = vTextureCoord / vec2(u_radius / u_screenSize.x, u_radius / u_screenSize.y);
@@ -46,7 +47,7 @@ void main() {
         float c = sqrt((a * a) + (b * b));
 
         float c_angle = asin(a/c);       // computed angle (rad) of pixel in unit circle
-        c_angle = c_angle * 180.0 / pi;  // convert to degrees
+        c_angle = c_angle * to_degrees;  // convert to degrees
 
         if (uv.x < 0.5 && uv.y > 0.5)    // 2nd quadrant
             c_angle = 180.0 - c_angle;
@@ -57,7 +58,10 @@ void main() {
 
         // Frag contained in angle
         //if (c_angle <= u_angle) {
-        if (c_angle <= u_angle) {
+        if (c_angle > u_angle) {
+            gl_FragColor = vec4(0.0, 0.0, 0.0, 0.2);
+        }
+        else {
             gl_FragColor = vec4(filling_green, 1.0);
         }
 

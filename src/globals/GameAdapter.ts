@@ -70,6 +70,17 @@ export default class GameAdapter {
     return enemies.countLiving() === 0;
   }
 
+  public displayControls(game: Phaser.Game): void {
+    const posY = game.world.centerY / 3
+    const controls = new Phaser.Sprite(game, game.world.centerX, posY, Assets.Images.ImagesControls.getName())
+    controls.anchor.setTo(0.5, 0.5)
+    game.add.existing(controls)
+    const tween = game.add.tween(controls).to(
+      {alpha: 0}, 5000, Phaser.Easing.Linear.None, true, 0, 0, false
+    )
+    tween.onComplete.add(() => controls.destroy())
+  }
+
   public initHealthBar(game: Phaser.Game): void {
     for (let i = 0; i < PLAYER_HEALTH; ++i) {
       const heart = new Phaser.Sprite(game, 10 + i * 22, 10, Assets.Images.SpritesheetsHeart.getName())
@@ -87,4 +98,5 @@ export default class GameAdapter {
       game.state.start('levelone')
     })
   }
+
 }

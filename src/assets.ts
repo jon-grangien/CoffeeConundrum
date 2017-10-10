@@ -6,6 +6,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/images/background_template.png'); }
     }
+    export class ImagesControls {
+        static getName(): string { return 'controls'; }
+
+        static getPNG(): string { return require('assets/images/controls.png'); }
+    }
     export class ImagesCyberpunkFarEdit {
         static getName(): string { return 'cyberpunk-far-edit'; }
 

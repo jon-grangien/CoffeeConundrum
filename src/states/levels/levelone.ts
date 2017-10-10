@@ -54,6 +54,7 @@ export default class LevelOne extends Phaser.State {
     )
 
     this.gameAdapter.initHealthBar(this.game)
+    this.gameAdapter.displayControls(this.game)
 
     // Spawn player
     this.player = new Player(this.game)

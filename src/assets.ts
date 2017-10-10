@@ -202,6 +202,8 @@ export namespace Audiosprites {
 
 export namespace GoogleWebFonts {
     export const Barrio: string = 'Barrio';
+    export const AnonymousPro: string = 'Anonymous Pro';
+    export const Roboto: string = 'Roboto';
 }
 
 export namespace CustomWebFonts {

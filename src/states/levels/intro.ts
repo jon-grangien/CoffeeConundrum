@@ -79,7 +79,7 @@ export default class Intro extends Phaser.State {
 
   private nextLine() {
     if (this.lineIndex === this.textContent.length) {
-      return this.countdownToNext()
+      return this.countdownToStart()
     }
 
     this.line = this.textContent[this.lineIndex].split(' ')
@@ -103,7 +103,7 @@ export default class Intro extends Phaser.State {
     this.characterHead.loadTexture(this.textEmotions[lineIdx])
   }
 
-  private countdownToNext(): void {
+  private countdownToStart(): void {
     this.startLevelCounter = this.game.add.text(this.game.world.centerX, this.game.world.centerY, this.countdownNumber.toString(), { font: '62px Arial', fill: '#fff' })
 
     const tween = this.game.add.tween(this.startLevelCounter).to(
@@ -115,7 +115,7 @@ export default class Intro extends Phaser.State {
       if (this.countdownNumber === 0)
         this.goNext()
       else
-        this.countdownToNext()
+        this.countdownToStart()
     })
   }
 }

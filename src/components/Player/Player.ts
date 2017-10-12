@@ -8,7 +8,7 @@ import CooldownCircle from './CooldownCircle'
 enum Direction { Up, Down, Left, Right, UpRight, UpLeft, DownLeft, DownRight, None }
 
 export default class Player extends Phaser.Sprite {
-  readonly TOP_SPEED: number = 350
+  readonly TOP_SPEED: number = 500
 
   private canons: Phaser.Weapon
   private timer: Phaser.Timer
@@ -53,8 +53,8 @@ export default class Player extends Phaser.Sprite {
 
     this.canons = game.add.weapon(-1, Images.SpritesheetsCanonbullet.getName())
     this.canons.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
-    this.canons.bulletSpeed = 1400
-    this.canons.fireRate = 50
+    this.canons.bulletSpeed = 1500
+    this.canons.fireRate = 40
     this.canons.fireAngle = 0
     this.canons.trackSprite(this, 0, 0, false)
 
@@ -133,6 +133,10 @@ export default class Player extends Phaser.Sprite {
    */
   private accelerate(velocity: number, positiveDir: boolean): number {
     const step = 50
+
+    if (this.TOP_SPEED % step !== 0) {
+      console.error('Player speed is not a multiple of move step')
+    }
 
     if ((positiveDir && velocity === this.TOP_SPEED) || (!positiveDir && velocity === -this.TOP_SPEED)) {
       return velocity

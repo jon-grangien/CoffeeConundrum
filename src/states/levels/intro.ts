@@ -19,9 +19,11 @@ export default class Intro extends Phaser.State {
   readonly WORD_DELAY: number = 150;
   readonly LINE_DELAY: number = 600;
 
-  constructor() {
-    super()
+
+  public create(): void {
     this.gameAdapter = new GameAdapter()
+    this.lineIndex = 0
+    this.wordIndex = 0
 
     this.textContent = [
       'Drop the coffee mugs! It looks like the Tea Tyrant Triad is attacking again!',
@@ -40,9 +42,6 @@ export default class Intro extends Phaser.State {
       4: Images.ImagesAva1Happy.getName(),
       5: Images.ImagesAva1Glasses.getName()
     }
-  }
-
-  public create(): void {
     const backImg = Images.ImagesCyberpunkFarEdit3.getName()
     const midImg = Images.ImagesCyberpunkMid.getName()
 

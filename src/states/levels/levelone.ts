@@ -100,7 +100,7 @@ export default class LevelOne extends Phaser.State {
   }
 
   public goNext(): void {
-    this.game.state.start('title')
+    this.game.state.start('win')
   }
 
   /**

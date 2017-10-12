@@ -11,6 +11,7 @@ import LevelOne from './states/levels/levelone'
 import Intro from './states/levels/intro'
 import * as Utils from './utils/utils'
 import * as Assets from './assets'
+import Win from './states/win'
 //import EnemyBulletTexture from './utils/texrender/enemybullet'
 //import GameManager from './globals/GameManager'
 
@@ -22,6 +23,7 @@ class App extends Phaser.Game {
         this.state.add('preloader', Preloader)
         this.state.add('title', Title)
         this.state.add('intro', Intro)
+        this.state.add('win', Win)
         this.state.add('levelone', LevelOne)
 
         this.state.start('boot')

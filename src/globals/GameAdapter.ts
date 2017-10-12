@@ -131,5 +131,4 @@ export default class GameAdapter {
       game.state.start('levelone')
     })
   }
-
 }

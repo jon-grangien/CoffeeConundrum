@@ -29,7 +29,7 @@ export default class SprayingAttackStrategy implements IAttackStrategy {
     weapon = game.add.weapon(-1)
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     weapon.bulletSpeed = 300
-    weapon.fireRate = 200
+    weapon.fireRate = 250
     weapon.fireAngle = 180
 
     return weapon

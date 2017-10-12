@@ -9,7 +9,7 @@ export default class ScatterShootAttackStrategy implements IAttackStrategy {
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     weapon.bulletSpeed = 300
     weapon.multiFire = true
-    weapon.fireRate = 1000
+    weapon.fireRate = 1100
 
     return weapon
   }

@@ -20,7 +20,7 @@ export default class FastShootAttackStrategy implements IAttackStrategy {
   setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
     weapon = game.add.weapon(-1)
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
-    weapon.bulletSpeed = 1000
+    weapon.bulletSpeed = 725
     weapon.fireRate = randomInRange(800, 1000)
     weapon.fireAngle = 180
 

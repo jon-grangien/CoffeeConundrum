@@ -53,12 +53,10 @@ const getLevelOneEnemyWave = (waveNumber: number, enemyFactory: EnemyFactory): E
       break
     case 7:
       enemies = [
-        enemyFactory.makeDumb(),
-        enemyFactory.makeDumb(),
         enemyFactory.makeDumbMovingTracking(),
         enemyFactory.makeDumbMovingTracking(),
-        enemyFactory.makeDumbMovingTracking(),
-        enemyFactory.makeDumbMovingScatterer(),
+        enemyFactory.makeDumbMovingFastShooting(),
+        enemyFactory.makeDumbMovingFastShooting(),
         enemyFactory.makeDumbMovingFastShooting()
       ]
       break
@@ -70,8 +68,7 @@ const getLevelOneEnemyWave = (waveNumber: number, enemyFactory: EnemyFactory): E
         enemyFactory.makeDumbMovingTracking(),
         enemyFactory.makeDumbMovingTracking(),
         enemyFactory.makeDumbMovingTracking(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingFastShooting()
+        enemyFactory.makeDumbMovingScatterer()
       ]
       break
     case 9:

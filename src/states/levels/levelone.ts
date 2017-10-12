@@ -120,6 +120,7 @@ export default class LevelOne extends Phaser.State {
 
       if (wave.length > 0) {
         console.log(`Wave ${this.currentWaveNumber}`)
+        this.gameAdapter.displayWaveInfo(this.game, this.currentWaveNumber)
         this.enemiesGroup.addMultiple(wave)
       } else {
         this.goNext()

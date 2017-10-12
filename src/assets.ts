@@ -270,11 +270,6 @@ export namespace Shaders {
 
         static getFRAG(): string { return require('assets/shaders/enemy/bullet.frag'); }
     }
-    export class ShadersPixelate {
-        static getName(): string { return 'pixelate'; }
-
-        static getFRAG(): string { return require('assets/shaders/pixelate.frag'); }
-    }
 }
 export namespace Misc {
     class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}

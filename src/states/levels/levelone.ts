@@ -68,6 +68,7 @@ export default class LevelOne extends Phaser.State {
     // Spawn first wave
     this.enemiesGroup.addMultiple(getLevelOneEnemyWave(1, this.enemyFactory))
     this.currentWaveNumber = 1
+    console.log(`Wave ${this.currentWaveNumber}`)
   }
 
   public update(): void {
@@ -118,6 +119,7 @@ export default class LevelOne extends Phaser.State {
       const wave = getLevelOneEnemyWave(this.currentWaveNumber, this.enemyFactory)
 
       if (wave.length > 0) {
+        console.log(`Wave ${this.currentWaveNumber}`)
         this.enemiesGroup.addMultiple(wave)
       } else {
         this.goNext()

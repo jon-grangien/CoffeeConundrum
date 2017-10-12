@@ -91,26 +91,17 @@ const getLevelOneEnemyWave = (waveNumber: number, enemyFactory: EnemyFactory): E
       break
     case 11:
       enemies = [
-        enemyFactory.makeDumbMovingTracking(),
-        enemyFactory.makeDumbMovingTracking(),
-        enemyFactory.makeDumbMovingTracking(),
-        enemyFactory.makeDumbMovingTracking(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeSlowMovingSpraying(true),
-        enemyFactory.makeSlowMovingSpraying(false),
-        enemyFactory.makeSlowMovingSpraying(true),
-        enemyFactory.makeSlowMovingSpraying(false),
+        enemyFactory.makeDumbMovingHoseShooter()
       ]
       break
     case 12:
       enemies = [
-        enemyFactory.makeSlowMovingSpraying(true),
-        enemyFactory.makeSlowMovingSpraying(false),
-        enemyFactory.makeSlowMovingSpraying(true),
-        enemyFactory.makeSlowMovingSpraying(false),
-        enemyFactory.makeSlowMovingSpraying(true),
-        enemyFactory.makeSlowMovingSpraying(false),
+        enemyFactory.makeDumbMovingTracking(),
+        enemyFactory.makeDumbMovingTracking(),
+        enemyFactory.makeDumbMovingTracking(),
+        enemyFactory.makeDumbMovingTracking(),
+        enemyFactory.makeDumbMovingScatterer(),
+        enemyFactory.makeDumbMovingScatterer(),
         enemyFactory.makeSlowMovingSpraying(true),
         enemyFactory.makeSlowMovingSpraying(false),
         enemyFactory.makeSlowMovingSpraying(true),
@@ -119,45 +110,34 @@ const getLevelOneEnemyWave = (waveNumber: number, enemyFactory: EnemyFactory): E
       break
     case 13:
       enemies = [
-        enemyFactory.makeSlowCenteredStrongScatterer(true),
-        enemyFactory.makeSlowCenteredStrongScatterer(false)
+        enemyFactory.makeSlowMovingSpraying(true),
+        enemyFactory.makeSlowMovingSpraying(false),
+        enemyFactory.makeSlowMovingSpraying(true),
+        enemyFactory.makeSlowMovingSpraying(false),
+        enemyFactory.makeSlowMovingSpraying(true),
+        enemyFactory.makeSlowMovingSpraying(false),
+        enemyFactory.makeSlowMovingSpraying(true),
+        enemyFactory.makeSlowMovingSpraying(false),
+        enemyFactory.makeSlowMovingSpraying(true),
+        enemyFactory.makeSlowMovingSpraying(false),
       ]
       break
     case 14:
       enemies = [
-        enemyFactory.makeDumbMovingCrazyScatterer()
+        enemyFactory.makeSlowCenteredStrongScatterer(true),
+        enemyFactory.makeSlowCenteredStrongScatterer(false)
       ]
       break
     case 15:
       enemies = [
-        enemyFactory.makeSlowCenteredStrongScatterer(true),
         enemyFactory.makeSlowCenteredStrongScatterer(false),
         enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
+        enemyFactory.makeDumbMovingScatterer()
       ]
       break
     case 16:
       enemies = [
         enemyFactory.makeDumbMovingCrazyScatterer()
-      ]
-      break
-    case 17:
-      enemies = [
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer(),
-        enemyFactory.makeDumbMovingScatterer()
       ]
       break
     default:

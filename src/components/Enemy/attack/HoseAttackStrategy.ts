@@ -3,7 +3,7 @@ import IAttackStrategy from './IAttackStrategy'
 
 export default class HoseAttackStrategy implements IAttackStrategy {
   private _angle: number = 250
-  private _fireRate: number = 80
+  private _fireRate: number = 130
   private _tween: Phaser.Tween
 
   setupProperties(): void {}

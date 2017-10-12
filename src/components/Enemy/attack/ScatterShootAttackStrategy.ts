@@ -1,5 +1,6 @@
 import 'phaser'
 import IAttackStrategy from './IAttackStrategy'
+import {randomInRange} from '../../../utils/gamehelpers'
 
 export default class ScatterShootAttackStrategy implements IAttackStrategy {
   setupProperties(): void {}
@@ -9,7 +10,7 @@ export default class ScatterShootAttackStrategy implements IAttackStrategy {
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     weapon.bulletSpeed = 300
     weapon.multiFire = true
-    weapon.fireRate = 1100
+    weapon.fireRate = randomInRange(900, 1200)
 
     return weapon
   }

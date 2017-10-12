@@ -1,6 +1,7 @@
 import 'phaser'
 import IAttackStrategy from './IAttackStrategy'
 import GameManager from '../../../globals/GameManager'
+import {randomInRange} from '../../../utils/gamehelpers'
 
 export default class TrackingAttackStrategy implements IAttackStrategy {
   setupProperties(): void {}
@@ -9,7 +10,7 @@ export default class TrackingAttackStrategy implements IAttackStrategy {
     weapon = game.add.weapon(-1)
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     weapon.bulletSpeed = 300
-    weapon.fireRate = 1000
+    weapon.fireRate = randomInRange(900, 1200)
     weapon.fireAngle = 180
 
     return weapon

@@ -51,7 +51,7 @@ export default class Player extends Phaser.Sprite {
     this.body.collideWorldBounds = true
     this.anchor.setTo(0.5, 0.5)
 
-    this.canons = game.add.weapon(-1, Images.SpritesheetsCanonbullet.getName())
+    this.canons = game.add.weapon(-1, Images.SpritesheetsCanonbullet2.getName())
     this.canons.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     this.canons.bulletSpeed = 1500
     this.canons.fireRate = 40
@@ -132,7 +132,7 @@ export default class Player extends Phaser.Sprite {
    * @returns {number} The new velocity
    */
   private accelerate(velocity: number, positiveDir: boolean): number {
-    const step = 50
+    const step = 100
 
     if (this.TOP_SPEED % step !== 0) {
       console.error('Player speed is not a multiple of move step')

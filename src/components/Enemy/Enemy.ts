@@ -57,6 +57,18 @@ export default class Enemy extends Phaser.Sprite {
 
     if (this.alive) {
       this.attackStrategy.attack(this.weaponWeak, this.weaponStrong, this.timer)
+
+      // Fix failed filters
+      const weakBullets = this.weaponWeak.bullets
+      const strongBullets = this.weaponStrong.bullets
+      weakBullets.forEach(bullet => {
+        if (bullet.alive && !bullet.filters)
+          bullet.filters = [ GameManager.Instance.getBulletFilter('weak')]
+      }, this)
+      strongBullets.forEach(bullet => {
+        if (bullet.alive && !bullet.filters)
+          bullet.filters = [ GameManager.Instance.getBulletFilter('strong')]
+      }, this)
     }
   }
 

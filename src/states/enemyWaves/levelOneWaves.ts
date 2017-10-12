@@ -20,9 +20,6 @@ const getLevelOneEnemyWave = (waveNumber: number, enemyFactory: EnemyFactory): E
         enemyFactory.makeDumb(),
         enemyFactory.makeDumb(),
         enemyFactory.makeDumbMovingTracking()
-
-        // TODO: Fix invisible bullets
-        //enemyFactory.makeDumbMovingFastShooting(),
       ]
       break
     case 3:

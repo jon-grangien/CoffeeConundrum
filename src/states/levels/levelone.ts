@@ -26,7 +26,7 @@ export default class LevelOne extends Phaser.State {
   }
 
   public create(): void {
-    GameManager.Instance.levelStartLogic()
+    GameManager.Instance.levelStartLogic(this.game)
     this.restartKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.enemyFactory = new EnemyFactory(this.game)
     this.game.stage.backgroundColor = '#071924'

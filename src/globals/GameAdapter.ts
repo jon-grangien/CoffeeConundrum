@@ -71,35 +71,45 @@ export default class GameAdapter {
   }
 
   public displayWaveInfo(game: Phaser.Game, wave: number): void {
-    const character: Phaser.Sprite = new Phaser.Sprite(game, game.world.centerX / 2, 25, Assets.Images.ImagesAva1Glasses.getName())
+    let { waveSpritesTween, waveSpritesCharacter, waveSpritesText } = GameManager.Instance
+    if (waveSpritesTween)
+      waveSpritesTween.stop()
+    if (waveSpritesCharacter && waveSpritesCharacter.alive)
+      waveSpritesCharacter.destroy()
+    if (waveSpritesText && waveSpritesText.alive)
+      waveSpritesText.destroy()
+
     const text: string = `Wave ${wave}`
     let appended: boolean = false
     let counter: number = 0
-    const textObj: Phaser.Text = new Phaser.Text(game, character.x + 50, character.y, text, { font: '12px Anonymous Pro', fontStyle: 'bold', fill: '#aea', align: 'left' })
 
-    character.anchor.setTo(0.5, 0.5)
-    textObj.anchor.setTo(0, 0.5)
-    game.add.existing(character)
-    game.add.existing(textObj)
+    waveSpritesCharacter = new Phaser.Sprite(game, game.world.centerX / 2, 25, Assets.Images.ImagesAva1Glasses.getName())
+    const { position } = waveSpritesCharacter
+    waveSpritesText = new Phaser.Text(game, position.x + 50, position.y, text, { font: '12px Anonymous Pro', fontStyle: 'bold', fill: '#aea', align: 'left' })
 
-    const tween = game.add.tween(textObj).to(
-      {}, 500, Phaser.Easing.Linear.None, true, 0, 1000, true
+    waveSpritesCharacter.anchor.setTo(0.5, 0.5)
+    waveSpritesText.anchor.setTo(0, 0.5)
+    game.add.existing(waveSpritesCharacter)
+    game.add.existing(waveSpritesText)
+
+    waveSpritesTween = game.add.tween(this).to(
+      {}, 400, Phaser.Easing.Linear.None, true, 0, 1000, true
     )
-    tween.onRepeat.add(() => {
+    waveSpritesTween.onRepeat.add(() => {
       counter++
       if (!appended) {
-        textObj.text = text + ' !!'
+        waveSpritesText.text = text + ' !!'
         appended = true
       } else {
-        textObj.text = text
+        waveSpritesText.text = text
         appended = false
       }
 
       // Stop
-      if (counter >= 8) {
-        tween.stop()
-        character.destroy()
-        textObj.destroy()
+      if (counter >= 7) {
+        waveSpritesTween.stop()
+        waveSpritesCharacter.destroy()
+        waveSpritesText.destroy()
       }
     })
   }

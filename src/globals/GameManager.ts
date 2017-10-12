@@ -1,6 +1,7 @@
 import 'phaser'
 import Player from '../components/Player/Player'
 import EnemyBulletFilter from './filters/EnemyBulletFilter'
+import {Images} from '../assets'
 import {ENEMY_STRONG_BULLET_COLOR, ENEMY_WEAK_BULLET_COLOR} from './constants'
 
 export default class GameManager {
@@ -11,6 +12,10 @@ export default class GameManager {
   private restartReady: boolean = false
   private enemyStrongBulletFilter: EnemyBulletFilter
   private enemyWeakBulletFilter: EnemyBulletFilter
+
+  public waveSpritesCharacter: Phaser.Sprite
+  public waveSpritesText: Phaser.Text
+  public waveSpritesTween: Phaser.Tween
 
   readonly RESTART_KEY_DELAY: number = 1000
 
@@ -29,8 +34,17 @@ export default class GameManager {
   /**
    * What manager needs to do when player starts level
    */
-  public levelStartLogic(): void {
+  public levelStartLogic(game: Phaser.Game): void {
     this.restartReady = false
+
+    //this.waveSpritesCharacter = new Phaser.Sprite(game, game.world.centerX / 2, 25, Images.ImagesAva1Glasses.getName())
+    //this.waveSpritesText = new Phaser.Text(game, this.waveSpritesCharacter.x + 50, this.waveSpritesCharacter.y, '', { font: '12px Anonymous Pro', fontStyle: 'bold', fill: '#aea', align: 'left' })
+    //this.waveSpritesCharacter.anchor.setTo(0.5, 0.5)
+    //this.waveSpritesText.anchor.setTo(0, 0.5)
+    //game.add.existing(this.waveSpritesCharacter)
+    //game.add.existing(this.waveSpritesText)
+    //this.waveSpritesCharacter.visible = false
+    //this.waveSpritesText.visible = false
   }
 
   /**

@@ -1,5 +1,4 @@
 import 'phaser'
-import {Images} from '../../../assets'
 import IAttackStrategy from './IAttackStrategy'
 import Enemy from '../Enemy'
 import { randomInRange } from '../../../utils/gamehelpers'
@@ -10,7 +9,7 @@ export default class TutorialAttackStrategy implements IAttackStrategy {
 
   setupProperties(enemy: Enemy): void {
     const { game } = enemy
-    const textWeak = 'Hit these!'
+    const textWeak = 'Shoot these!'
     const textStrong = 'Indestructible!'
 
     this.textWeakObj = new Phaser.Text(game, 0, 0, textWeak, { font: '14px Anonymous Pro', fontStyle: 'bold', fill: '#afa', align: 'center' })

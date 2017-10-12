@@ -1,4 +1,7 @@
 #!/bin/sh
+# Deploy to github pages
+# NOTE: Will delete and force push to gh-pages branch 
+# Check if game builds in development first
 git checkout master
 git branch -D gh-pages
 git checkout -b gh-pages

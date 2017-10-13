@@ -9,6 +9,7 @@ export default class EnemyBullet extends Phaser.Bullet {
     this.height = ENEMY_BULLET_HEIGHT
     this.checkWorldBounds = false
     this.outOfBoundsKill = false
+    this.anchor.setTo(0.5, 0.5)
   }
 
   public update(): void {

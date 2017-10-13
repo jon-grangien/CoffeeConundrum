@@ -219,7 +219,7 @@ export default class Player extends Phaser.Sprite {
       return
     }
 
-    const zapIn = new Zap(this.game, this, this.ZAP_TIME, true)
+    const zapIn = new Zap(this.game, this, 48, [0.0, 0.0, 0.0], [0.6, 0.0, 0.0])
     this.game.add.existing(zapIn)
 
     switch (this.currentMovingDirection) {
@@ -259,7 +259,7 @@ export default class Player extends Phaser.Sprite {
 
     this.resetDodgeCooldown()
 
-    const zapOut = new Zap(this.game, this, this.ZAP_TIME, false)
+    const zapOut = new Zap(this.game, this, 48, [0.0, 0.0, 0.0], [0.6, 0.0, 0.0])
     this.game.add.existing(zapOut)
 
     if (!this.invulnerable) {

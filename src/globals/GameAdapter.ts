@@ -3,6 +3,7 @@ import Player from '../components/Player/Player'
 import * as Assets from '../assets'
 import { PLAYER_HEALTH } from './constants'
 import GameManager from './GameManager'
+import Zap from '../components/Player/Zap'
 
 export default class GameAdapter {
 
@@ -27,6 +28,8 @@ export default class GameAdapter {
         if (!player.getInvulnerability()) {
           bullet.kill()
           player.damage(1)
+          const zap = new Zap(game, bullet, 24, [1.0, 0.7, 0.2], [0.8, 0.8, 0.8])
+          game.add.existing(zap)
         }
       })
 
@@ -35,6 +38,8 @@ export default class GameAdapter {
         if (!player.getInvulnerability()) {
           bullet.kill()
           player.damage(1)
+          const zap = new Zap(game, bullet, 24, [1.0, 0.5, 1.0], [0.8, 0.8, 0.8])
+          game.add.existing(zap)
         }
       })
 
@@ -42,6 +47,8 @@ export default class GameAdapter {
       game.physics.arcade.overlap(player.getBullets(), enemy.getWeakBullets(), (playerBullet, enemyBullet) => {
         playerBullet.kill()
         enemyBullet.kill()
+        const zap = new Zap(game, enemyBullet, 24, [1.0, 0.7, 0.2], [0.8, 0.8, 0.8])
+        game.add.existing(zap)
       })
 
       // Player and enemy collision

@@ -6,6 +6,7 @@ import GameManager from '../../globals/GameManager'
 import { DUMB_ENEMY_HEALTH } from '../../globals/constants'
 import EnemyWeakBullet from './bullets/EnemyWeakBullet'
 import EnemyStrongBullet from './bullets/EnemyStrongBullet'
+import Zap from '../Player/Zap'
 
 export default class Enemy extends Phaser.Sprite {
   public health: number
@@ -30,22 +31,30 @@ export default class Enemy extends Phaser.Sprite {
 
     this.timer = game.time.create(false)
 
-    this.weaponWeak = this.attackStrategy.setupWeapon(this.game, this.weaponWeak, Images.SpritesheetsEnemybulletweak.getName())
+    this.weaponWeak = game.add.weapon(-1)
     this.weaponWeak.bulletClass = EnemyWeakBullet
+    this.weaponWeak = this.attackStrategy.setupWeapon(this.game, this.weaponWeak, Images.SpritesheetsEnemybulletweak.getName())
     this.weaponWeak.trackSprite(this, null, null, false)
 
-    this.weaponStrong = this.attackStrategy.setupWeapon(this.game, this.weaponStrong, Images.SpritesheetsEnemybulletstrong.getName())
+    this.weaponStrong = game.add.weapon(-1)
     this.weaponStrong.bulletClass = EnemyStrongBullet
+    this.weaponStrong = this.attackStrategy.setupWeapon(this.game, this.weaponStrong, Images.SpritesheetsEnemybulletstrong.getName())
     this.weaponStrong.trackSprite(this, null, null, false)
 
     this.events.onKilled.add(() => {
       this.buryAfterDeadBullets = true
+      const zap = new Zap(game, this, 24, [0.2, 0.2, 0.2], [0.5, 0.5, 0.5])
+      game.add.existing(zap)
     })
 
     this.moveStrategy.setMovement(this)
     this.attackStrategy.setupProperties(this)
 
     this.timer.start(0)
+  }
+
+  public create(): void {
+    console.log('created emeny')
   }
 
   public update(): void {

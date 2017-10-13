@@ -6,8 +6,6 @@ export default class DumbAttackStrategy implements IAttackStrategy {
   setupProperties(): void {}
 
   setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
-    weapon = game.add.weapon(-1)
-    weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     weapon.bulletSpeed = 300
     weapon.fireRate = randomInRange(900, 1200)
     weapon.fireAngle = 180

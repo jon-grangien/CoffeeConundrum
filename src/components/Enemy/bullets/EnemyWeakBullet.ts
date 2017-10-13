@@ -1,6 +1,7 @@
 import 'phaser'
 import GameManager from '../../../globals/GameManager'
 import EnemyBullet from './EnemyBullet'
+import Zap from '../../Player/Zap'
 
 export default class EnemyWeakBullet extends EnemyBullet {
   constructor(game: Phaser.Game, x: number, y: number, key?: any, frame?: any) {

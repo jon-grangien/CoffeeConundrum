@@ -25,8 +25,9 @@ export default class Title extends Phaser.State {
     this.aboutInfo = [
       '\"Coffee Conundrum\"',
       'By Jonathan Grangien 2017',
-      'Background art - ',
-      'Spaceships - '
+      'Background art - Ansimuz on OpenGameArt',
+      'Spaceships - Gobusto, Bevoulinn on OpenGameArt',
+      'Developed with Phaser CE'
     ]
 
     const startY = (this.game.world.height - this.aboutInfo.length * 10) - 20

@@ -62,8 +62,11 @@ export default class Intro extends Phaser.State {
     this.game.add.button(this.game.world.width - 150, this.game.world.height - 85, Images.SpritesheetsSkip.getName(), this.goNext, this, 2, 1, 0)
     this.skipKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
 
-    this.textObject = this.game.add.text(110, 32, '', { font: '13px Anonymous Pro', fill: '#19de65' })
-    this.characterHead = this.game.add.sprite(32, 64, Images.ImagesAva1Normal.getName())
+    this.textObject = this.game.add.text(140, 32, '', { font: '13px Anonymous Pro', fill: '#19de65' })
+    this.characterHead = this.game.add.sprite(16, 64, Images.ImagesAva1Normal.getName())
+    this.game.add.text(this.characterHead.x, this.characterHead.y + 50, 'Ava', { font: '13px Anonymous Pro', fill: '#aea' })
+    this.game.add.text(this.characterHead.x, this.characterHead.y + 60, 'Shop Manager', { font: '13px Anonymous Pro', fill: '#aea' })
+    this.game.add.text(this.characterHead.x, this.characterHead.y + 70, 'Lvl 20 Mechanic', { font: '13px Anonymous Pro', fill: '#aea' })
     this.nextLine()
   }
 

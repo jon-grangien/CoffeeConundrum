@@ -5,6 +5,7 @@ export default class Title extends Phaser.State {
   private backgroundTemplateSprite: Phaser.TileSprite = null
   private sfxAudiosprite: Phaser.AudioSprite = null
   private startKey: Phaser.Key
+  private aboutInfo: string[]
 
   // This is any[] not string[] due to a limitation in TypeScript at the moment;
   // despite string enums working just fine, they are not officially supported so we trick the compiler into letting us do it anyway.
@@ -19,6 +20,20 @@ export default class Title extends Phaser.State {
       this.game.cache.getImage(bgImg).height,
       bgImg
     )
+
+    // About text
+    this.aboutInfo = [
+      '\"Coffee Conundrum\"',
+      'By Jonathan Grangien 2017',
+      'Background art - ',
+      'Spaceships - '
+    ]
+
+    const startY = (this.game.world.height - this.aboutInfo.length * 10) - 20
+    for (let i = 0; i < this.aboutInfo.length; i++) {
+      const offset: number = i * 10
+      this.game.add.text(16, startY + offset, this.aboutInfo[i], { font: '13px Anonymous Pro', fill: '#aea' })
+    }
 
     // Init Game Manager
     GameManager.Instance.initBulletFilters(this.game)

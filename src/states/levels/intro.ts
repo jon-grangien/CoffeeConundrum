@@ -9,7 +9,7 @@ export default class Intro extends Phaser.State {
   private characterHead: Phaser.Sprite
   private textObject: any
   private gameAdapter: GameAdapter
-  private countdownNumber: number = 3
+  private countdownNumber: number
   private startLevelCounter: any
   private skipKey: Phaser.Key
 
@@ -19,11 +19,11 @@ export default class Intro extends Phaser.State {
   readonly WORD_DELAY: number = 150;
   readonly LINE_DELAY: number = 600;
 
-
   public create(): void {
     this.gameAdapter = new GameAdapter()
     this.lineIndex = 0
     this.wordIndex = 0
+    this.countdownNumber = 3
 
     this.textContent = [
       'Drop the coffee mugs! It looks like the Tea Tyrant Triad is attacking again!',

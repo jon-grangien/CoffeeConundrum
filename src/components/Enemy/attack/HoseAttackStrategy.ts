@@ -8,7 +8,7 @@ export default class HoseAttackStrategy implements IAttackStrategy {
 
   setupProperties(): void {}
 
-  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
+  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, isWeakType: boolean): Phaser.Weapon {
     weapon.bulletSpeed = 300
     weapon.multiFire = true
     weapon.fireRate = this._fireRate

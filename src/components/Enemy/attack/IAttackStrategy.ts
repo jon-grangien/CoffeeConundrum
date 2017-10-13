@@ -9,9 +9,9 @@ interface IAttackStrategy {
    * Set up weapon properties
    * @param {Phaser.Game} game - The game instance
    * @param {Phaser.Weapon} weapon - The weapon to set up
-   * @param {string} resource = The name of the sprite asset for the projectile
+   * @param {boolean} isWeakType = If this weapon is of the weak type. If not, it is strong
    */
-  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon
+  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, isWeakType: boolean): Phaser.Weapon
 
   /**
    * Fire the weapons in a certain pattern

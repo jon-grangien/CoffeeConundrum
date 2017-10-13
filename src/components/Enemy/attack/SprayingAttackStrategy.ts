@@ -25,7 +25,7 @@ export default class SprayingAttackStrategy implements IAttackStrategy {
     })
   }
 
-  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
+  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, isWeakType: boolean): Phaser.Weapon {
     weapon.bulletSpeed = 300
     weapon.fireRate = 250
     weapon.fireAngle = 180

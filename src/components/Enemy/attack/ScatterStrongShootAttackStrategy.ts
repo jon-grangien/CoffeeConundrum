@@ -4,7 +4,7 @@ import IAttackStrategy from './IAttackStrategy'
 export default class ScatterStrongShootAttackStrategy implements IAttackStrategy {
   setupProperties(): void {}
 
-  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
+  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, isWeakType: boolean): Phaser.Weapon {
     weapon.bulletSpeed = 300
     weapon.multiFire = true
     weapon.fireRate = 400

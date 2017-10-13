@@ -5,7 +5,7 @@ import {randomInRange} from '../../../utils/gamehelpers'
 export default class DumbAttackStrategy implements IAttackStrategy {
   setupProperties(): void {}
 
-  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, resource: string): Phaser.Weapon {
+  setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, isWeakType: boolean): Phaser.Weapon {
     weapon.bulletSpeed = 300
     weapon.fireRate = randomInRange(900, 1200)
     weapon.fireAngle = 180

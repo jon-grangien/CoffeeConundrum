@@ -31,7 +31,7 @@ export default class Player extends Phaser.Sprite {
   private currentCooldownStartTimeStamp: number
   public dodgeDistance: number = 125
   public diagonalDodgeDistance: number 
-  public dodgeCooldownMS: number = 3500
+  public dodgeCooldownMS: number = 2800
   public dodgeReady: boolean = true
 
   constructor(game: Phaser.Game) {

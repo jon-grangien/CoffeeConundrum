@@ -275,6 +275,11 @@ export namespace Shaders {
 
         static getFRAG(): string { return require('assets/shaders/enemy/bullet.frag'); }
     }
+    export class ShadersZap {
+        static getName(): string { return 'zap'; }
+
+        static getFRAG(): string { return require('assets/shaders/zap.frag'); }
+    }
 }
 export namespace Misc {
     class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}

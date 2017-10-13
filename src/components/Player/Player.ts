@@ -4,11 +4,13 @@ import GameManager from '../../globals/GameManager'
 import GameAdapter from '../../globals/GameAdapter'
 import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../../globals/constants'
 import CooldownCircle from './CooldownCircle'
+import Zap from './Zap'
 
 enum Direction { Up, Down, Left, Right, UpRight, UpLeft, DownLeft, DownRight, None }
 
 export default class Player extends Phaser.Sprite {
   readonly TOP_SPEED: number = 500
+  readonly ZAP_TIME: number = 500
 
   private canons: Phaser.Weapon
   private timer: Phaser.Timer
@@ -217,6 +219,9 @@ export default class Player extends Phaser.Sprite {
       return
     }
 
+    const zapIn = new Zap(this.game, this, this.ZAP_TIME, true)
+    this.game.add.existing(zapIn)
+
     switch (this.currentMovingDirection) {
       case Direction.Up:
         this.body.position.y -= this.dodgeDistance
@@ -253,6 +258,9 @@ export default class Player extends Phaser.Sprite {
     }
 
     this.resetDodgeCooldown()
+
+    const zapOut = new Zap(this.game, this, this.ZAP_TIME, false)
+    this.game.add.existing(zapOut)
 
     if (!this.invulnerable) {
       this.makeInvulnerable(200)

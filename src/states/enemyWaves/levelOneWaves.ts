@@ -4,6 +4,7 @@ import Enemy from '../../components/Enemy/Enemy'
 /**
  * Get array of enemies for a wave number. If no wave defined, returns empty array
  * @param {number} waveNumber
+ * @param {EnemyFactory} enemyFactory
  * @returns {Enemy[]}
  */
 const getLevelOneEnemyWave = (waveNumber: number, enemyFactory: EnemyFactory): Enemy[] => {

@@ -71,6 +71,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/spritesheets/canonbullet.png'); }
     }
+    export class SpritesheetsCanonbullet2Single {
+        static getName(): string { return 'canonbullet2_single'; }
+
+        static getPNG(): string { return require('assets/spritesheets/canonbullet2_single.png'); }
+    }
     export class SpritesheetsCanonbullet2 {
         static getName(): string { return 'canonbullet2'; }
 

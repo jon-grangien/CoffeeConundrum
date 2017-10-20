@@ -5,14 +5,17 @@ import GameAdapter from '../../globals/GameAdapter'
 import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../../globals/constants'
 import CooldownCircle from './CooldownCircle'
 import Zap from './Zap'
+import Weapon = Phaser.Weapon
 
 enum Direction { Up, Down, Left, Right, UpRight, UpLeft, DownLeft, DownRight, None }
+enum WeaponTypes { Regular, Scatter }
 
 export default class Player extends Phaser.Sprite {
   readonly TOP_SPEED: number = 500
-  readonly ZAP_TIME: number = 500
 
-  private canons: Phaser.Weapon
+  private regularWeapon: Phaser.Weapon
+  private scatterer: Phaser.Weapon
+  private scatterAngles: number[] = [40, 30, 20, 10, 0, 350, 340, 330, 320]
   private timer: Phaser.Timer
   private invulnerable: boolean = false
   private invulnerableTween: Phaser.Tween
@@ -24,6 +27,7 @@ export default class Player extends Phaser.Sprite {
   private shootKeys: Phaser.Key[]
   private dodgeKeys: Phaser.Key[]
   private currentMovingDirection: Direction
+  private activeWeapon: WeaponTypes
 
   private gameAdapter: GameAdapter = new GameAdapter()
   private cooldownCircle: CooldownCircle
@@ -44,6 +48,7 @@ export default class Player extends Phaser.Sprite {
     this.moveRightKey = keyboard.addKey(Phaser.Keyboard.D)
     this.shootKeys = [keyboard.addKey(Phaser.Keyboard.SPACEBAR), keyboard.addKey(Phaser.Keyboard.J)]
     this.dodgeKeys = [keyboard.addKey(Phaser.Keyboard.ALT), keyboard.addKey(Phaser.Keyboard.K)]
+    this.activeWeapon = WeaponTypes.Regular
 
     this.diagonalDodgeDistance = this.dodgeDistance * Math.sin(Math.PI / 4)
     this.health = PLAYER_HEALTH
@@ -53,12 +58,19 @@ export default class Player extends Phaser.Sprite {
     this.body.collideWorldBounds = true
     this.anchor.setTo(0.5, 0.5)
 
-    this.canons = game.add.weapon(-1, Images.SpritesheetsCanonbullet2.getName())
-    this.canons.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
-    this.canons.bulletSpeed = 1500
-    this.canons.fireRate = 40
-    this.canons.fireAngle = 0
-    this.canons.trackSprite(this, 0, 0, false)
+    this.regularWeapon = game.add.weapon(-1, Images.SpritesheetsCanonbullet2.getName())
+    this.regularWeapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
+    this.regularWeapon.bulletSpeed = 1500
+    this.regularWeapon.fireRate = 40
+    this.regularWeapon.fireAngle = 0
+    this.regularWeapon.trackSprite(this, 0, 0, false)
+
+    this.scatterer = game.add.weapon(-1, Images.SpritesheetsCanonbullet2Single.getName())
+    this.scatterer.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
+    this.scatterer.bulletSpeed = 1500
+    this.scatterer.fireRate = 60
+    this.scatterer.fireAngle = 0
+    this.scatterer.trackSprite(this, 0, 0, false)
 
     this.events.onKilled.add(() => {
       this.gameAdapter.gameOver(this.game)
@@ -70,7 +82,6 @@ export default class Player extends Phaser.Sprite {
     })
 
     this.cooldownCircle = new CooldownCircle(game, this, 25)
-    //this.cooldownCircle.body.trackSprite(this, null, null, false)
 
     this.timer.start(0)
     game.add.existing(this)
@@ -81,7 +92,7 @@ export default class Player extends Phaser.Sprite {
    * @returns {Phaser.Group}
    */
   public getBullets(): Phaser.Group {
-    return this.canons.bullets
+    return this.regularWeapon.bullets
   }
 
   /**
@@ -98,7 +109,7 @@ export default class Player extends Phaser.Sprite {
     this.setDodgeDirection()
 
     let { velocity } = this.body
-    const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey, shootKeys, canons } = this
+    const { moveUpKey, moveDownKey, moveLeftKey, moveRightKey, shootKeys, regularWeapon } = this
 
     if (moveUpKey.isDown) {
       this.body.velocity.y = this.accelerate(velocity.y, false)
@@ -121,10 +132,26 @@ export default class Player extends Phaser.Sprite {
     }
 
     if (shootKeys[0].isDown || shootKeys[1].isDown) {
-      canons.fire()
+      this.handleFire()
     }
 
     this.currentMovingDirection = Direction.None
+  }
+
+  private handleFire(): void {
+    switch (this.activeWeapon) {
+      case WeaponTypes.Regular:
+        this.regularWeapon.fire()
+        break
+      case WeaponTypes.Scatter:
+        for (const angle of this.scatterAngles) {
+          this.scatterer.fireAngle = angle
+          this.scatterer.fire()
+        }
+        break
+      default:
+        this.regularWeapon.fire()
+    }
   }
 
   /**

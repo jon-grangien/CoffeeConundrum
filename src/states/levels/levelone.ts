@@ -6,9 +6,12 @@ import getLevelOneEnemyWave from '../enemyWaves/levelOneWaves'
 import EnemyFactory from '../../components/Enemy/EnemyFactory'
 
 export default class LevelOne extends Phaser.State {
+  readonly WAVE_DELAY: number = 750
+
   private player: Player
   private enemiesGroup: Phaser.Group
   private gameAdapter: GameAdapter
+  private timer: Phaser.Timer
   private bgBack: any
   private bgMid: any
   private bgFront: any
@@ -16,8 +19,8 @@ export default class LevelOne extends Phaser.State {
   private midTilesSpeed: number = 1
   private frontTilesSpeed: number = 3
   private enemyFactory: EnemyFactory
+  private willUpdateWave: boolean
   private restartKey: Phaser.Key
-
   private currentWaveNumber: number
 
   constructor() {
@@ -28,8 +31,12 @@ export default class LevelOne extends Phaser.State {
   public create(): void {
     GameManager.Instance.levelStartLogic(this.game)
     this.restartKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
+    this.willUpdateWave = false
     this.enemyFactory = new EnemyFactory(this.game)
     this.game.stage.backgroundColor = '#071924'
+
+    this.timer = this.game.time.create(false)
+    this.timer.start()
 
     const backImg = Images.ImagesCyberpunkFarEdit3.getName()
     const midImg = Images.ImagesCyberpunkMid.getName()
@@ -73,7 +80,7 @@ export default class LevelOne extends Phaser.State {
 
   public update(): void {
     GameManager.Instance.clearGraveyard()
-    this.updateWaveIfPassed()
+    this.checkWavePassed()
     this.gameAdapter.checkCollisions(this.game, this.player, this.enemiesGroup)
 
     //let bullets = 0
@@ -103,28 +110,37 @@ export default class LevelOne extends Phaser.State {
     this.game.state.start('win')
   }
 
+  private checkWavePassed(): void {
+    if (!this.willUpdateWave && this.gameAdapter.enemyGroupDead(this.enemiesGroup)) {
+      this.willUpdateWave = true
+
+      this.timer.add(this.WAVE_DELAY, () => {
+        this.updateWave()
+      })
+    }
+  }
+
   /**
    * Check if current enemies wave is all dead
    * and if so, add the next until none are left
    */
-  private updateWaveIfPassed(): void {
-    if (this.gameAdapter.enemyGroupDead(this.enemiesGroup)) {
-      this.currentWaveNumber = this.currentWaveNumber + 1
+  private updateWave(): void {
+    this.willUpdateWave = false // reset state for coming loops
+    this.currentWaveNumber = this.currentWaveNumber + 1
 
-      // Make parallax bg move slightly faster for each wave
-      this.farTilesSpeed += 0.03
-      this.midTilesSpeed += 0.1
-      this.frontTilesSpeed += 0.3
+    // Make parallax bg move slightly faster for each wave
+    this.farTilesSpeed += 0.03
+    this.midTilesSpeed += 0.1
+    this.frontTilesSpeed += 0.3
 
-      const wave = getLevelOneEnemyWave(this.currentWaveNumber, this.enemyFactory)
+    const wave = getLevelOneEnemyWave(this.currentWaveNumber, this.enemyFactory)
 
-      if (wave.length > 0) {
-        console.log(`Wave ${this.currentWaveNumber}`)
-        this.gameAdapter.displayWaveInfo(this.game, this.currentWaveNumber)
-        this.enemiesGroup.addMultiple(wave)
-      } else {
-        this.goNext()
-      }
+    if (wave.length > 0) {
+      console.log(`Wave ${this.currentWaveNumber}`)
+      this.gameAdapter.displayWaveInfo(this.game, this.currentWaveNumber)
+      this.enemiesGroup.addMultiple(wave)
+    } else {
+      this.goNext()
     }
   }
 

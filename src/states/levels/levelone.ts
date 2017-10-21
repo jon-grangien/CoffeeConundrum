@@ -146,12 +146,12 @@ export default class LevelOne extends Phaser.State {
 
       // Spawn powerUp possibility
       const poll: number = Math.random()
-      if (poll <= 0.2) {
+      if (poll <= 0.3) {
         const poll2: number = Math.random()
         const timer = this.game.time.create(true)
         timer.start()
 
-        if (poll2 > 0.6)
+        if (poll2 > 0.5)
           timer.add(750, () => this.powerUpFactory.spawnScatterer())
         else
           timer.add(750, () => this.powerUpFactory.spawnBehemoth())

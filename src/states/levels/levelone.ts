@@ -4,6 +4,8 @@ import GameAdapter from '../../globals/GameAdapter'
 import GameManager from '../../globals/GameManager'
 import getLevelOneEnemyWave from '../enemyWaves/levelOneWaves'
 import EnemyFactory from '../../components/Enemy/EnemyFactory'
+import PowerUp from '../../components/PowerUp'
+import PlayerWeaponTypes from '../../globals/WeaponTypes'
 
 export default class LevelOne extends Phaser.State {
   readonly WAVE_DELAY: number = 750
@@ -76,6 +78,9 @@ export default class LevelOne extends Phaser.State {
     this.enemiesGroup.addMultiple(getLevelOneEnemyWave(1, this.enemyFactory))
     this.currentWaveNumber = 1
     console.log(`Wave ${this.currentWaveNumber}`)
+
+    const powerUp = new PowerUp(this.game, this.player, PlayerWeaponTypes.Scatterer)
+    this.game.add.existing(powerUp)
   }
 
   public update(): void {

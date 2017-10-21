@@ -101,6 +101,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/spritesheets/metalslug_mummy.[37,45,18,0,0].png'); }
     }
+    export class SpritesheetsScattererPowerup {
+        static getName(): string { return 'scatterer_powerup'; }
+
+        static getPNG(): string { return require('assets/spritesheets/scatterer_powerup.png'); }
+    }
     export class SpritesheetsSkip {
         static getName(): string { return 'skip'; }
 

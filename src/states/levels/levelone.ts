@@ -80,8 +80,6 @@ export default class LevelOne extends Phaser.State {
     this.enemiesGroup.addMultiple(getLevelOneEnemyWave(1, this.enemyFactory))
     this.currentWaveNumber = 1
     console.log(`Wave ${this.currentWaveNumber}`)
-
-    this.powerUpFactory.spawnBehemoth()
   }
 
   public update(): void {
@@ -148,7 +146,7 @@ export default class LevelOne extends Phaser.State {
 
       // Spawn powerUp possibility
       const poll: number = Math.random()
-      if (poll <= 0.3) {
+      if (poll <= 0.35) {
         const poll2: number = Math.random()
         const timer = this.game.time.create(true)
         timer.start()

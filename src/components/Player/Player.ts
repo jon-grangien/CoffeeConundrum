@@ -57,20 +57,21 @@ export default class Player extends Phaser.Sprite {
     this.body.collideWorldBounds = true
     this.anchor.setTo(0.5, 0.5)
 
+    const offsetX: number = 25
     this.regularWeapon = game.add.weapon(-1, Images.SpritesheetsCanonbullet2.getName())
     this.regularWeapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     this.regularWeapon.bulletSpeed = 1500
     this.regularWeapon.fireRate = 40
     this.regularWeapon.fireAngle = 0
-    this.regularWeapon.trackSprite(this, 0, 0, false)
+    this.regularWeapon.trackSprite(this, offsetX, 0, false)
 
     this.scatterer = game.add.weapon(-1, Images.SpritesheetsCanonbullet2Single.getName())
     this.scatterer.multiFire = true
     this.scatterer.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     this.scatterer.bulletSpeed = 1500
-    this.scatterer.fireRate = 120
+    this.scatterer.fireRate = 130
     this.scatterer.fireAngle = 0
-    this.scatterer.trackSprite(this, 0, 0, false)
+    this.scatterer.trackSprite(this, offsetX, 0, false)
 
     this.events.onKilled.add(() => {
       this.gameAdapter.gameOver(this.game)
@@ -310,7 +311,6 @@ export default class Player extends Phaser.Sprite {
     const timer = this.game.time.create(true)
     timer.start()
     timer.add(duration, () => {
-      console.log('hello?')
       this.activeWeapon = PlayerWeaponTypes.RegularWeapon
     })
   }

@@ -4,8 +4,7 @@ import GameAdapter from '../../globals/GameAdapter'
 import GameManager from '../../globals/GameManager'
 import getLevelOneEnemyWave from '../enemyWaves/levelOneWaves'
 import EnemyFactory from '../../components/Enemy/EnemyFactory'
-import PowerUp from '../../components/PowerUp'
-import PlayerWeaponTypes from '../../globals/WeaponTypes'
+import PowerUpFactory from '../../components/PowerUp/PowerUpFactory'
 
 export default class LevelOne extends Phaser.State {
   readonly WAVE_DELAY: number = 750
@@ -21,6 +20,7 @@ export default class LevelOne extends Phaser.State {
   private midTilesSpeed: number = 1
   private frontTilesSpeed: number = 3
   private enemyFactory: EnemyFactory
+  private powerUpFactory: PowerUpFactory
   private willUpdateWave: boolean
   private restartKey: Phaser.Key
   private currentWaveNumber: number
@@ -32,6 +32,7 @@ export default class LevelOne extends Phaser.State {
 
   public create(): void {
     GameManager.Instance.levelStartLogic(this.game)
+
     this.restartKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.willUpdateWave = false
     this.enemyFactory = new EnemyFactory(this.game)
@@ -68,19 +69,17 @@ export default class LevelOne extends Phaser.State {
     this.gameAdapter.initHealthBar(this.game)
     this.gameAdapter.displayControls(this.game)
 
+    this.enemiesGroup = this.game.add.group()
+
     // Spawn player
     this.player = new Player(this.game)
     GameManager.Instance.setPlayerInstance(this.player)
-
-    this.enemiesGroup = this.game.add.group()
+    this.powerUpFactory = new PowerUpFactory(this.game, this.player)
 
     // Spawn first wave
     this.enemiesGroup.addMultiple(getLevelOneEnemyWave(1, this.enemyFactory))
     this.currentWaveNumber = 1
     console.log(`Wave ${this.currentWaveNumber}`)
-
-    const powerUp = new PowerUp(this.game, this.player, PlayerWeaponTypes.Scatterer)
-    this.game.add.existing(powerUp)
   }
 
   public update(): void {
@@ -144,7 +143,17 @@ export default class LevelOne extends Phaser.State {
       console.log(`Wave ${this.currentWaveNumber}`)
       this.gameAdapter.displayWaveInfo(this.game, this.currentWaveNumber)
       this.enemiesGroup.addMultiple(wave)
+
+      // Spawn powerUp possibility
+      const poll: number = Math.random()
+      if (poll <= 0.2) {
+        const timer = this.game.time.create(true)
+        timer.start()
+        timer.add(750, () => this.powerUpFactory.spawnScatterer())
+      }
+
     } else {
+      // No more enemies
       this.goNext()
     }
   }

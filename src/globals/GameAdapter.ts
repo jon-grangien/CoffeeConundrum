@@ -16,9 +16,11 @@ export default class GameAdapter {
   public checkCollisions(game: Phaser.Game, player: Player, enemies: Phaser.Group): void {
 
     // Player bullets hit enemy
-    game.physics.arcade.overlap(enemies, player.getBullets(), (enemy, bullet) => {
-      bullet.kill()
-      enemy.damage(1)
+    player.getBullets().children.map(playerBullets => {
+      game.physics.arcade.overlap(enemies, playerBullets, (enemy, bullet) => {
+        bullet.kill()
+        enemy.damage(1)
+      })
     })
 
     enemies.forEach(enemy => {

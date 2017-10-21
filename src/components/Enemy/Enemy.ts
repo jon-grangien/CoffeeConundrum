@@ -31,15 +31,17 @@ export default class Enemy extends Phaser.Sprite {
 
     this.timer = game.time.create(false)
 
+    const offsetX = -15
+    const offsetY = 5
     this.weaponWeak = game.add.weapon(-1)
     this.weaponWeak.bulletClass = EnemyWeakBullet
     this.weaponWeak = this.attackStrategy.setupWeapon(this.game, this.weaponWeak, true)
-    this.weaponWeak.trackSprite(this, null, null, false)
+    this.weaponWeak.trackSprite(this, offsetX, offsetY, false)
 
     this.weaponStrong = game.add.weapon(-1)
     this.weaponStrong.bulletClass = EnemyStrongBullet
     this.weaponStrong = this.attackStrategy.setupWeapon(this.game, this.weaponStrong, false)
-    this.weaponStrong.trackSprite(this, null, null, false)
+    this.weaponStrong.trackSprite(this, offsetX, offsetY, false)
 
     this.events.onKilled.add(() => {
       this.buryAfterDeadBullets = true
@@ -71,12 +73,14 @@ export default class Enemy extends Phaser.Sprite {
       const weakBullets = this.weaponWeak.bullets
       const strongBullets = this.weaponStrong.bullets
       weakBullets.forEach(bullet => {
-        if (bullet.alive && !bullet.filters)
-          bullet.filters = [ GameManager.Instance.getBulletFilter('weak')]
+        if (bullet.alive && !bullet.filters) {
+          bullet.filters = [GameManager.Instance.getBulletFilter('weak')]
+        }
       }, this)
       strongBullets.forEach(bullet => {
-        if (bullet.alive && !bullet.filters)
-          bullet.filters = [ GameManager.Instance.getBulletFilter('strong')]
+        if (bullet.alive && !bullet.filters) {
+          bullet.filters = [GameManager.Instance.getBulletFilter('strong')]
+        }
       }, this)
     }
   }

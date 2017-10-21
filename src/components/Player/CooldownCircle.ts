@@ -16,7 +16,7 @@ export default class CooldownCircle extends Phaser.Sprite {
     this._uniforms = {
       u_angle: { type: '1f', value: Math.floor((360 / 100) * this._percent) },
       u_resolution: { type: '2f', value: {x: 16, y: 16}},
-      u_screenSize: { type: '2f', value: { x: game.width , y: game.height }},
+      u_screenSize: { type: '2f', value: { x: game.world.width , y: game.world.height }},
       u_radius: { type: '1f', value: 16}
     }
 

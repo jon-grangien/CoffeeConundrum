@@ -8,7 +8,7 @@ export default class ScatterShootAttackStrategy implements IAttackStrategy {
   setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, isWeakType: boolean): Phaser.Weapon {
     weapon.bulletSpeed = 300
     weapon.multiFire = true
-    weapon.fireRate = randomInRange(900, 1200)
+    weapon.fireRate = randomInRange(600, 1000)
 
     return weapon
   }
@@ -28,5 +28,6 @@ export default class ScatterShootAttackStrategy implements IAttackStrategy {
     } else {
       this.shoot(weaponWeak)
     }
+    return null
   }
 }

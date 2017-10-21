@@ -6,8 +6,8 @@ export default class ScatterCrazyAttackStrategy implements IAttackStrategy {
 
   setupWeapon(game: Phaser.Game, weapon: Phaser.Weapon, isWeakType: boolean): Phaser.Weapon {
     weapon.bulletSpeed = 300
-    weapon.multiFire = true
     weapon.fireRate = 350
+    weapon.multiFire = true
 
     return weapon
   }

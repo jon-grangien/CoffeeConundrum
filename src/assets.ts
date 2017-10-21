@@ -275,6 +275,11 @@ export namespace Scripts {
     }
 }
 export namespace Shaders {
+    export class ShadersBehemothbullet {
+        static getName(): string { return 'behemothbullet'; }
+
+        static getFRAG(): string { return require('assets/shaders/behemothbullet.frag'); }
+    }
     export class ShadersCooldowncircle {
         static getName(): string { return 'cooldowncircle'; }
 

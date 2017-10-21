@@ -6,6 +6,7 @@ import { PLAYER_INVULNERABILITY_COOLDOWN, PLAYER_HEALTH } from '../../globals/co
 import CooldownCircle from './CooldownCircle'
 import Zap from './Zap'
 import PlayerWeaponTypes from '../../globals/WeaponTypes'
+import PlayerBehemothBullet from './bullets/PlayerBehemothBullet'
 
 enum Direction { Up, Down, Left, Right, UpRight, UpLeft, DownLeft, DownRight, None }
 
@@ -15,9 +16,11 @@ export default class Player extends Phaser.Sprite {
   private regularWeapon: Phaser.Weapon
   private scatterer: Phaser.Weapon
   private scatterAngles: number[] = [15, 7.5, 0, 352.5, 345]
+  private behemothLauncher: Phaser.Weapon
   private timer: Phaser.Timer
   private invulnerable: boolean = false
   private invulnerableTween: Phaser.Tween
+  private commonBulletGroup: Phaser.Group
 
   private moveUpKey: Phaser.Key
   private moveDownKey: Phaser.Key
@@ -39,6 +42,7 @@ export default class Player extends Phaser.Sprite {
 
   constructor(game: Phaser.Game) {
     super(game, 100, game.world.centerY, Images.SpritesheetsTinyShip.getName())
+    this.commonBulletGroup = new Phaser.Group(game)
 
     const { keyboard } = game.input
     this.moveUpKey = keyboard.addKey(Phaser.Keyboard.W)
@@ -58,20 +62,29 @@ export default class Player extends Phaser.Sprite {
     this.anchor.setTo(0.5, 0.5)
 
     const offsetX: number = 25
-    this.regularWeapon = game.add.weapon(-1, Images.SpritesheetsCanonbullet2.getName())
+    this.regularWeapon = game.add.weapon(-1, Images.SpritesheetsCanonbullet2.getName(), null, this.commonBulletGroup)
     this.regularWeapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     this.regularWeapon.bulletSpeed = 1500
     this.regularWeapon.fireRate = 40
     this.regularWeapon.fireAngle = 0
     this.regularWeapon.trackSprite(this, offsetX, 0, false)
 
-    this.scatterer = game.add.weapon(-1, Images.SpritesheetsCanonbullet2Single.getName())
+    this.scatterer = game.add.weapon(-1, Images.SpritesheetsCanonbullet2Single.getName(), null, this.commonBulletGroup)
     this.scatterer.multiFire = true
     this.scatterer.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     this.scatterer.bulletSpeed = 1500
     this.scatterer.fireRate = 130
     this.scatterer.fireAngle = 0
     this.scatterer.trackSprite(this, offsetX, 0, false)
+
+    this.behemothLauncher = new Phaser.Weapon(game, game.plugins)
+    this.behemothLauncher.bulletClass = PlayerBehemothBullet
+    this.behemothLauncher.createBullets(-1, null, null, this.commonBulletGroup)
+    this.behemothLauncher.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
+    this.behemothLauncher.bulletSpeed = 200
+    this.behemothLauncher.fireRate = 1000
+    this.behemothLauncher.fireAngle = 0
+    this.behemothLauncher.trackSprite(this, offsetX, 0, false)
 
     this.events.onKilled.add(() => {
       this.gameAdapter.gameOver(this.game)
@@ -93,7 +106,7 @@ export default class Player extends Phaser.Sprite {
    * @returns {Phaser.Group}
    */
   public getBullets(): Phaser.Group {
-    return this.getActualActiveWeapon().bullets
+    return this.commonBulletGroup
   }
 
   /**
@@ -149,6 +162,9 @@ export default class Player extends Phaser.Sprite {
           this.scatterer.fireAngle = angle
           this.scatterer.fire()
         }
+        break
+      case PlayerWeaponTypes.Behemoth:
+        this.behemothLauncher.fire()
         break
       default:
         this.regularWeapon.fire()
@@ -306,7 +322,6 @@ export default class Player extends Phaser.Sprite {
 
   public setActiveWeapon(type: PlayerWeaponTypes, duration: number) {
     this.activeWeapon = type
-    console.log(duration)
 
     const timer = this.game.time.create(true)
     timer.start()
@@ -321,6 +336,8 @@ export default class Player extends Phaser.Sprite {
         return this.regularWeapon
       case PlayerWeaponTypes.Scatterer:
         return this.scatterer
+      case PlayerWeaponTypes.Behemoth:
+        return this.behemothLauncher
       default:
         return this.regularWeapon
     }

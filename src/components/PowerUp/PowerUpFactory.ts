@@ -22,4 +22,15 @@ export default class PowerUpFactory {
       )
     )
   }
+
+  public spawnBehemoth(): void {
+    this.game.add.existing(
+      new PowerUp(
+        this.game,
+        this.player,
+        Images.SpritesheetsScattererPowerup.getName(),
+        PlayerWeaponTypes.Behemoth
+      )
+    )
+  }
 }

@@ -18,6 +18,7 @@ export default class Player extends Phaser.Sprite {
   private scatterAngles: number[] = [15, 7.5, 0, 352.5, 345]
   private behemothLauncher: Phaser.Weapon
   private timer: Phaser.Timer
+  private weaponTimer: Phaser.Timer
   private invulnerable: boolean = false
   private invulnerableTween: Phaser.Tween
   private commonBulletGroup: Phaser.Group
@@ -56,6 +57,7 @@ export default class Player extends Phaser.Sprite {
     this.diagonalDodgeDistance = this.dodgeDistance * Math.sin(Math.PI / 4)
     this.health = PLAYER_HEALTH
     this.timer = game.time.create(false)
+    this.weaponTimer = this.game.time.create(true)
 
     game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.collideWorldBounds = true
@@ -322,12 +324,18 @@ export default class Player extends Phaser.Sprite {
   }
 
   public setActiveWeapon(type: PlayerWeaponTypes, duration: number) {
-    this.activeWeapon = type
+    // Already has a power up
+    if (this.weaponTimer) {
+      this.weaponTimer.destroy()
+    }
 
-    const timer = this.game.time.create(true)
-    timer.start()
-    timer.add(duration, () => {
+    this.activeWeapon = type
+    this.weaponTimer = this.game.time.create(true)
+
+    this.weaponTimer.start()
+    this.weaponTimer.add(duration, () => {
       this.activeWeapon = PlayerWeaponTypes.RegularWeapon
+      this.weaponTimer.destroy()
     })
   }
 

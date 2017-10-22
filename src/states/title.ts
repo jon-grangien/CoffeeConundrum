@@ -61,7 +61,7 @@ export default class Title extends Phaser.State {
       this.sfxAudiosprite.play(Phaser.ArrayUtils.getRandomItem(this.sfxLaserSounds))
     });
 
-    this.game.add.button(this.game.world.centerX - 100, this.game.world.centerY + 50, Assets.Images.SpritesheetsStartgame1.getName(), this.goNext, this, 2, 1, 0)
+    this.game.add.button(this.game.world.centerX - 100, this.game.world.centerY + 50, Assets.Images.SpritesheetsStartgame2.getName(), this.goNext, this, 2, 1, 0)
     this.game.camera.flash(0x000000, 1000)
   }
 

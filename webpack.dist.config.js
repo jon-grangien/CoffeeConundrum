@@ -35,7 +35,6 @@ module.exports = {
 
             // The items below most likely the ones you should be modifying
             'GOOGLE_WEB_FONTS': JSON.stringify([ // Add or remove entries in this array to change which fonts are loaded
-                'Barrio',
                 'Anonymous Pro',
                 'Roboto'
             ]),

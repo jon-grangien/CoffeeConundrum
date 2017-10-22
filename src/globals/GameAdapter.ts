@@ -136,7 +136,7 @@ export default class GameAdapter {
     text.anchor.set(0.5)
     game.add.existing(text)
 
-    game.add.button(game.world.centerX - 100, game.world.centerY + 50, Assets.Images.SpritesheetsTryagain1.getName(), () => {
+    game.add.button(game.world.centerX - 100, game.world.centerY + 50, Assets.Images.SpritesheetsTryagain2.getName(), () => {
       game.state.start('levelone')
     })
   }

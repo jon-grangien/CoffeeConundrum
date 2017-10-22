@@ -80,6 +80,7 @@ export default class LevelOne extends Phaser.State {
     this.enemiesGroup.addMultiple(getLevelOneEnemyWave(1, this.enemyFactory))
     this.currentWaveNumber = 1
     console.log(`Wave ${this.currentWaveNumber}`)
+    this.powerUpFactory.spawnBehemoth()
   }
 
   public update(): void {

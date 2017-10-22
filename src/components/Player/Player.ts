@@ -81,7 +81,7 @@ export default class Player extends Phaser.Sprite {
     this.behemothLauncher.bulletClass = PlayerBehemothBullet
     this.behemothLauncher.createBullets(-1, null, null, this.commonBulletGroup)
     this.behemothLauncher.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
-    this.behemothLauncher.bulletSpeed = 200
+    this.behemothLauncher.bulletSpeed = 0
     this.behemothLauncher.fireRate = 1000
     this.behemothLauncher.fireAngle = 0
     this.behemothLauncher.trackSprite(this, offsetX, 0, false)
@@ -164,7 +164,8 @@ export default class Player extends Phaser.Sprite {
         }
         break
       case PlayerWeaponTypes.Behemoth:
-        this.behemothLauncher.fire()
+        const bullet = this.behemothLauncher.fire()
+        if (bullet && bullet.data.onFired) bullet.data.onFired()
         break
       default:
         this.regularWeapon.fire()

@@ -111,6 +111,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/spritesheets/skip.png'); }
     }
+    export class SpritesheetsSkip2 {
+        static getName(): string { return 'skip2'; }
+
+        static getPNG(): string { return require('assets/spritesheets/skip2.png'); }
+    }
     export class SpritesheetsSmilingship {
         static getName(): string { return 'smilingship'; }
 
@@ -121,6 +126,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/spritesheets/startgame1.png'); }
     }
+    export class SpritesheetsStartgame2 {
+        static getName(): string { return 'startgame2'; }
+
+        static getPNG(): string { return require('assets/spritesheets/startgame2.png'); }
+    }
     export class SpritesheetsTinyShip {
         static getName(): string { return 'tiny_ship'; }
 
@@ -130,6 +140,11 @@ export namespace Images {
         static getName(): string { return 'tryagain1'; }
 
         static getPNG(): string { return require('assets/spritesheets/tryagain1.png'); }
+    }
+    export class SpritesheetsTryagain2 {
+        static getName(): string { return 'tryagain2'; }
+
+        static getPNG(): string { return require('assets/spritesheets/tryagain2.png'); }
     }
 }
 
@@ -216,7 +231,6 @@ export namespace Audiosprites {
 }
 
 export namespace GoogleWebFonts {
-    export const Barrio: string = 'Barrio';
     export const AnonymousPro: string = 'Anonymous Pro';
     export const Roboto: string = 'Roboto';
 }
@@ -289,6 +303,11 @@ export namespace Shaders {
         static getName(): string { return 'bullet'; }
 
         static getFRAG(): string { return require('assets/shaders/enemy/bullet.frag'); }
+    }
+    export class ShadersPowerup {
+        static getName(): string { return 'powerup'; }
+
+        static getFRAG(): string { return require('assets/shaders/powerup.frag'); }
     }
     export class ShadersZap {
         static getName(): string { return 'zap'; }

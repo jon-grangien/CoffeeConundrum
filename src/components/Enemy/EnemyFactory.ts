@@ -66,4 +66,10 @@ export default class EnemyFactory {
   public makeDumbMovingCrazyScatterer(): Enemy {
     return new Enemy(this.game, this.game.world.centerY, new DumbMoveStrategy(), new ScatterCrazyAttackStrategy())
   }
+
+  public makeStrongDumbMovingCrazyScatterer(): Enemy {
+    const e = new Enemy(this.game, this.game.world.centerY, new DumbMoveStrategy(), new ScatterCrazyAttackStrategy())
+    e.health = 15
+    return e
+  }
 }

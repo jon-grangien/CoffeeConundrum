@@ -143,7 +143,7 @@ const getLevelOneEnemyWave = (waveNumber: number, enemyFactory: EnemyFactory): E
       break
     case 17:
       enemies = [
-        enemyFactory.makeDumbMovingCrazyScatterer()
+        enemyFactory.makeStrongDumbMovingCrazyScatterer()
       ]
       break
     default:
